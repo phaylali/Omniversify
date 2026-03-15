@@ -1,0 +1,159 @@
+---
+import Section from "./Section.astro";
+---
+
+<Section>
+  <div class="contact-content">
+    <h2>Support Us</h2>
+    <p class="subtitle">Help us build infinite worlds</p>
+
+    <div class="support-options">
+      <a href="#" class="support-card kofi">
+        <span class="icon">☕</span>
+        <span class="name">Buy us a coffee</span>
+      </a>
+      <a href="#" class="support-card patreon">
+        <span class="icon">⚡</span>
+        <span class="name">Patreon</span>
+      </a>
+      <a href="https://discord.omniversify.com" class="support-card discord">
+        <span class="icon">💬</span>
+        <span class="name">Discord</span>
+      </a>
+    </div>
+
+    <div class="contact-form">
+      <h3>Get in Touch</h3>
+      <form>
+        <input type="email" placeholder="Your email" />
+        <textarea placeholder="Your message"></textarea>
+        <button type="submit">Send</button>
+      </form>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .contact-content {
+    text-align: center;
+    color: white;
+    width: 100%;
+    max-width: 900px;
+  }
+
+  h2 {
+    font-size: 3rem;
+    margin: 0 0 0.5rem 0;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: radial-gradient(
+      circle at 35% 35%,
+      #8a7a3a 0%,
+      #c2b067 50%,
+      #8a7a3a 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .subtitle {
+    font-size: 1.25rem;
+    color: #c2b067;
+    margin: 0 0 3rem 0;
+  }
+
+  .support-options {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+  }
+
+  .support-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    height: 120px;
+    border-radius: 16px;
+    text-decoration: none;
+    color: #c2b067;
+    transition:
+      transform 0.3s,
+      box-shadow 0.3s;
+    border: 2px solid rgba(194, 176, 103, 0.3);
+    background: rgba(194, 176, 103, 0.1);
+  }
+
+  .support-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 30px rgba(194, 176, 103, 0.2);
+  }
+
+  .support-card .icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .support-card .name {
+    font-size: 0.9rem;
+  }
+
+  .contact-form {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 2rem;
+    border-radius: 16px;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .contact-form h3 {
+    margin: 0 0 1.5rem 0;
+    font-size: 1.5rem;
+  }
+
+  .contact-form form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(0, 0, 0, 0.3);
+    color: white;
+    font-size: 1rem;
+  }
+
+  .contact-form input::placeholder,
+  .contact-form textarea::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .contact-form textarea {
+    min-height: 100px;
+    resize: vertical;
+  }
+
+  .contact-form button {
+    padding: 0.75rem 2rem;
+    border-radius: 8px;
+    border: none;
+    background: #c2b067;
+    color: #1a1a2e;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform 0.2s;
+  }
+
+  .contact-form button:hover {
+    transform: scale(1.05);
+  }
+</style>

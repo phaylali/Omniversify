@@ -1,0 +1,164 @@
+---
+import Section from "./Section.astro";
+import faviconSvg from "../../public/favicon.svg?raw";
+---
+
+<Section>
+  <div class="footer-content">
+    <div class="logo">
+      <div class="logo-svg" set:html={faviconSvg} />
+      <span>Omniversify</span>
+    </div>
+
+    <div class="links-group">
+      <div class="link-column">
+        <h4>Company</h4>
+        <a href="#">About</a>
+        <a href="#">Careers</a>
+        <a href="#">Press Kit</a>
+      </div>
+      <div class="link-column">
+        <h4>Legal</h4>
+        <a href="#">Privacy Policy</a>
+        <a href="#">Terms of Service</a>
+        <a href="#">Cookie Policy</a>
+      </div>
+      <div class="link-column">
+        <h4>Resources</h4>
+        <a href="#">Documentation</a>
+        <a href="#">API</a>
+        <a href="#">Brand Assets</a>
+      </div>
+      <div class="link-column">
+        <h4>Community</h4>
+        <a href="#">Discord</a>
+        <a href="#">Twitter</a>
+        <a href="#">GitHub</a>
+      </div>
+    </div>
+
+    <div class="licenses">
+      <p>Open Source Licenses</p>
+      <div class="license-list">
+        <span>Astro</span>
+        <span>React</span>
+        <span>TailwindCSS</span>
+        <span>Embla Carousel</span>
+        <span>Lucide Icons</span>
+      </div>
+    </div>
+
+    <div class="copyright">
+      <p>&copy; 2026 Omniversify. All rights reserved.</p>
+      <p>Made with ∞ across the multiverse</p>
+    </div>
+  </div>
+</Section>
+
+<style>
+  .footer-content {
+    text-align: center;
+    color: white;
+    width: 100%;
+  }
+
+  .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .logo-svg {
+    width: 60px;
+    height: 60px;
+  }
+
+  .logo-svg :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .logo span {
+    font-size: 1.5rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    background: radial-gradient(circle at 35% 35%, #8a7a3a 0%, #C2B067 50%, #8a7a3a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .links-group {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+  }
+
+  .link-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .link-column h4 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: #C2B067;
+  }
+
+  .link-column a {
+    color: #C2B067;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+
+  .link-column a:hover {
+    opacity: 1;
+  }
+
+  .licenses {
+    margin-bottom: 2rem;
+    padding: 1rem;
+    background: rgba(194, 176, 103, 0.1);
+    border: 1px solid rgba(194, 176, 103, 0.2);
+    border-radius: 8px;
+    display: inline-block;
+  }
+
+  .licenses p {
+    margin: 0 0 0.5rem 0;
+    font-size: 0.9rem;
+    color: #C2B067;
+  }
+
+  .license-list {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .license-list span {
+    font-size: 0.8rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(194, 176, 103, 0.2);
+    border-radius: 4px;
+    color: #C2B067;
+  }
+
+  .copyright {
+    color: #C2B067;
+  }
+
+  .copyright p {
+    margin: 0.25rem 0;
+    font-size: 0.9rem;
+  }
+</style>

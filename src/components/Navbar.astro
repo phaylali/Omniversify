@@ -1,0 +1,200 @@
+---
+import faviconSvg from "../../public/favicon.svg?raw";
+---
+
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="/" class="nav-logo">
+      <div class="logo-icon" set:html={faviconSvg} />
+    </a>
+  </div>
+
+  <div class="nav-right">
+    <div class="nav-item dropdown">
+      <button class="nav-link">
+        Menu
+        <svg
+          class="chevron"
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+      <div class="dropdown-menu">
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Team</a>
+        <a href="#">Careers</a>
+      </div>
+    </div>
+
+    <div class="nav-item dropdown">
+      <button class="nav-link">
+        Language
+        <svg
+          class="chevron"
+          width="12"
+          height="12"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+        >
+          <polyline points="6 9 12 15 18 9"></polyline>
+        </svg>
+      </button>
+      <div class="dropdown-menu">
+        <a href="#">English</a>
+        <a href="#">العربية</a>
+        <a href="#">ⵜⵉⴼⵉⵏⴰⵖ</a>
+      </div>
+    </div>
+
+    <a href="#" class="nav-item nav-btn">Blog</a>
+    <a href="#" class="nav-item nav-btn">Wiki</a>
+    <a href="#" class="nav-item nav-btn">Projects</a>
+    <a href="#" class="nav-item nav-btn">Shop</a>
+  </div>
+</nav>
+
+<style>
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    z-index: 1000;
+    background: transparent;
+  }
+
+  .nav-left {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #c2b067;
+  }
+
+  .logo-icon {
+    width: 40px;
+    height: 40px;
+  }
+
+  .logo-icon :global(svg) {
+    width: 100%;
+    height: 100%;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .nav-item {
+    position: relative;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    background: none;
+    border: none;
+    color: #c2b067;
+    font-size: 1rem;
+    cursor: pointer;
+    padding: 0.5rem;
+    font-family: inherit;
+  }
+
+  .chevron {
+    transition: transform 0.2s;
+  }
+
+  .dropdown:hover .chevron {
+    transform: rotate(180deg);
+  }
+
+  .nav-btn {
+    color: #c2b067;
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 0.5rem 0;
+    position: relative;
+  }
+
+  .nav-btn::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background: #c2b067;
+    transform: scaleX(0);
+    transform-origin: right;
+    transition: transform 0.3s ease;
+  }
+
+  .nav-btn:hover::after {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 150px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid rgba(194, 176, 103, 0.3);
+    border-radius: 8px;
+    padding: 0.5rem 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.2s ease;
+  }
+
+  .dropdown:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+  }
+
+  .dropdown-menu a {
+    display: block;
+    padding: 0.5rem 1rem;
+    color: #c2b067;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .dropdown-menu a:hover {
+    background: rgba(194, 176, 103, 0.1);
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      padding: 1rem;
+    }
+
+    .nav-right {
+      gap: 1rem;
+    }
+  }
+</style>

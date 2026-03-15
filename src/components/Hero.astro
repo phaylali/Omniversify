@@ -1,0 +1,75 @@
+---
+import Section from "./Section.astro";
+import faviconSvg from "../../public/favicon.svg?raw";
+---
+
+<Section>
+  <div class="hero-content">
+    <div class="logo-wrapper">
+      <div class="logo" set:html={faviconSvg}></div>
+    </div>
+    <h1>Omniversify</h1>
+    <p>Where infinite worlds converge</p>
+  </div>
+</Section>
+
+<style>
+  .hero-content {
+    text-align: center;
+    color: white;
+  }
+
+  .logo-wrapper {
+    margin-bottom: 2rem;
+    animation: pulse 3s ease-in-out infinite;
+    width: 120px;
+    height: 120px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .logo :global(svg) {
+    width: 200%;
+    height: 200%;
+    max-width: none;
+    display: block;
+    transform: translate(-25%, -25%);
+  }
+
+  h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: radial-gradient(
+      circle at 35% 35%,
+      #8a7a3a 0%,
+      #c2b067 50%,
+      #8a7a3a 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  p {
+    font-size: 1.5rem;
+    color: #c2b067;
+    margin: 0;
+    font-weight: 300;
+  }
+
+  @keyframes pulse {
+    0%,
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      transform: scale(1.05);
+      opacity: 0.8;
+    }
+  }
+</style>
