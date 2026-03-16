@@ -11,10 +11,6 @@ import Search from "./Search.astro";
   </div>
 
   <div class="nav-right">
-    <div class="nav-search-wrapper">
-      <Search />
-    </div>
-
     <div class="nav-item dropdown">
       <button class="nav-link">
         Menu
@@ -33,38 +29,22 @@ import Search from "./Search.astro";
       <div class="dropdown-menu">
         <a href="/">Home</a>
         <a href="/news">News</a>
+        <a href="/blog">Blog</a>
+        <a href="/projects">Projects</a>
+        <a href="/wiki">Wiki</a>
+        <a href="#">Shop</a>
         <a href="#">About</a>
         <a href="#">Team</a>
         <a href="#">Careers</a>
-      </div>
-    </div>
-
-    <div class="nav-item dropdown">
-      <button class="nav-link">
-        Language
-        <svg
-          class="chevron"
-          width="12"
-          height="12"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-        >
-          <polyline points="6 9 12 15 18 9"></polyline>
-        </svg>
-      </button>
-      <div class="dropdown-menu">
+        <div class="dropdown-divider"></div>
         <a href="#">English</a>
         <a href="#">العربية</a>
-        <a href="#">ⵜⵉⴼⵉⵏⴰⵖ</a>
+        <a href="#">ⴽⵉⴼⵉⵏⴰⵖ</a>
       </div>
     </div>
-
-    <a href="/blog" class="nav-item nav-btn">Blog</a>
-    <a href="/projects" class="nav-item nav-btn">Projects</a>
-    <a href="/wiki" class="nav-item nav-btn">Wiki</a>
-    <a href="#" class="nav-item nav-btn">Shop</a>
+    <div class="nav-search-wrapper">
+      <Search />
+    </div>
   </div>
 </nav>
 
@@ -198,13 +178,66 @@ import Search from "./Search.astro";
     background: rgba(194, 176, 103, 0.1);
   }
 
+  .dropdown-divider {
+    height: 1px;
+    background: rgba(194, 176, 103, 0.3);
+    margin: 0.5rem 0;
+  }
+
   @media (max-width: 768px) {
     .navbar {
-      padding: 1rem;
+      padding: 0.75rem 1rem;
     }
 
     .nav-right {
-      gap: 1rem;
+      gap: 0.5rem;
+      align-items: center;
+    }
+
+    .nav-search-wrapper {
+      margin-left: auto;
+      order: 3;
+    }
+
+    .nav-item.dropdown {
+      order: 2;
+    }
+
+    .nav-item.dropdown.language-dropdown {
+      display: none;
+    }
+
+    .nav-btn {
+      display: none;
+    }
+
+    .nav-item.dropdown .dropdown-menu {
+      position: fixed;
+      top: 60px;
+      left: 50%;
+      transform: translateX(-50%);
+      min-width: 200px;
+      text-align: center;
+      opacity: 0;
+      visibility: hidden;
+    }
+
+    .nav-item.dropdown:hover .dropdown-menu,
+    .nav-item.dropdown:focus-within .dropdown-menu {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 0.75rem 1rem;
+      color: #c2b067;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(194, 176, 103, 0.1);
+    }
+
+    .dropdown-menu a:last-child {
+      border-bottom: none;
     }
   }
 </style>

@@ -4,6 +4,7 @@ description: "Introducing our vision for a unified multiverse across games, anim
 pubDate: 2026-01-15
 author: "Omniversify Team"
 tags: ["Announcement", "Introduction"]
+project: ""
 ---
 
 # Welcome to Omniversify

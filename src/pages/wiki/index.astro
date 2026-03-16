@@ -1,20 +1,40 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
 
-const wiki = await getCollection('wiki');
+const wiki = await getCollection("wiki");
 
 const categories = [
-  { id: 'characters', name: 'Characters', icon: '👤', description: 'Heroes, villains, and legends' },
-  { id: 'realms', name: 'Realms', icon: '🌍', description: 'Worlds, dimensions, and domains' },
-  { id: 'weapons', name: 'Weapons', icon: '⚔️', description: 'Artifacts of immense power' },
-  { id: 'events', name: 'Events', icon: '📜', description: 'Historical moments that shaped existence' },
+  {
+    id: "characters",
+    name: "Characters",
+    icon: "👤",
+    description: "Heroes, villains, and legends",
+  },
+  {
+    id: "realms",
+    name: "Realms",
+    icon: "🌍",
+    description: "Worlds, dimensions, and domains",
+  },
+  {
+    id: "weapons",
+    name: "Weapons",
+    icon: "⚔️",
+    description: "Artifacts of immense power",
+  },
+  {
+    id: "events",
+    name: "Events",
+    icon: "📜",
+    description: "Historical moments that shaped existence",
+  },
 ];
 
-const categoryCount = categories.map(cat => ({
+const categoryCount = categories.map((cat) => ({
   ...cat,
-  count: wiki.filter(item => item.data.category === cat.id).length
+  count: wiki.filter((item) => item.data.category === cat.id).length,
 }));
 ---
 
@@ -25,16 +45,17 @@ const categoryCount = categories.map(cat => ({
       <h1>Wiki</h1>
       <p>Explore the lore and history of the Omniversify multiverse</p>
     </div>
-    
     <div class="categories-grid">
-      {categoryCount.map((cat) => (
-        <a href={`/wiki/${cat.id}`} class="category-card">
-          <span class="category-icon">{cat.icon}</span>
-          <h2>{cat.name}</h2>
-          <p>{cat.description}</p>
-          <span class="count">{cat.count} entries</span>
-        </a>
-      ))}
+      {
+        categoryCount.map((cat) => (
+          <a href={`/wiki/${cat.id}`} class="category-card">
+            <span class="category-icon">{cat.icon}</span>
+            <h2>{cat.name}</h2>
+            <p>{cat.description}</p>
+            <span class="count">{cat.count} entries</span>
+          </a>
+        ))
+      }
     </div>
   </main>
 </Layout>
@@ -56,7 +77,12 @@ const categoryCount = categories.map(cat => ({
     margin: 0 0 1rem;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    background: radial-gradient(circle at 35% 35%, #8a7a3a 0%, #c2b067 50%, #8a7a3a 100%);
+    background: radial-gradient(
+      circle at 35% 35%,
+      #8a7a3a 0%,
+      #c2b067 50%,
+      #8a7a3a 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

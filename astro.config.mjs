@@ -7,7 +7,7 @@ import react from '@astrojs/react';
 
 import pagefind from 'astro-pagefind';
 
-import cloudflare from '@astrojs/cloudflare';
+import mdx from '@astrojs/mdx';
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,6 +15,6 @@ export default defineConfig({
     plugins: [tailwindcss()]
   },
 
-  integrations: [react(), pagefind()],
-  adapter: cloudflare()
+  integrations: [react(), pagefind(), mdx()],
+  output: 'static'
 });
