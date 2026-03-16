@@ -27,7 +27,7 @@ export function ProjectsCarousel({ projects }: Props) {
         <div className="embla__container">
           {projects.map((project) => (
             <div className="embla__slide project-slide" key={project.id}>
-              <div className="project-card">
+              <a href={`/projects/${project.id}`} className="project-card">
                 <div className="project-image" style={{ background: project.data.gradient }}>
                   <div className="image-placeholder">
                     <span>{project.data.title.charAt(0)}</span>
@@ -42,7 +42,7 @@ export function ProjectsCarousel({ projects }: Props) {
                   </div>
                   <p>{project.data.description}</p>
                 </div>
-              </div>
+              </a>
             </div>
           ))}
         </div>

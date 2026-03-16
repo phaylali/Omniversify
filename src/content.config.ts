@@ -17,8 +17,8 @@ const wiki = defineCollection({
   loader: glob({ pattern: '**/*.md', base: './src/content/wiki' }),
   schema: z.object({
     title: z.string(),
-    type: z.enum(['Character', 'Event', 'Era', 'Location', 'Artifact']),
     description: z.string(),
+    category: z.enum(['characters', 'realms', 'weapons', 'events']),
     color: z.string(),
   }),
 });

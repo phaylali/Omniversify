@@ -6,6 +6,7 @@
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
 - [Component Architecture](#component-architecture)
+- [Content Collections](#content-collections)
 - [Styling System](#styling-system)
 - [Key Features](#key-features)
 - [Development Commands](#development-commands)
@@ -17,9 +18,9 @@
 
 ## Project Overview
 
-Omniversify is a promotional landing page for a creative studio building a unified multiverse across multiple media (games, anime, series, books). The website showcases the studio's vision, current projects, lore/characters, and provides contact/support channels.
+Omniversify is a multi-page website for a creative studio building a unified multiverse across games, anime, series, and books. The site features a landing page, projects showcase, blog, news section, and wiki with full-text search.
 
-**Type**: Static marketing website with interactive elements  
+**Type**: Static multi-page website  
 **Target Users**: Gamers, anime fans, potential collaborators, and supporters  
 **Browser Support**: Modern browsers (Chrome, Firefox, Safari, Edge)
 
@@ -33,7 +34,7 @@ Omniversify is a promotional landing page for a creative studio building a unifi
 | UI Library | [React](https://react.dev/) v19.2.4 |
 | Styling | [Tailwind CSS](https://tailwindcss.com/) v4.2.1 |
 | Carousel | [Embla Carousel](https://www.embla-carousel.com/) v8.6.0 |
-| Icons | [Lucide React](https://lucide.dev/) v0.577.0 |
+| Search | [Pagefind](https://pagefind.app/) (via astro-pagefind) |
 | Animation | [tw-animate-css](https://github.com/nicokempe/tw-animate-css) v1.4.0 |
 | Fonts | Geist Variable (via @fontsource-variable/geist) |
 | Package Manager | Bun |
@@ -56,16 +57,40 @@ Omniversify is a promotional landing page for a creative studio building a unifi
 │   │   ├── Hero.astro                 # Landing hero section
 │   │   ├── LoreCarousel.astro         # Lore carousel wrapper
 │   │   ├── LoreCarousel.tsx           # Character/event carousel
-│   │   ├── ModeToggle.tsx             # Theme toggle (future use)
+│   │   ├── Navbar.astro               # Navigation bar with search
 │   │   ├── ProjectsCarousel.astro     # Projects carousel wrapper
 │   │   ├── ProjectsCarousel.tsx        # Game projects carousel
+│   │   ├── Search.astro               # Pagefind search overlay
 │   │   ├── Section.astro              # Reusable section wrapper
-│   │   ├── Vision.astro               # Studio vision section
-│   │   └── Welcome.astro              # Default Astro component
+│   │   └── Vision.astro               # Studio vision section
+│   ├── content/
+│   │   ├── blog/                     # Blog posts (markdown)
+│   │   ├── news/                     # News articles (markdown)
+│   │   ├── projects/                 # Project entries (markdown)
+│   │   └── wiki/                     # Wiki content (markdown)
+│   │       ├── characters/
+│   │       ├── events/
+│   │       ├── realms/
+│   │       └── weapons/
+│   ├── content.config.ts         # Astro content collections config
 │   ├── layouts/
 │   │   └── Layout.astro               # Base HTML layout with theme
 │   ├── pages/
-│   │   └── index.astro                # Main page (assembles all sections)
+│   │   ├── blog/
+│   │   │   ├── index.astro            # Blog feed
+│   │   │   └── [id].astro             # Individual blog post
+│   │   ├── news/
+│   │   │   ├── index.astro            # News feed
+│   │   │   └── [id].astro             # Individual news article
+│   │   ├── projects/
+│   │   │   ├── index.astro            # Projects feed
+│   │   │   └── [id].astro             # Individual project page
+│   │   ├── wiki/
+│   │   │   ├── index.astro            # Wiki main page
+│   │   │   └── [category]/
+│   │   │       ├── index.astro        # Category listing
+│   │   │       └── [id].astro         # Individual wiki entry
+│   │   └── index.astro                # Home page
 │   └── styles/
 │       └── global.css                  # Tailwind + custom CSS variables
 ├── astro.config.mjs            # Astro configuration
@@ -84,17 +109,18 @@ Omniversify is a promotional landing page for a creative studio building a unifi
   - Global CSS imports
   - Meta tags and SEO
   - Font loading (Geist Variable)
+  - Background pattern (applies to all pages)
 
-### Section Components
+### Navigation
 
-- **Section.astro** — Reusable full-viewport section wrapper with:
-  - CSS scroll-snap alignment
-  - Flexbox centering
-  - Responsive padding
+- **Navbar.astro** — Fixed navigation bar with:
+  - Logo
+  - Search trigger (magnifying glass icon)
+  - Menu dropdown (Home, News, About, Team, Careers)
+  - Language dropdown (English, العربية, ⴽⵉⴼⵉⵏⴰⵖ)
+  - Navigation links (Blog, Projects, Wiki, Shop)
 
-- **BackgroundPattern.astro** — Fixed SVG geometric pattern overlay
-
-### Feature Components
+### Page Components
 
 | Component | Type | Purpose |
 |-----------|------|---------|
@@ -104,21 +130,34 @@ Omniversify is a promotional landing page for a creative studio building a unifi
 | LoreCarousel | React | Horizontal scrolling lore/character cards |
 | Contact | Astro | Support options + contact form |
 | Footer | Astro | Navigation links, licenses, copyright |
+| Search | Astro | Pagefind search overlay modal |
 
 ### React Components (Interactive)
 
-- **ProjectsCarousel.tsx** — Embla-powered carousel with:
-  - 5 project cards (Alpha through Epsilon)
-  - Split layout (image + info)
-  - Tags for each project
-  - Loop scrolling
-  - Navigation buttons
+- **ProjectsCarousel.tsx** — Embla-powered carousel displaying project cards
+- **LoreCarousel.tsx** — Embla-powered carousel displaying wiki entries
 
-- **LoreCarousel.tsx** — Embla-powered carousel with:
-  - 6 lore entries (characters, events, eras)
-  - Color-coded cards
-  - Loop scrolling
-  - Navigation buttons
+---
+
+## Content Collections
+
+The site uses Astro 6's content collections with the loader API:
+
+### Collections
+
+| Collection | Path | Purpose |
+|-----------|------|---------|
+| projects | `src/content/projects/*.md` | Game projects |
+| wiki | `src/content/wiki/[category]/*.md` | Lore entries |
+| blog | `src/content/blog/*.md` | Blog posts |
+| news | `src/content/news/*.md` | News articles |
+
+### Wiki Categories
+
+- **characters/** — Character profiles (Aether, Lyra, Kairos)
+- **events/** — Historical events (Nexus War, The Fracture)
+- **realms/** — Locations and realms (Crystal Age)
+- **weapons/** — Weapons and artifacts (Void Blade)
 
 ---
 
@@ -126,20 +165,15 @@ Omniversify is a promotional landing page for a creative studio building a unifi
 
 ### Tailwind CSS v4
 
-The project uses Tailwind CSS v4 with the Vite plugin (`@tailwindcss/vite`). Configuration is done via CSS:
+The project uses Tailwind CSS v4 with the Vite plugin:
 
 ```css
 @import "tailwindcss";
-@import "shadcn/tailwind.css";  /* shadcn/ui compatibility */
 ```
 
 ### Design Tokens (CSS Variables)
 
-**Light Theme** (`:root`):
-- Background: `oklch(1 0 0)` (white)
-- Foreground: `oklch(0.145 0 0)` (near black)
-
-**Dark Theme** (`.dark`):
+**Dark Theme** (default):
 - Background: `oklch(0.145 0 0)` (near black)
 - Foreground: `oklch(0.985 0 0)` (near white)
 
@@ -149,26 +183,11 @@ The project uses Tailwind CSS v4 with the Vite plugin (`@tailwindcss/vite`). Con
 |------|-----|-------|
 | Primary Gold | `#C2B067` | Main accent, text, borders |
 | Gold Dark | `#8a7a3a` | Gradient endpoints |
-| Gold Light | `#f6eee3` | Highlights |
+| Content Text | `#F8F5FA` | Body text on content pages |
 
-### Gradient Text Effect
+### Content Page Colors
 
-```css
-background: radial-gradient(circle at 35% 35%, #8a7a3a 0%, #C2B067 50%, #8a7a3a 100%);
--webkit-background-clip: text;
--webkit-text-fill-color: transparent;
-background-clip: text;
-```
-
-### Project Color Palette
-
-| Project | Primary Color | Gradient |
-|---------|---------------|----------|
-| Alpha | `#4a90d9` | `#1a3a5c` → `#4a90d9` |
-| Beta | `#9b59b6` | `#2d1f4a` → `#9b59b6` |
-| Gamma | `#e74c3c` | `#3d1f20` → `#e74c3c` |
-| Delta | `#2ecc71` | `#0f3d2a` → `#2ecc71` |
-| Epsilon | `#f39c12` | `#3d2e0f` → `#f39c12` |
+Content pages (Wiki, Blog, News, Projects) use `#F8F5FA` for body text while keeping headings/titles in gold `#C2B067`.
 
 ---
 
@@ -176,44 +195,36 @@ background-clip: text;
 
 ### 1. Scroll Snap Navigation
 
-Full-page sections with CSS scroll-snap:
-
-```css
-.snap-container {
-  height: 100vh;
-  overflow-y: scroll;
-  scroll-snap-type: y mandatory;
-  scroll-behavior: smooth;
-}
-```
+Full-page sections on the home page with CSS scroll-snap.
 
 ### 2. Dark Mode Support
 
-Theme detection with localStorage persistence:
-
-```javascript
-const getThemePreference = () => {
-  if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-    return localStorage.getItem("theme");
-  }
-  return window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light";
-};
-```
+Theme detection with localStorage persistence.
 
 ### 3. Embla Carousel Integration
 
-Both carousels use `embla-carousel-react` with:
+Interactive carousels for projects and wiki entries with:
 - Loop mode enabled
 - Previous/Next navigation buttons
-- Responsive slide widths
+- Color-coded cards
 
-### 4. Responsive Design
+### 4. Pagefind Search
 
-- Mobile-first approach via Tailwind
-- Flexbox layouts with wrap support
-- Responsive padding (2rem base)
+- Full-text search across all content
+- Overlay modal triggered by magnifying glass icon
+- Dark-themed UI matching the website
+
+### 5. Reader Mode Support
+
+Content pages use semantic `<article>` tags for native browser reader mode:
+- Safari: View → Show Reader (⌘⇧R)
+- Firefox: View → Reader View (F9)
+
+### 6. Responsive Design
+
+- Mobile-first approach
+- Flexbox layouts
+- Responsive breakpoints
 
 ---
 
@@ -233,57 +244,40 @@ Both carousels use `embla-carousel-react` with:
 
 ### Build Output
 
-Running `bun build` produces a static `./dist/` folder containing:
-
-- `index.html` — Main HTML file
-- `_astro/` — Bundled JS, CSS, fonts
-- `favicon.svg` — Copied from public/
+Running `bun build` produces:
+- Static HTML pages for all routes
+- Bundled JS, CSS, fonts in `_astro/`
+- Pagefind search index in `pagefind/`
 
 ### Deployment
 
-The built `dist/` folder can be deployed to any static host:
-
+The `dist/` folder can be deployed to:
 - Vercel
 - Netlify
 - Cloudflare Pages
 - GitHub Pages
-- AWS S3 + CloudFront
-
-Example for Vercel:
-```bash
-npx vercel deploy dist
-```
 
 ---
 
 ## Performance Considerations
 
-### Optimizations Already Applied
+### Optimizations Applied
 
-1. **Static Generation** — Astro generates static HTML by default
-2. **Partial Hydration** — Only React components hydrate (carousels)
-3. **Font Optimization** — Self-hosted Geist font via @fontsource
-4. **SVG Assets** — Vector graphics (no raster images)
-5. **CSS Gradients** — No external background images
-
-### Potential Improvements
-
-- Add image optimization for project screenshots
-- Implement lazy loading for below-fold content
-- Add service worker for offline support
-- Consider View Transitions API for smooth navigation
+1. **Static Generation** — Astro generates static HTML
+2. **Partial Hydration** — Only React components hydrate
+3. **Font Optimization** — Self-hosted Geist font
+4. **SVG Assets** — No raster images
+5. **Pagefind** — Client-side search with minimal bandwidth
 
 ---
 
 ## Future Improvements
 
-- **CMS Integration** — Connect to headless CMS for dynamic content
-- **Project Detail Pages** — Individual pages for each project
-- **Lore Database** — Searchable lore encyclopedia
-- **Newsletter Signup** — Email collection integration
-- **Multi-language Support** — i18n for international audiences
-- **Analytics** — Add visitor tracking
-- **Blog/News Section** — Regular updates and announcements
+- CMS Integration for dynamic content
+- Multi-language support expansion
+- Analytics tracking
+- Shop functionality
+- More wiki content
 
 ---
 
@@ -291,15 +285,12 @@ npx vercel deploy dist
 
 ### Open Source Licenses
 
-- Astro — [MIT](https://github.com/withastro/astro/blob/main/LICENSE)
-- React — [MIT](https://github.com/facebook/react/blob/main/LICENSE)
-- Tailwind CSS — [MIT](https://github.com/tailwindlabs/tailwindcss/blob/main/LICENSE)
-- Embla Carousel — [MIT](https://github.com/davidbernson/embla-carousel/blob/master/LICENSE)
-- Lucide Icons — [ISC](https://github.com/lucide-icons/lucide/blob/main/LICENSE)
-
-### Asset Credits
-
-- Logo/favicon: Custom design (included in public/favicon.svg)
+- Astro — MIT
+- React — MIT
+- Tailwind CSS — MIT
+- Embla Carousel — MIT
+- Pagefind — MIT
+- astro-pagefind — MIT
 
 ---
 

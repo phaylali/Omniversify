@@ -10,7 +10,30 @@
 
 ---
 
-Omniversify is a creative studio dedicated to building unified multiverses that span across games, anime, series, books, and beyond. We believe that every story, every character, and every world deserves to exist in a connected tapestry of imagination.
+Omniversify is a creative studio and website dedicated to building unified multiverses that span across games, anime, series, books, and beyond. We believe that every story, every character, and every world deserves to exist in a connected tapestry of imagination.
+
+## Features
+
+### Multi-Page Website
+
+- **Home** — Immersive landing page with scroll-snap sections showcasing projects and lore
+- **Projects** — Grid view of all games in development
+- **Blog** — Latest updates, stories, and developer insights
+- **News** — Announcements and community updates
+- **Wiki** — Comprehensive lore database with search functionality
+
+### Wiki Categories
+
+- **Characters** — Heroes, villains, and legends
+- **Realms** — Worlds, dimensions, and domains
+- **Weapons** — Artifacts of immense power
+- **Events** — Historical moments that shaped existence
+
+### Site Features
+
+- **Search** — Full-text search via overlay modal (Pagefind)
+- **Reader Mode** — Native browser reader mode support
+- **Responsive Design** — Works on all devices
 
 ## Our Vision
 

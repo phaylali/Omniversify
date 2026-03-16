@@ -1,0 +1,148 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import Navbar from "../../../components/Navbar.astro";
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const wiki = await getCollection('wiki');
+  const categories = ['characters', 'realms', 'weapons', 'events'];
+  
+  return categories.map((category) => ({
+    params: { category },
+    props: { 
+      category,
+      items: wiki.filter(item => item.data.category === category)
+    },
+  }));
+}
+
+const { category, items } = Astro.props;
+
+const categoryInfo: Record<string, { name: string; icon: string }> = {
+  characters: { name: 'Characters', icon: '👤' },
+  realms: { name: 'Realms', icon: '🌍' },
+  weapons: { name: 'Weapons', icon: '⚔️' },
+  events: { name: 'Events', icon: '📜' },
+};
+---
+
+<Layout>
+  <Navbar />
+  <main class="wiki-category-page">
+    <div class="category-header">
+      <a href="/wiki" class="back-link">← Back to Wiki</a>
+      <span class="category-icon">{categoryInfo[category].icon}</span>
+      <h1>{categoryInfo[category].name}</h1>
+    </div>
+    
+    <div class="items-grid">
+      {items.map((item) => {
+        const slug = item.id.split('/').pop();
+        return (
+        <a href={`/wiki/${category}/${slug}`} class="item-card" style={{ borderColor: item.data.color }}>
+          <span class="item-color" style={{ background: item.data.color }}></span>
+          <div class="item-content">
+            <h2>{item.data.title}</h2>
+            <p>{item.data.description}</p>
+          </div>
+        </a>
+        );
+      })}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .wiki-category-page {
+    padding: 8rem 2rem 4rem;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .category-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .back-link {
+    display: inline-block;
+    color: #c2b067;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    transition: opacity 0.2s;
+  }
+
+  .back-link:hover {
+    opacity: 0.8;
+  }
+
+  .category-icon {
+    font-size: 3rem;
+    display: block;
+    margin-bottom: 1rem;
+  }
+
+  .category-header h1 {
+    font-size: 2.5rem;
+    margin: 0;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: radial-gradient(circle at 35% 35%, #8a7a3a 0%, #c2b067 50%, #8a7a3a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .items-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .item-card {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 2px solid rgba(194, 176, 103, 0.3);
+    background: rgba(0, 0, 0, 0.3);
+    text-decoration: none;
+    color: #c2b067;
+    transition: all 0.3s ease;
+  }
+
+  .item-card:hover {
+    box-shadow: 0 0 20px rgba(194, 176, 103, 0.3);
+    transform: translateX(8px);
+  }
+
+  .item-color {
+    width: 8px;
+    height: 60px;
+    border-radius: 4px;
+    flex-shrink: 0;
+  }
+
+  .item-content h2 {
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem;
+    color: #c2b067;
+  }
+
+  .item-content p {
+    font-size: 0.9rem;
+    margin: 0;
+    opacity: 0.8;
+  }
+
+  @media (max-width: 600px) {
+    .item-card {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+</style>

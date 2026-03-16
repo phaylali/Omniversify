@@ -130,7 +130,7 @@ const { Content } = await render(project);
   }
 
   .content-body {
-    color: #c2b067;
+    color: #F8F5FA;
     line-height: 1.8;
     font-size: 1.1rem;
   }
@@ -174,6 +174,14 @@ const { Content } = await render(project);
 
   .content-body :global(em) {
     font-style: italic;
+  }
+
+  .content-body :global(blockquote) {
+    border-left: 3px solid #c2b067;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    color: #F8F5FA;
   }
 
   .project-footer {
