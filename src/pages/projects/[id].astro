@@ -1,0 +1,223 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((project) => ({
+    params: { id: project.id },
+    props: { project },
+  }));
+}
+
+const { project } = Astro.props;
+const { Content } = await render(project);
+---
+
+<Layout>
+  <Navbar />
+  <article class="project-page">
+    <header class="project-header" style={`background: ${project.data.gradient}`}>
+      <a href="/projects" class="back-link">← Back to Projects</a>
+      
+      <div class="project-icon">
+        <span>{project.data.title.charAt(0)}</span>
+      </div>
+      
+      <h1>{project.data.title}</h1>
+      
+      <div class="tags">
+        {project.data.tags.map((tag) => (
+          <span class="tag">{tag}</span>
+        ))}
+      </div>
+    </header>
+    
+    <div class="project-content">
+      <p class="description">{project.data.description}</p>
+      
+      <div class="content-body">
+        <Content />
+      </div>
+    </div>
+    
+    <footer class="project-footer">
+      <a href="/projects" class="back-link">← Back to Projects</a>
+    </footer>
+  </article>
+</Layout>
+
+<style>
+  .project-page {
+    padding-top: 8rem;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .project-header {
+    padding: 4rem 2rem;
+    text-align: center;
+    position: relative;
+  }
+
+  .project-header .back-link {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+  }
+
+  .project-header .back-link:hover {
+    opacity: 1;
+  }
+
+  .project-icon {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    font-weight: bold;
+    background: rgba(194, 176, 103, 0.2);
+    color: #c2b067;
+    margin: 0 auto 2rem;
+  }
+
+  .project-header h1 {
+    font-size: 3rem;
+    margin: 0 0 1.5rem;
+    color: white;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: white;
+  }
+
+  .project-content {
+    padding: 3rem 2rem;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .description {
+    font-size: 1.4rem;
+    color: #c2b067;
+    text-align: center;
+    margin-bottom: 3rem;
+    line-height: 1.6;
+  }
+
+  .content-body {
+    color: #c2b067;
+    line-height: 1.8;
+    font-size: 1.1rem;
+  }
+
+  .content-body :global(h1),
+  .content-body :global(h2),
+  .content-body :global(h3) {
+    color: #c2b067;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .content-body :global(h2) {
+    font-size: 1.75rem;
+    border-bottom: 1px solid rgba(194, 176, 103, 0.2);
+    padding-bottom: 0.5rem;
+  }
+
+  .content-body :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .content-body :global(ul),
+  .content-body :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .content-body :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .content-body :global(a) {
+    color: #c2b067;
+    text-decoration: underline;
+  }
+
+  .content-body :global(strong) {
+    font-weight: 600;
+  }
+
+  .content-body :global(em) {
+    font-style: italic;
+  }
+
+  .project-footer {
+    padding: 2rem;
+    text-align: center;
+    border-top: 1px solid rgba(194, 176, 103, 0.2);
+  }
+
+  .project-footer .back-link {
+    color: #c2b067;
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: opacity 0.2s;
+  }
+
+  .project-footer .back-link:hover {
+    opacity: 0.8;
+  }
+
+  @media (max-width: 600px) {
+    .project-page {
+      padding-top: 7rem;
+    }
+
+    .project-header {
+      padding: 3rem 1rem;
+    }
+
+    .project-header h1 {
+      font-size: 2rem;
+    }
+
+    .project-icon {
+      width: 80px;
+      height: 80px;
+      font-size: 2rem;
+    }
+
+    .project-content {
+      padding: 2rem 1rem;
+    }
+
+    .description {
+      font-size: 1.1rem;
+    }
+  }
+</style>

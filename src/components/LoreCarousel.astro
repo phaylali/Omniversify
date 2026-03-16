@@ -1,8 +1,11 @@
 ---
 import Section from "./Section.astro";
 import { LoreCarousel } from "./LoreCarousel";
+import { getCollection } from 'astro:content';
+
+const wiki = await getCollection('wiki');
 ---
 
 <Section>
-  <LoreCarousel client:visible />
+  <LoreCarousel client:visible wiki={wiki} />
 </Section>

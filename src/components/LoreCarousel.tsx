@@ -1,16 +1,21 @@
 import * as React from "react";
 import useEmblaCarousel from "embla-carousel-react";
 
-const loreItems = [
-  { id: 1, name: "Aether", type: "Character", description: "The First Wanderer", color: "#1abc9c" },
-  { id: 2, name: "Nexus War", type: "Event", description: "The Great Convergence", color: "#3498db" },
-  { id: 3, name: "Lyra", type: "Character", description: "Queen of Shadows", color: "#9b59b6" },
-  { id: 4, name: "The Fracture", type: "Event", description: "When worlds broke", color: "#e74c3c" },
-  { id: 5, name: "Kairos", type: "Character", description: "Time Keeper", color: "#f1c40f" },
-  { id: 6, name: "Crystal Age", type: "Era", description: "Age of Magic", color: "#2ecc71" },
-];
+interface WikiEntry {
+  id: string;
+  data: {
+    title: string;
+    type: 'Character' | 'Event' | 'Era' | 'Location' | 'Artifact';
+    description: string;
+    color: string;
+  };
+}
 
-export function LoreCarousel() {
+interface Props {
+  wiki: WikiEntry[];
+}
+
+export function LoreCarousel({ wiki }: Props) {
   const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
 
   return (
@@ -18,12 +23,12 @@ export function LoreCarousel() {
       <h2>Lore: Characters & Events</h2>
       <div className="embla" ref={emblaRef}>
         <div className="embla__container">
-          {loreItems.map((item) => (
+          {wiki.map((item) => (
             <div className="embla__slide" key={item.id}>
-              <div className="lore-card" style={{ backgroundColor: item.color }}>
-                <span className="lore-type">{item.type}</span>
-                <h3>{item.name}</h3>
-                <p>{item.description}</p>
+              <div className="lore-card" style={{ backgroundColor: item.data.color }}>
+                <span className="lore-type">{item.data.type}</span>
+                <h3>{item.data.title}</h3>
+                <p>{item.data.description}</p>
               </div>
             </div>
           ))}

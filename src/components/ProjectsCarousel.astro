@@ -1,10 +1,13 @@
 ---
 import Section from "./Section.astro";
 import { ProjectsCarousel } from "./ProjectsCarousel";
+import { getCollection } from 'astro:content';
+
+const projects = await getCollection('projects');
 ---
 
 <Section>
-  <ProjectsCarousel client:visible />
+  <ProjectsCarousel client:visible projects={projects} />
 </Section>
 
 <style>

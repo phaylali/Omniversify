@@ -6,7 +6,7 @@ import faviconSvg from "../../public/favicon.svg?raw";
 <Section>
   <div class="hero-content">
     <div class="logo-wrapper">
-      <div class="logo" set:html={faviconSvg}></div>
+      <div class="logo" set:html={faviconSvg} />
     </div>
     <h1>Omniversify</h1>
     <p>Where infinite worlds converge</p>
@@ -17,6 +17,10 @@ import faviconSvg from "../../public/favicon.svg?raw";
   .hero-content {
     text-align: center;
     color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
   }
 
   .logo-wrapper {
@@ -27,16 +31,22 @@ import faviconSvg from "../../public/favicon.svg?raw";
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: visible;
+  }
+
+  .logo {
+    width: 100%;
+    height: 100%;
   }
 
   .logo :global(svg) {
-    width: 200%;
-    height: 200%;
-    max-width: none;
+    width: 100%;
+    height: 100%;
     display: block;
-    transform: translate(-25%, -25%);
+    /* Center the SVG content within its viewBox */
+    transform: translate(-11.5%, -11.5%);
   }
-
+  
   h1 {
     font-size: 4rem;
     font-weight: 700;

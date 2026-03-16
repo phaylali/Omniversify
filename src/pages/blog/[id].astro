@@ -1,0 +1,218 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog');
+  return posts.map((post) => ({
+    params: { id: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+function formatDate(date: Date) {
+	return date.toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+	});
+}
+---
+
+<Layout>
+  <Navbar />
+  <article class="blog-post">
+    <header class="post-header">
+      <a href="/blog" class="back-link">← Back to Blog</a>
+      
+      <div class="post-meta">
+        <span class="date">{formatDate(post.data.pubDate)}</span>
+        <span class="separator">•</span>
+        <span class="author">by {post.data.author}</span>
+      </div>
+      
+      <h1>{post.data.title}</h1>
+      <p class="description">{post.data.description}</p>
+      
+      <div class="tags">
+        {post.data.tags.map((tag) => (
+          <span class="tag">{tag}</span>
+        ))}
+      </div>
+    </header>
+    
+    <div class="post-content">
+      <Content />
+    </div>
+    
+    <footer class="post-footer">
+      <a href="/blog" class="back-link">← Back to Blog</a>
+    </footer>
+  </article>
+</Layout>
+
+<style>
+  .blog-post {
+    padding: 8rem 2rem 4rem;
+    max-width: 800px;
+    margin: 0 auto;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .post-header {
+    margin-bottom: 3rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid rgba(194, 176, 103, 0.2);
+  }
+
+  .back-link {
+    display: inline-block;
+    color: #c2b067;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-bottom: 2rem;
+    transition: opacity 0.2s;
+  }
+
+  .back-link:hover {
+    opacity: 0.8;
+  }
+
+  .post-meta {
+    display: flex;
+    gap: 0.75rem;
+    align-items: center;
+    font-size: 0.9rem;
+    color: #c2b067;
+    opacity: 0.7;
+    margin-bottom: 1rem;
+  }
+
+  .separator {
+    opacity: 0.5;
+  }
+
+  .post-header h1 {
+    font-size: 2.5rem;
+    margin: 0 0 1rem;
+    color: #c2b067;
+    line-height: 1.2;
+  }
+
+  .description {
+    font-size: 1.25rem;
+    color: #c2b067;
+    opacity: 0.8;
+    margin: 0 0 1.5rem;
+    line-height: 1.6;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(194, 176, 103, 0.2);
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #c2b067;
+  }
+
+  .post-content {
+    color: #c2b067;
+    line-height: 1.8;
+    font-size: 1.1rem;
+  }
+
+  .post-content :global(h1),
+  .post-content :global(h2),
+  .post-content :global(h3) {
+    color: #c2b067;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .post-content :global(h2) {
+    font-size: 1.75rem;
+  }
+
+  .post-content :global(h3) {
+    font-size: 1.4rem;
+  }
+
+  .post-content :global(p) {
+    margin-bottom: 1.5rem;
+  }
+
+  .post-content :global(ul),
+  .post-content :global(ol) {
+    margin-bottom: 1.5rem;
+    padding-left: 1.5rem;
+  }
+
+  .post-content :global(li) {
+    margin-bottom: 0.5rem;
+  }
+
+  .post-content :global(a) {
+    color: #c2b067;
+    text-decoration: underline;
+  }
+
+  .post-content :global(blockquote) {
+    border-left: 3px solid #c2b067;
+    padding-left: 1.5rem;
+    margin: 2rem 0;
+    font-style: italic;
+    opacity: 0.9;
+  }
+
+  .post-content :global(code) {
+    background: rgba(194, 176, 103, 0.1);
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.9em;
+  }
+
+  .post-content :global(pre) {
+    background: rgba(0, 0, 0, 0.3);
+    padding: 1.5rem;
+    border-radius: 8px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+  }
+
+  .post-content :global(strong) {
+    font-weight: 600;
+  }
+
+  .post-footer {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(194, 176, 103, 0.2);
+  }
+
+  @media (max-width: 600px) {
+    .blog-post {
+      padding: 7rem 1rem 3rem;
+    }
+
+    .post-header h1 {
+      font-size: 1.75rem;
+    }
+
+    .description {
+      font-size: 1.1rem;
+    }
+  }
+</style>

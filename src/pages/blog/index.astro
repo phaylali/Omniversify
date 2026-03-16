@@ -1,0 +1,145 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog')).sort(
+	(a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+
+function formatDate(date: Date) {
+	return date.toLocaleDateString('en-US', {
+		year: 'numeric',
+		month: 'long',
+		day: 'numeric',
+	});
+}
+---
+
+<Layout>
+  <Navbar />
+  <main class="feed-page">
+    <div class="feed-header">
+      <h1>Blog</h1>
+      <p>Latest updates, stories, and insights from our team</p>
+    </div>
+    
+    <div class="posts-grid">
+      {posts.map((post) => (
+        <a href={`/blog/${post.id}`} class="post-card">
+          <div class="post-content">
+            <div class="post-meta">
+              <span class="date">{formatDate(post.data.pubDate)}</span>
+              <span class="author">by {post.data.author}</span>
+            </div>
+            <h2>{post.data.title}</h2>
+            <p>{post.data.description}</p>
+            <div class="tags">
+              {post.data.tags.map((tag) => (
+                <span class="tag">{tag}</span>
+              ))}
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+  </main>
+</Layout>
+
+<style>
+  .feed-page {
+    padding: 8rem 2rem 4rem;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.3);
+  }
+
+  .feed-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .feed-header h1 {
+    font-size: 3rem;
+    margin: 0 0 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: radial-gradient(circle at 35% 35%, #8a7a3a 0%, #c2b067 50%, #8a7a3a 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .feed-header p {
+    color: #c2b067;
+    font-size: 1.25rem;
+    opacity: 0.8;
+  }
+
+  .posts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .post-card {
+    display: block;
+    border-radius: 16px;
+    text-decoration: none;
+    color: white;
+    border: 2px solid rgba(194, 176, 103, 0.3);
+    transition: all 0.3s ease;
+    background: rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+  }
+
+  .post-card:hover {
+    box-shadow: 0 0 30px rgba(194, 176, 103, 0.4);
+    transform: translateY(-4px);
+  }
+
+  .post-content {
+    padding: 2rem;
+  }
+
+  .post-meta {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.85rem;
+    color: #c2b067;
+    opacity: 0.7;
+    margin-bottom: 1rem;
+  }
+
+  .post-content h2 {
+    font-size: 1.5rem;
+    margin: 0 0 1rem;
+    color: #c2b067;
+    line-height: 1.3;
+  }
+
+  .post-content p {
+    margin: 0 0 1.5rem;
+    font-size: 0.95rem;
+    color: #c2b067;
+    opacity: 0.8;
+    line-height: 1.6;
+  }
+
+  .tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .tag {
+    font-size: 0.7rem;
+    padding: 0.25rem 0.75rem;
+    background: rgba(194, 176, 103, 0.2);
+    border-radius: 20px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: #c2b067;
+  }
+</style>
