@@ -8,9 +8,9 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build",
-    "preview": "wrangler dev",
+    "preview": "astro preview",
     "astro": "astro",
-    "deploy": "wrangler deploy",
+    "deploy": "wrangler pages deploy dist",
     "generate-types": "wrangler types"
   },
   "dependencies": {
