@@ -3,9 +3,15 @@ import Section from "./Section.astro";
 import { LoreCarousel } from "./LoreCarousel";
 import { getCollection } from 'astro:content';
 
+interface Props {
+  fullHeight?: boolean;
+}
+
+const { fullHeight = true } = Astro.props;
+
 const wiki = await getCollection('wiki');
 ---
 
-<Section>
+<Section fullHeight={fullHeight}>
   <LoreCarousel client:only="react" wiki={wiki} />
 </Section>

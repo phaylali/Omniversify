@@ -1,9 +1,12 @@
 ---
 import Section from "./Section.astro";
 import faviconSvg from "../../public/favicon.svg?raw";
+import cornerSvg from "../assets/corner.svg?raw";
 ---
 
 <Section>
+  <div class="corner corner-left" set:html={cornerSvg} />
+  <div class="corner corner-right" set:html={cornerSvg} />
   <div class="hero-content">
     <div class="logo-wrapper">
       <div class="logo" set:html={faviconSvg} />
@@ -14,6 +17,14 @@ import faviconSvg from "../../public/favicon.svg?raw";
 </Section>
 
 <style>
+  :global(.section.hero-section) {
+    overflow: visible;
+  }
+
+  .hero-section {
+    overflow: visible;
+  }
+
   .hero-content {
     text-align: center;
     color: white;
@@ -81,6 +92,30 @@ import faviconSvg from "../../public/favicon.svg?raw";
       transform: scale(1.05);
       opacity: 0.8;
     }
+  }
+
+  .corner {
+    position: absolute;
+    bottom: 10px;
+    width: 120px;
+    height: auto;
+    pointer-events: none;
+    opacity: 0.6;
+    z-index: 1;
+  }
+
+  .corner-left {
+    left: 10px;
+  }
+
+  .corner-right {
+    right: 10px;
+    transform: scaleX(-1);
+  }
+
+  .corner :global(svg) {
+    width: 100%;
+    height: auto;
   }
 
   @media (max-width: 768px) {

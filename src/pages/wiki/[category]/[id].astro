@@ -20,6 +20,15 @@ const categoryInfo: Record<string, { name: string; icon: string }> = {
   weapons: { name: 'Weapons', icon: '⚔️' },
   events: { name: 'Events', icon: '📜' },
 };
+
+function getReadingTime(body: string): string {
+	const wordsPerMinute = 200;
+	const words = body.trim().split(/\s+/).length;
+	const minutes = Math.ceil(words / wordsPerMinute);
+	return `${minutes} min read`;
+}
+
+const readingTime = getReadingTime(item.body);
 ---
 
 <Layout>
@@ -29,7 +38,12 @@ const categoryInfo: Record<string, { name: string; icon: string }> = {
       <a href={`/wiki/${item.data.category}`} class="back-link">← Back to {categoryInfo[item.data.category].name}</a>
       
       <div class="entry-meta">
-        <span class="category-badge">{categoryInfo[item.data.category].icon} {categoryInfo[item.data.category].name}</span>
+        <div class="meta-left">
+          <span class="category-badge">{categoryInfo[item.data.category].icon} {categoryInfo[item.data.category].name}</span>
+        </div>
+        <div class="meta-right">
+          <span class="reading-time">{readingTime}</span>
+        </div>
       </div>
       
       <h1>{item.data.title}</h1>
@@ -75,7 +89,28 @@ const categoryInfo: Record<string, { name: string; icon: string }> = {
   }
 
   .entry-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 1rem;
+  }
+
+  .meta-left {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .meta-right {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .reading-time {
+    font-size: 0.8rem;
+    color: #c2b067;
+    opacity: 0.7;
   }
 
   .category-badge {
@@ -136,6 +171,26 @@ const categoryInfo: Record<string, { name: string; icon: string }> = {
     padding-left: 1.5rem;
   }
 
+  .entry-content :global(ol) {
+    list-style: none;
+    counter-reset: ordered-list;
+  }
+
+  .entry-content :global(ol li) {
+    counter-increment: ordered-list;
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .entry-content :global(ol li::before) {
+    content: counter(ordered-list) ".";
+    position: absolute;
+    left: 0;
+    color: #c2b067;
+    font-weight: 600;
+  }
+
   .entry-content :global(li) {
     margin-bottom: 0.5rem;
   }
@@ -156,6 +211,35 @@ const categoryInfo: Record<string, { name: string; icon: string }> = {
 
   .entry-content :global(strong) {
     font-weight: 600;
+  }
+
+  .entry-content :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    border: 2px solid #c2b067;
+    box-shadow: 0 0 10px rgba(194, 176, 103, 0.2);
+  }
+
+  .entry-content :global(th),
+  .entry-content :global(td) {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border: 1px solid rgba(194, 176, 103, 0.4);
+  }
+
+  .entry-content :global(th) {
+    background: rgba(194, 176, 103, 0.2);
+    color: #c2b067;
+    font-weight: 600;
+  }
+
+  .entry-content :global(tr:nth-child(even)) {
+    background: rgba(194, 176, 103, 0.05);
+  }
+
+  .entry-content :global(tr:hover) {
+    background: rgba(194, 176, 103, 0.1);
   }
 
   .entry-footer {

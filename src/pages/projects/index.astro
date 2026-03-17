@@ -15,24 +15,30 @@ const projects = await getCollection('projects');
     </div>
     
     <div class="projects-grid">
-      {projects.map((project) => (
-        <a href={`/projects/${project.id}`} class="project-card">
-          <div class="project-image" style={`background: ${project.data.gradient}`}>
-            <div class="image-placeholder">
-              <span>{project.data.title.charAt(0)}</span>
+      {projects.length > 0 ? (
+        projects.map((project) => (
+          <a href={`/projects/${project.id}`} class="project-card">
+            <div class="project-image" style={project.data.cover ? { backgroundImage: `url(${project.data.cover})`, backgroundSize: 'cover', backgroundPosition: 'center' } : { background: project.data.gradient }}>
+              {!project.data.cover && (
+                <div class="image-placeholder">
+                  <span>{project.data.title.charAt(0)}</span>
+                </div>
+              )}
             </div>
-          </div>
-          <div class="project-content">
-            <h2>{project.data.title}</h2>
-            <div class="tags">
-              {project.data.tags.map((tag) => (
-                <span class="tag">{tag}</span>
-              ))}
+            <div class="project-content">
+              <h2>{project.data.title}</h2>
+              <div class="tags">
+                {project.data.tags.map((tag) => (
+                  <span class="tag">{tag}</span>
+                ))}
+              </div>
+              <p>{project.data.description}</p>
             </div>
-            <p>{project.data.description}</p>
-          </div>
-        </a>
-      ))}
+          </a>
+        ))
+      ) : (
+        <p class="empty-message">No projects yet. Coming soon!</p>
+      )}
     </div>
   </main>
 </Layout>
@@ -147,6 +153,15 @@ const projects = await getCollection('projects');
     color: #c2b067;
     opacity: 0.8;
     line-height: 1.5;
+  }
+
+  .empty-message {
+    text-align: center;
+    color: #c2b067;
+    opacity: 0.6;
+    padding: 3rem;
+    font-size: 1.1rem;
+    grid-column: 1 / -1;
   }
 
   @media (max-width: 600px) {

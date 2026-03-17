@@ -15,12 +15,18 @@ const { item } = Astro.props;
 const { Content } = await render(item);
 
 function formatDate(date: Date) {
-	return date.toLocaleDateString('en-US', {
-		year: 'numeric',
-		month: 'long',
-		day: 'numeric',
-	});
+	const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+	return `${date.getFullYear()} ${months[date.getMonth()]} ${date.getDate()}`;
 }
+
+function getReadingTime(body: string): string {
+	const wordsPerMinute = 200;
+	const words = body.trim().split(/\s+/).length;
+	const minutes = Math.ceil(words / wordsPerMinute);
+	return `${minutes} min read`;
+}
+
+const readingTime = getReadingTime(item.body);
 ---
 
 <Layout>
@@ -32,7 +38,12 @@ function formatDate(date: Date) {
       <span class="category">{item.data.category}</span>
       
       <div class="post-meta">
-        <span class="date">{formatDate(item.data.pubDate)}</span>
+        <div class="meta-left">
+          <span class="date">{formatDate(item.data.pubDate)}</span>
+        </div>
+        <div class="meta-right">
+          <span class="reading-time">{readingTime}</span>
+        </div>
       </div>
       
       <h1>{item.data.title}</h1>
@@ -90,10 +101,25 @@ function formatDate(date: Date) {
   }
 
   .post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     font-size: 0.9rem;
     color: #c2b067;
     opacity: 0.7;
     margin-bottom: 1rem;
+  }
+
+  .meta-left {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  .meta-right {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
   }
 
   .post-header h1 {

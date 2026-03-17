@@ -10,6 +10,7 @@ interface Project {
     tags: string[];
     color: string;
     gradient: string;
+    cover?: string;
   };
 }
 
@@ -28,10 +29,18 @@ export function ProjectsCarousel({ projects }: Props) {
           {projects.map((project) => (
             <div className="embla__slide project-slide" key={project.id}>
               <a href={`/projects/${project.id}`} className="project-card">
-                <div className="project-image" style={{ background: project.data.gradient }}>
-                  <div className="image-placeholder">
-                    <span>{project.data.title.charAt(0)}</span>
-                  </div>
+                <div 
+                  className="project-image" 
+                  style={project.data.cover 
+                    ? { backgroundImage: `url(${project.data.cover})`, backgroundSize: 'cover', backgroundPosition: 'center' }
+                    : { background: project.data.gradient }
+                  }
+                >
+                  {!project.data.cover && (
+                    <div className="image-placeholder">
+                      <span>{project.data.title.charAt(0)}</span>
+                    </div>
+                  )}
                 </div>
                 <div className="project-info">
                   <h3>{project.data.title}</h3>

@@ -36,18 +36,22 @@ const categoryInfo: Record<string, { name: string; icon: string }> = {
     </div>
     
     <div class="items-grid">
-      {items.map((item) => {
-        const slug = item.id.split('/').pop();
-        return (
-        <a href={`/wiki/${category}/${slug}`} class="item-card" style={{ borderColor: item.data.color }}>
-          <span class="item-color" style={{ background: item.data.color }}></span>
-          <div class="item-content">
-            <h2>{item.data.title}</h2>
-            <p>{item.data.description}</p>
-          </div>
-        </a>
-        );
-      })}
+      {items.length > 0 ? (
+        items.map((item) => {
+          const slug = item.id.split('/').pop();
+          return (
+          <a href={`/wiki/${category}/${slug}`} class="item-card" style={{ borderColor: item.data.color }}>
+            <span class="item-color" style={{ background: item.data.color }}></span>
+            <div class="item-content">
+              <h2>{item.data.title}</h2>
+              <p>{item.data.description}</p>
+            </div>
+          </a>
+          );
+        })
+      ) : (
+        <p class="empty-message">No entries yet. Coming soon!</p>
+      )}
     </div>
   </main>
 </Layout>
@@ -137,6 +141,14 @@ const categoryInfo: Record<string, { name: string; icon: string }> = {
     font-size: 0.9rem;
     margin: 0;
     opacity: 0.8;
+  }
+
+  .empty-message {
+    text-align: center;
+    color: #c2b067;
+    opacity: 0.6;
+    padding: 3rem;
+    font-size: 1.1rem;
   }
 
   @media (max-width: 600px) {

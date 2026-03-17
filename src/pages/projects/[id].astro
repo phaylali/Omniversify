@@ -14,24 +14,29 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await render(project);
 
+const coverImage = project.data.cover || undefined;
+
 const allBlogPosts = await getCollection("blog");
 const projectUpdates = allBlogPosts
   .filter((post) => post.data.project === project.id)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
 
-<Layout>
+<Layout
+  title={project.data.title}
+  description={project.data.description}
+  image={coverImage}
+>
   <Navbar />
   <article class="project-page">
     <header
       class="project-header"
-      style={`background: ${project.data.gradient}`}
+      style={project.data.cover
+        ? `background-image: url(${project.data.cover}); background-size: cover; background-position: center;`
+        : `background: ${project.data.gradient}`}
     >
+      {!project.data.cover && <div class="header-overlay" />}
       <a href="/projects" class="back-link">← Back to Projects</a>
-
-      <div class="project-icon">
-        <span>{project.data.title.charAt(0)}</span>
-      </div>
 
       <h1>{project.data.title}</h1>
 
@@ -49,7 +54,6 @@ const projectUpdates = allBlogPosts
     <div class="tab-content">
       <div id="overview" class="tab-pane active">
         <div class="project-content">
-          <p class="description">{project.data.description}</p>
           <div class="content-body">
             <Content />
           </div>
@@ -131,6 +135,21 @@ const projectUpdates = allBlogPosts
     padding: 4rem 2rem;
     text-align: center;
     position: relative;
+  }
+
+  .header-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 0;
+  }
+
+  .project-header > * {
+    position: relative;
+    z-index: 1;
   }
 
   .project-header .back-link {
@@ -335,6 +354,26 @@ const projectUpdates = allBlogPosts
     padding-left: 1.5rem;
   }
 
+  .content-body :global(ol) {
+    list-style: none;
+    counter-reset: ordered-list;
+  }
+
+  .content-body :global(ol li) {
+    counter-increment: ordered-list;
+    position: relative;
+    padding-left: 2rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .content-body :global(ol li::before) {
+    content: counter(ordered-list) ".";
+    position: absolute;
+    left: 0;
+    color: #c2b067;
+    font-weight: 600;
+  }
+
   .content-body :global(li) {
     margin-bottom: 0.5rem;
   }
@@ -346,6 +385,35 @@ const projectUpdates = allBlogPosts
 
   .content-body :global(strong) {
     font-weight: 600;
+  }
+
+  .content-body :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 2rem 0;
+    border: 2px solid #c2b067;
+    box-shadow: 0 0 10px rgba(194, 176, 103, 0.2);
+  }
+
+  .content-body :global(th),
+  .content-body :global(td) {
+    padding: 0.75rem 1rem;
+    text-align: left;
+    border: 1px solid rgba(194, 176, 103, 0.4);
+  }
+
+  .content-body :global(th) {
+    background: rgba(194, 176, 103, 0.2);
+    color: #c2b067;
+    font-weight: 600;
+  }
+
+  .content-body :global(tr:nth-child(even)) {
+    background: rgba(194, 176, 103, 0.05);
+  }
+
+  .content-body :global(tr:hover) {
+    background: rgba(194, 176, 103, 0.1);
   }
 
   .content-body :global(em) {

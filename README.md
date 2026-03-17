@@ -1,7 +1,7 @@
 # Omniversify
 
 <p align="center">
-  <img src="/favicon.svg" width="120" height="120" alt="Omniversify Logo" />
+  <img src="/public/favicon.svg" width="120" height="120" alt="Omniversify Logo" />
 </p>
 
 <p align="center">
@@ -16,7 +16,7 @@ Omniversify is a creative studio and website dedicated to building unified multi
 
 ### Multi-Page Website
 
-- **Home** — Immersive landing page with scroll-snap sections showcasing projects and lore
+- **Home** — Landing page showcasing projects and lore
 - **Projects** — Grid view of all games in development
 - **Blog** — Latest updates, stories, and developer insights
 - **News** — Announcements and community updates
@@ -24,16 +24,17 @@ Omniversify is a creative studio and website dedicated to building unified multi
 
 ### Wiki Categories
 
-- **Characters** — Heroes, villains, and legends
+- **Characters** — Historical figures and legends
 - **Realms** — Worlds, dimensions, and domains
-- **Weapons** — Artifacts of immense power
-- **Events** — Historical moments that shaped existence
+- **Weapons** — Artifacts of immense power (coming soon)
+- **Events** — Historical moments that shaped existence (coming soon)
 
 ### Site Features
 
 - **Search** — Full-text search via overlay modal (Pagefind)
-- **Reader Mode** — Native browser reader mode support
+- **SEO** — Open Graph and Twitter card support for social sharing
 - **Responsive Design** — Works on all devices
+- **Project Cover Images** — Optional cover images for projects with gradient fallback
 
 ## Our Vision
 
@@ -41,26 +42,29 @@ We are architects of unified multiverses. Our mission is to build a singular, co
 
 > One Universe. Infinite Stories. Zero Boundaries.
 
-## Projects
+## Current Projects
 
-We are developing a diverse portfolio of games and interactive experiences:
-
-- **Project Alpha** — A groundbreaking sci-fi RPG where time is currency
-- **Project Beta** — A sprawling fantasy MMORPG where ancient gods awaken
-- **Project Gamma** — An action-adventure game spanning multiple dimensions
-- **Project Delta** — A mind-bending puzzle platformer with gravity as your weapon
-- **Project Epsilon** — A psychological horror survival experience
+### Warframe Tools
+A collection of tools and resources for Warframe players.
 
 ## The Lore
 
-Our universe is populated by memorable characters, world-shaping events, and entire eras:
+Our universe features the Barghawata Confederacy - a Berber tribal confederation from Moroccan history that established a unique religious-political entity along Morocco's Atlantic coast from 744 to 1058 CE.
 
-- **Aether** — The First Wanderer
-- **Nexus War** — The Great Convergence
-- **Lyra** — Queen of Shadows
-- **The Fracture** — When worlds broke
-- **Kairos** — Time Keeper
-- **Crystal Age** — Age of Magic
+### Characters
+
+- **Salih ibn Tarif** — First prophet-king of the Barghawata
+- **Ilyas ibn Salih** — Second ruler; maintained religious secrecy
+- **Yunus ibn Ilyas** — Third ruler; revealed the Barghawata faith publicly
+- **Abu Ghufair** — Fourth ruler; consolidated the confederation
+- **Abu al-Ansar Abdullah** — Fifth ruler; diplomatic golden age
+- **Abu Mansur Isa** — Sixth ruler; died in battle
+- **Tarif al-Matghari** — Founder of the Barghawata Confederacy
+
+### Realms
+
+- **Barghawata Confederacy** — The Berber tribal confederation (744-1058 CE)
+- **Tamesna** — Core territory along Atlantic Morocco
 
 ## Connect With Us
 
@@ -79,4 +83,4 @@ Help us build infinite worlds:
 
 &copy; 2026 Omniversify. All rights reserved.
 
-*Made with ∞ across the multiverse*
+_Made with ∞ across the multiverse_
