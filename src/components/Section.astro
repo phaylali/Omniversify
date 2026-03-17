@@ -1,43 +1,29 @@
 ---
 interface Props {
   class?: string;
-  fullHeight?: boolean;
 }
 
-const { class: className, fullHeight = true } = Astro.props;
+const { class: className } = Astro.props;
 ---
 
-<section class:list={["section", className]} data-full-height={fullHeight}>
+<section class:list={["section", className]}>
   <slot />
 </section>
 
 <style>
   .section {
     width: 100%;
-    scroll-snap-align: start;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    padding: 2rem;
-    box-sizing: border-box;
-  }
-
-  .section[data-full-height="true"] {
-    height: 100vh;
-  }
-
-  .section[data-full-height="false"] {
-    height: auto;
-    min-height: auto;
     padding: 4rem 2rem;
+    box-sizing: border-box;
   }
 
   @media (max-width: 768px) {
     .section {
-      height: auto;
-      min-height: 100vh;
       padding: 3rem 1.5rem;
     }
   }

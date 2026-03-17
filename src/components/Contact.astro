@@ -1,14 +1,8 @@
 ---
 import Section from "./Section.astro";
-
-interface Props {
-  fullHeight?: boolean;
-}
-
-const { fullHeight = true } = Astro.props;
 ---
 
-<Section fullHeight={fullHeight}>
+<Section>
   <div class="contact-content">
     <h2>Support Us</h2>
     <p class="subtitle">Help us build infinite worlds</p>

@@ -4,7 +4,7 @@ import faviconSvg from "../../public/favicon.svg?raw";
 import cornerSvg from "../assets/corner.svg?raw";
 ---
 
-<Section>
+<Section class="hero-section">
   <div class="corner corner-left" set:html={cornerSvg} />
   <div class="corner corner-right" set:html={cornerSvg} />
   <div class="hero-content">
@@ -17,12 +17,8 @@ import cornerSvg from "../assets/corner.svg?raw";
 </Section>
 
 <style>
-  :global(.section.hero-section) {
-    overflow: visible;
-  }
-
-  .hero-section {
-    overflow: visible;
+  :global(section.hero-section) {
+    height: 100vh;
   }
 
   .hero-content {

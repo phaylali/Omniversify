@@ -3,16 +3,10 @@ import Section from "./Section.astro";
 import { ProjectsCarousel } from "./ProjectsCarousel";
 import { getCollection } from 'astro:content';
 
-interface Props {
-  fullHeight?: boolean;
-}
-
-const { fullHeight = true } = Astro.props;
-
 const projects = await getCollection('projects');
 ---
 
-<Section fullHeight={fullHeight}>
+<Section>
   <ProjectsCarousel client:only="react" projects={projects} />
 </Section>
 
