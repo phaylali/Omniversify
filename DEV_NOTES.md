@@ -18,10 +18,10 @@
 
 ## Project Overview
 
-Omniversify is a multi-page website for a creative studio building a unified multiverse across games, anime, series, and books. The site features a landing page, projects showcase, blog, news section, and wiki with full-text search.
+Omniversify is a multi-page website for a creative studio building a unified multiverse. The site features a landing page, projects showcase, blog, news section, and wiki with full-text search.
 
 **Type**: Static multi-page website  
-**Target Users**: Gamers, anime fans, potential collaborators, and supporters  
+**Target Users**: Gamers, lore enthusiasts, potential collaborators, and supporters  
 **Browser Support**: Modern browsers (Chrome, Firefox, Safari, Edge)
 
 ---
@@ -39,6 +39,7 @@ Omniversify is a multi-page website for a creative studio building a unified mul
 | Fonts | Geist Variable (via @fontsource-variable/geist) |
 | Package Manager | Bun |
 | Runtime | Node.js >= 22.12.0 |
+| Deployment | Cloudflare Pages |
 
 ---
 
@@ -47,26 +48,29 @@ Omniversify is a multi-page website for a creative studio building a unified mul
 ```
 /
 ├── public/
-│   └── favicon.svg              # Custom logo (star character design)
+│   ├── favicon.svg              # Custom logo
+│   └── images/covers/           # Project cover images
 ├── src/
-│   ├── assets/                  # Static assets (SVG decorations)
+│   ├── assets/
+│   │   ├── corner.svg           # Corner decoration for hero
+│   │   └── covers/             # Source cover images (not used directly)
 │   ├── components/
 │   │   ├── BackgroundPattern.astro    # Fixed geometric background
 │   │   ├── Contact.astro              # Support/contact section
-│   │   ├── Footer.astro                # Site footer with links
-│   │   ├── Hero.astro                 # Landing hero section
-│   │   ├── LoreCarousel.astro         # Lore carousel wrapper
-│   │   ├── LoreCarousel.tsx           # Character/event carousel
-│   │   ├── Navbar.astro               # Navigation bar with search
-│   │   ├── ProjectsCarousel.astro     # Projects carousel wrapper
-│   │   ├── ProjectsCarousel.tsx        # Game projects carousel
-│   │   ├── Search.astro               # Pagefind search overlay
-│   │   ├── Section.astro              # Reusable section wrapper
-│   │   └── Vision.astro               # Studio vision section
+│   │   ├── Footer.astro              # Site footer with links
+│   │   ├── Hero.astro                # Landing hero section with corners
+│   │   ├── LoreCarousel.astro        # Lore carousel wrapper
+│   │   ├── LoreCarousel.tsx          # Character/event carousel
+│   │   ├── Navbar.astro              # Navigation bar with search
+│   │   ├── ProjectsCarousel.astro    # Projects carousel wrapper
+│   │   ├── ProjectsCarousel.tsx      # Game projects carousel
+│   │   ├── Search.astro              # Pagefind search overlay
+│   │   ├── Section.astro             # Reusable section wrapper
+│   │   └── Vision.astro              # Studio vision section
 │   ├── content/
 │   │   ├── blog/                     # Blog posts (markdown)
 │   │   ├── news/                     # News articles (markdown)
-│   │   ├── projects/                 # Project entries (markdown)
+│   │   ├── projects/                 # Project entries (mdx)
 │   │   └── wiki/                     # Wiki content (markdown)
 │   │       ├── characters/
 │   │       ├── events/
@@ -74,28 +78,29 @@ Omniversify is a multi-page website for a creative studio building a unified mul
 │   │       └── weapons/
 │   ├── content.config.ts         # Astro content collections config
 │   ├── layouts/
-│   │   └── Layout.astro               # Base HTML layout with theme
+│   │   └── Layout.astro         # Base HTML layout with SEO
 │   ├── pages/
 │   │   ├── blog/
-│   │   │   ├── index.astro            # Blog feed
-│   │   │   └── [id].astro             # Individual blog post
+│   │   │   ├── index.astro      # Blog feed
+│   │   │   └── [id].astro       # Individual blog post
 │   │   ├── news/
-│   │   │   ├── index.astro            # News feed
-│   │   │   └── [id].astro             # Individual news article
+│   │   │   ├── index.astro      # News feed
+│   │   │   └── [id].astro       # Individual news article
 │   │   ├── projects/
-│   │   │   ├── index.astro            # Projects feed
-│   │   │   └── [id].astro             # Individual project page
+│   │   │   ├── index.astro      # Projects feed
+│   │   │   └── [id].astro       # Individual project page
 │   │   ├── wiki/
-│   │   │   ├── index.astro            # Wiki main page
+│   │   │   ├── index.astro      # Wiki main page
 │   │   │   └── [category]/
-│   │   │       ├── index.astro        # Category listing
-│   │   │       └── [id].astro         # Individual wiki entry
-│   │   └── index.astro                # Home page
+│   │   │       ├── index.astro  # Category listing
+│   │   │       └── [id].astro   # Individual wiki entry
+│   │   └── index.astro          # Home page
 │   └── styles/
-│       └── global.css                  # Tailwind + custom CSS variables
+│       └── global.css           # Tailwind + custom CSS variables
 ├── astro.config.mjs            # Astro configuration
-├── package.json                # Dependencies and scripts
-└── tsconfig.json               # TypeScript configuration
+├── package.json                 # Dependencies and scripts
+├── wrangler.jsonc              # Cloudflare Pages config
+└── DEV_NOTES.md                # This file
 ```
 
 ---
@@ -107,7 +112,7 @@ Omniversify is a multi-page website for a creative studio building a unified mul
 - **Layout.astro** — Root layout component handling:
   - Theme detection and persistence (dark/light mode)
   - Global CSS imports
-  - Meta tags and SEO
+  - SEO meta tags (Open Graph, Twitter Cards)
   - Font loading (Geist Variable)
   - Background pattern (applies to all pages)
 
@@ -116,25 +121,24 @@ Omniversify is a multi-page website for a creative studio building a unified mul
 - **Navbar.astro** — Fixed navigation bar with:
   - Logo
   - Search trigger (magnifying glass icon)
-  - Menu dropdown (Home, News, About, Team, Careers)
-  - Language dropdown (English, العربية, ⴽⵉⴼⵉⵏⴰⵖ)
-  - Navigation links (Blog, Projects, Wiki, Shop)
+  - Menu dropdown (Home, Projects, Wiki, Blog, News)
 
 ### Page Components
 
 | Component | Type | Purpose |
 |-----------|------|---------|
-| Hero | Astro | Logo, title, tagline with pulse animation |
+| Hero | Astro | Logo, title, tagline with pulse animation, corner decorations |
 | Vision | Astro | Studio mission statement |
 | ProjectsCarousel | React | Horizontal scrolling project cards |
 | LoreCarousel | React | Horizontal scrolling lore/character cards |
-| Contact | Astro | Support options + contact form |
-| Footer | Astro | Navigation links, licenses, copyright |
+| Contact | Astro | Support options (Ko-Fi, Patreon) |
+| Footer | Astro | Navigation links, copyright |
 | Search | Astro | Pagefind search overlay modal |
+| Section | Astro | Reusable section wrapper with fullHeight option |
 
 ### React Components (Interactive)
 
-- **ProjectsCarousel.tsx** — Embla-powered carousel displaying project cards
+- **ProjectsCarousel.tsx** — Embla-powered carousel displaying project cards with cover image support
 - **LoreCarousel.tsx** — Embla-powered carousel displaying wiki entries
 
 ---
@@ -147,17 +151,34 @@ The site uses Astro 6's content collections with the loader API:
 
 | Collection | Path | Purpose |
 |-----------|------|---------|
-| projects | `src/content/projects/*.md` | Game projects |
+| projects | `src/content/projects/*.mdx` | Game projects |
 | wiki | `src/content/wiki/[category]/*.md` | Lore entries |
 | blog | `src/content/blog/*.md` | Blog posts |
 | news | `src/content/news/*.md` | News articles |
 
 ### Wiki Categories
 
-- **characters/** — Character profiles (Aether, Lyra, Kairos)
-- **events/** — Historical events (Nexus War, The Fracture)
-- **realms/** — Locations and realms (Crystal Age)
-- **weapons/** — Weapons and artifacts (Void Blade)
+- **characters/** — Character profiles (Barghawata dynasty)
+- **events/** — Historical events (coming soon)
+- **realms/** — Locations and realms (Barghawata Confederacy)
+- **weapons/** — Weapons and artifacts (coming soon)
+
+### Project Schema
+
+Projects support the following frontmatter fields:
+- `title` (string) - Project title
+- `description` (string) - Short description
+- `tags` (string[]) - Array of tags
+- `color` (string) - Brand color hex
+- `gradient` (string) - CSS gradient for fallback
+- `cover` (string, optional) - Cover image path (use `/images/covers/...`)
+- `featured` (boolean) - Featured status
+
+### Wiki Schema
+
+Characters support: title, description, category, color, alternate_names, title_role, faction, character_type, status, first_appearance, abilities, related_characters, related_events, related_realms, related_weapons
+
+Realms support: title, description, category, color, alternate_names, realm_type, period, region, capital, founded, ended
 
 ---
 
@@ -185,46 +206,70 @@ The project uses Tailwind CSS v4 with the Vite plugin:
 | Gold Dark | `#8a7a3a` | Gradient endpoints |
 | Content Text | `#F8F5FA` | Body text on content pages |
 
-### Content Page Colors
+### Content Page Styling
 
-Content pages (Wiki, Blog, News, Projects) use `#F8F5FA` for body text while keeping headings/titles in gold `#C2B067`.
+Content pages (Wiki, Blog, News, Projects) feature:
+- **Tables** — Gold borders, alternating rows, hover effects
+- **Numbered Lists** — Gold numbers with custom counter
+- **Body Text** — Uses `#F8F5FA` while headings/titles in gold `#C2B067`
 
 ---
 
 ## Key Features
 
-### 1. Scroll Snap Navigation
+### 1. Responsive Section Heights
 
-Full-page sections on the home page with CSS scroll-snap.
+Sections on the home page have configurable heights:
+- Hero: Full viewport height (100vh)
+- Other sections: Auto height with padding
 
-### 2. Dark Mode Support
+### 2. Hero Corner Decorations
+
+The Hero section displays corner SVG decorations:
+- Bottom-left: Original orientation
+- Bottom-right: Horizontally mirrored
+
+### 3. Dark Mode Support
 
 Theme detection with localStorage persistence.
 
-### 3. Embla Carousel Integration
+### 4. Embla Carousel Integration
 
 Interactive carousels for projects and wiki entries with:
 - Loop mode enabled
 - Previous/Next navigation buttons
+- Cover image or gradient backgrounds
 - Color-coded cards
 
-### 4. Pagefind Search
+### 5. Pagefind Search
 
 - Full-text search across all content
 - Overlay modal triggered by magnifying glass icon
 - Dark-themed UI matching the website
 
-### 5. Reader Mode Support
+### 6. Project Cover Images
 
-Content pages use semantic `<article>` tags for native browser reader mode:
-- Safari: View → Show Reader (⌘⇧R)
-- Firefox: View → Reader View (F9)
+Projects support optional cover images:
+- Place in `public/images/covers/`
+- Reference as `/images/covers/filename.ext`
+- Falls back to gradient if not provided
 
-### 6. Responsive Design
+### 7. SEO Support
 
-- Mobile-first approach
-- Flexbox layouts
-- Responsive breakpoints
+All pages include:
+- Open Graph meta tags (og:title, og:description, og:image)
+- Twitter Card meta tags
+- Project pages use cover image as og:image
+
+### 8. MDX Support
+
+Project pages support MDX with section markers:
+- `<div class="section-overview">` - Content for Overview tab
+- `<div class="section-documentation">` - Content for Documentation tab
+
+### 9. Reader Mode Support
+
+Content pages use semantic `<article>` tags for native browser reader mode.
 
 ---
 
@@ -236,7 +281,7 @@ Content pages use semantic `<article>` tags for native browser reader mode:
 | `bun dev` | Start dev server at `localhost:4321` |
 | `bun build` | Build production site to `./dist/` |
 | `bun preview` | Preview production build locally |
-| `bun astro --help` | Get Astro CLI help |
+| `bun run deploy` | Deploy to Cloudflare Pages |
 
 ---
 
@@ -248,14 +293,14 @@ Running `bun build` produces:
 - Static HTML pages for all routes
 - Bundled JS, CSS, fonts in `_astro/`
 - Pagefind search index in `pagefind/`
+- Static assets in `public/` (including images)
 
 ### Deployment
 
-The `dist/` folder can be deployed to:
-- Vercel
-- Netlify
-- Cloudflare Pages
-- GitHub Pages
+The project deploys to **Cloudflare Pages**:
+- Build command: `bun run build`
+- Output directory: `dist`
+- Deploy command: `bun run deploy`
 
 ---
 
@@ -264,10 +309,11 @@ The `dist/` folder can be deployed to:
 ### Optimizations Applied
 
 1. **Static Generation** — Astro generates static HTML
-2. **Partial Hydration** — Only React components hydrate
+2. **Partial Hydration** — Only React components hydrate (client:only="react")
 3. **Font Optimization** — Self-hosted Geist font
-4. **SVG Assets** — No raster images
+4. **SVG Assets** — Vector graphics for decorations
 5. **Pagefind** — Client-side search with minimal bandwidth
+6. **Image Handling** — Cover images in public folder for direct serving
 
 ---
 
@@ -277,7 +323,8 @@ The `dist/` folder can be deployed to:
 - Multi-language support expansion
 - Analytics tracking
 - Shop functionality
-- More wiki content
+- More wiki content (weapons, events)
+- Image optimization pipeline
 
 ---
 
@@ -301,6 +348,20 @@ The `dist/` folder can be deployed to:
 3. Run `bun dev` to start the development server
 4. Make changes to components in `src/components/`
 5. Test with `bun build` before submitting
+6. Deploy with `bun run deploy`
+
+---
+
+## Notes
+
+### Image Paths
+
+- Cover images belong in `public/images/covers/` and are referenced as `/images/covers/filename.ext`
+- Do not use `/src/assets/` paths in frontmatter - these won't work in production
+
+### Wiki Content
+
+The wiki currently features the Barghawata Confederacy - a historical Berber tribal confederation from Moroccan history (744-1058 CE).
 
 ---
 
