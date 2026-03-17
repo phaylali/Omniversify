@@ -7,19 +7,27 @@ import Section from "./Section.astro";
     <h2>Our Vision</h2>
     <div class="divider"></div>
     <p>
-      Omniversify is more than a studio — we are architects of unified multiverses. 
-      We believe that every story, every character, and every world deserves to exist 
-      in a connected tapestry of imagination.
+      Omniversify is a movement derived from the theory of infinite coexisting
+      realities. We exist to ensure our stories are seen, heard, and felt. We're
+      building an extended version of Moroccan history to fill the gaps and
+      create a full, comprehensive timeline without question marks. Through
+      immersive games, we celebrate Morocco's multicultural legacy, amplify the
+      Global South's silenced histories, and unite communities through shared
+      creativity.
     </p>
     <p>
-      Our mission is to build a singular, cohesive lore that spans across games, 
-      anime, series, books, and beyond. A universe where Spider-Man meets Dragon Ball 
-      meets The Witcher — not as a crossover, but as a natural expansion of shared 
-      mythology.
+      For too long, Western narratives have reduced ours to footnotes or
+      caricatures. We flip the script by promoting Amazigh Heritage and
+      dismantling divisive myths, bridging cultures across the Maghreb through
+      North African Unity, and illuminating stories textbooks ignore with Global
+      South Solidarity. Our games are acts of resistance — blending history,
+      fantasy, and cultural truth.
     </p>
-    <p class="highlight">
-      One Universe. Infinite Stories. Zero Boundaries.
-    </p>
+    <blockquote class="highlight">
+      "I'd be sure every time folks knew this version wasn't mine<br />
+      which is why it is called 'His story'"<br />
+      <cite>— Gil Scott-Heron</cite>
+    </blockquote>
   </div>
 </Section>
 
@@ -35,7 +43,12 @@ import Section from "./Section.astro";
     margin: 0 0 1rem 0;
     letter-spacing: 0.15em;
     text-transform: uppercase;
-    background: radial-gradient(circle at 35% 35%, #8a7a3a 0%, #C2B067 50%, #8a7a3a 100%);
+    background: radial-gradient(
+      circle at 35% 35%,
+      #8a7a3a 0%,
+      #c2b067 50%,
+      #8a7a3a 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -44,22 +57,42 @@ import Section from "./Section.astro";
   .divider {
     width: 100px;
     height: 3px;
-    background: linear-gradient(90deg, transparent, #C2B067, transparent);
+    background: linear-gradient(90deg, transparent, #c2b067, transparent);
     margin: 0 auto 2rem;
   }
 
   p {
     font-size: 1.25rem;
     line-height: 1.8;
-    color: #C2B067;
+    color: #c2b067;
     margin: 0 0 1.5rem 0;
   }
 
   .highlight {
-    font-size: 1.5rem;
-    font-weight: 600;
+    font-size: 1.25rem;
+    font-weight: 400;
     margin-top: 2rem;
-    color: #C2B067;
+    color: #c2b067;
+    font-style: italic;
+    border: none;
+    padding: 1.5rem;
+    background: rgba(194, 176, 103, 0.1);
+    border-radius: 8px;
+    line-height: 1.6;
+  }
+
+  .highlight br {
+    display: block;
+    content: "";
+    margin: 0.5rem 0;
+  }
+
+  .highlight cite {
+    display: block;
+    margin-top: 1rem;
+    font-size: 1rem;
+    font-style: normal;
+    opacity: 0.8;
   }
 
   @media (max-width: 768px) {
