@@ -5,53 +5,40 @@
 </p>
 
 <p align="center">
-  <strong>Where infinite worlds converge</strong>
+  <strong>Where the Forgotten Become Immortal.</strong>
 </p>
 
 ---
 
-Omniversify is a creative studio and website dedicated to building unified multiverses that span across games, anime, series, books, and beyond. We believe that every story, every character, and every world deserves to exist in a connected tapestry of imagination.
+Omniversify is a **Moroccan game development studio** dedicated to reclaiming history, culture, and identity through immersive video games. We create games that celebrate Morocco's multicultural legacy, amplify the Global South's silenced histories, and unite communities through shared creativity.
 
-## Features
+## Our Mission
 
-### Multi-Page Website
+We are not just building games. We are reclaiming narratives. For too long, the world's stories have been filtered through a narrow lens. We flip the script by:
 
-- **Home** — Landing page showcasing projects and lore
-- **Projects** — Grid view of all games in development
-- **Blog** — Latest updates, stories, and developer insights
-- **News** — Announcements and community updates
-- **Wiki** — Comprehensive lore database with search functionality
+- **Promoting Amazigh Heritage** — Celebrating Berber culture and traditions
+- **Maghreb Unity** — Bridging cultures across North Africa
+- **Global South Solidarity** — Illuminating stories that textbooks ignore
 
-### Wiki Categories
+> "Colonialism stole our wealth; let's reclaim our narrative wealth."
 
-- **Characters** — Historical figures and legends
-- **Realms** — Worlds, dimensions, and domains
-- **Weapons** — Artifacts of immense power (coming soon)
-- **Events** — Historical moments that shaped existence (coming soon)
+## The Deserted Tales Series
 
-### Site Features
+Our flagship game series explores untold histories and mythologies across Morocco and the Global South.
 
-- **Search** — Full-text search via overlay modal (Pagefind)
-- **SEO** — Open Graph and Twitter card support for social sharing
-- **Responsive Design** — Works on all devices
-- **Project Cover Images** — Optional cover images for projects with gradient fallback
+### Deserted Tales I
 
-## Our Vision
+A stealth-action RPG set in Portuguese-occupied Mazagan (modern El Jadida). Players lead **The Argan Vanguard**, a clandestine resistance cell fighting colonial occupation.
 
-We are architects of unified multiverses. Our mission is to build a singular, cohesive lore that transcends individual franchises—not as crossovers, but as natural expansions of shared mythology.
+### Deserted Tales: Origins
 
-> One Universe. Infinite Stories. Zero Boundaries.
-
-## Current Projects
-
-### Warframe Tools
-A collection of tools and resources for Warframe players.
+A narrative-driven game rediscovering Moroccan history in a Telltale-style adventure game created using Ren'Py.
 
 ## The Lore
 
-Our universe features the Barghawata Confederacy - a Berber tribal confederation from Moroccan history that established a unique religious-political entity along Morocco's Atlantic coast from 744 to 1058 CE.
+Our universe features the **Barghawata Confederacy** — a Berber tribal confederation from Moroccan history that established a unique religious-political entity along Morocco's Atlantic coast from 744 to 1058 CE.
 
-### Characters
+### Key Characters
 
 - **Salih ibn Tarif** — First prophet-king of the Barghawata
 - **Ilyas ibn Salih** — Second ruler; maintained religious secrecy
@@ -66,18 +53,36 @@ Our universe features the Barghawata Confederacy - a Berber tribal confederation
 - **Barghawata Confederacy** — The Berber tribal confederation (744-1058 CE)
 - **Tamesna** — Core territory along Atlantic Morocco
 
+## Website Features
+
+### Pages
+
+- **Home** — Landing page with Hero, Vision, Projects, Lore, and Contact sections
+- **Projects** — Showcase of games in development with GitHub links
+- **Wiki** — Comprehensive lore database (Characters, Realms, Weapons, Events)
+- **Blog** — Developer updates, stories, and insights
+- **News** — Announcements and community updates
+- **About** — Our mission, vision, and story
+
+### Technical Features
+
+- Full-text search via Pagefind
+- Open Graph & Twitter Card support for social sharing
+- Responsive design for all devices
+- Social media sharing buttons on all content pages
+
 ## Connect With Us
 
-- Discord — Join our community
-- Twitter — Follow updates
-- GitHub — Explore our work
+- [Discord](https://discord.omniversify.com) — Join our community
+- [X/Twitter](https://twitter.com/omniversify) — Follow updates
+- [GitHub](https://github.com/phaylali) — Explore our work
 
 ## Support Us
 
-Help us build infinite worlds:
+Help us weaponize creativity and reclaim our narratives:
 
-- Buy us a coffee
-- Support on Patreon
+- [Buy us a coffee](https://ko-fi.com/omniversify)
+- [Support on Patreon](https://patreon.com/omniversify)
 
 ---
 
