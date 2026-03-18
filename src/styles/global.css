@@ -508,3 +508,16 @@
     @apply grid-cols-1;
   }
 }
+
+/* ============ SHARE BUTTONS ============ */
+.share-buttons {
+  @apply flex justify-center flex-wrap gap-4;
+}
+
+.share-btn {
+  @apply flex items-center justify-center w-10 h-10 rounded-full bg-gold/20 text-gold transition-all duration-200;
+}
+
+.share-btn:hover {
+  @apply bg-gold/30 scale-110;
+}

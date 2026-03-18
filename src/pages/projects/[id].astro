@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
+import ShareButtons from "../../components/ShareButtons.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -55,22 +56,25 @@ const projectUpdates = allBlogPosts
       </div>
     </header>
 
-    <div class="tabs">
-      <button class="tab-btn tab-btn-active" data-tab="overview"
-        >Overview</button
+    <div class="flex border-b border-gold/20">
+      <button
+        class="tab-btn flex-1 py-4 text-center rounded-none border-b-2 border-transparent data-[active=true]:border-gold data-[active=true]:text-gold"
+        data-tab="documentation"
+        data-active="true"
       >
-      <button class="tab-btn" data-tab="documentation">Documentation</button>
-      <button class="tab-btn" data-tab="updates">Updates</button>
+        Documentation
+      </button>
+      <button
+        class="tab-btn flex-1 py-4 text-center rounded-none border-b-2 border-transparent data-[active=true]:border-gold data-[active=true]:text-gold"
+        data-tab="updates"
+        data-active={projectUpdates.length > 0 ? "true" : "false"}
+      >
+        Updates ({projectUpdates.length})
+      </button>
     </div>
 
     <div class="tab-content min-h-[50vh]">
-      <div id="overview" class="tab-pane block p-8 max-w-[800px] mx-auto">
-        <div class="content-body">
-          <Content />
-        </div>
-      </div>
-
-      <div id="documentation" class="tab-pane hidden p-8 max-w-[800px] mx-auto">
+      <div id="documentation" class="tab-pane block p-8 max-w-[800px] mx-auto">
         <div class="content-body">
           <Content />
         </div>
@@ -117,26 +121,30 @@ const projectUpdates = allBlogPosts
     </div>
 
     <footer class="py-8 text-center border-t border-gold/20">
-      <a href="/projects" class="link-back">← Back to Projects</a>
+      <ShareButtons 
+        url={Astro.url.href} 
+        title={project.data.title} 
+        description={project.data.description} 
+      />
     </footer>
   </article>
 </Layout>
 
 <script>
   document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll(".tab-btn").forEach((btn) => {
+    document.querySelectorAll<HTMLButtonElement>(".tab-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         document
           .querySelectorAll(".tab-btn")
-          .forEach((b) => b.classList.remove("tab-btn-active"));
+          .forEach((b) => b.removeAttribute("data-active"));
         document
           .querySelectorAll(".tab-pane")
           .forEach((p) => p.classList.add("hidden"));
 
-        btn.classList.add("tab-btn-active");
-        document
-          .getElementById(btn.dataset.tab || "")
-          ?.classList.remove("hidden");
+        btn.setAttribute("data-active", "true");
+        if (btn.dataset.tab) {
+          document.getElementById(btn.dataset.tab)?.classList.remove("hidden");
+        }
       });
     });
   });

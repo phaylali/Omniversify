@@ -4,7 +4,7 @@ description: "A behind-the-scenes look at how we're creating a universe where ti
 pubDate: 2026-02-20
 author: "Development Team"
 tags: ["Dev Diary", "Project Alpha", "Development"]
-project: "alpha"
+project: "warframe_tools"
 ---
 
 # Dev Diary: Building Project Alpha
