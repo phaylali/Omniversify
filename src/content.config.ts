@@ -10,6 +10,7 @@ const projects = defineCollection({
     color: z.string(),
     gradient: z.string(),
     cover: z.string().optional(),
+    repo: z.string().url().optional(),
     featured: z.boolean().default(false),
   }),
 });

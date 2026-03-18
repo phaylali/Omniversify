@@ -1,6 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
+import ShareButtons from "../../components/ShareButtons.astro";
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -29,7 +30,11 @@ function getReadingTime(body: string): string {
 const readingTime = getReadingTime(item.body);
 ---
 
-<Layout title={`${item.data.title} - Omniversify News`} description={item.data.description}>
+<Layout 
+  title={`${item.data.title} - Omniversify News`} 
+  description={item.data.description}
+  image={`${Astro.url.origin}/logo.webp`}
+>
   <Navbar />
   <article class="page-container mx-auto max-w-[800px]">
     <header class="mb-12 pb-8 border-b border-gold/20">
@@ -51,7 +56,12 @@ const readingTime = getReadingTime(item.body);
     </div>
     
     <footer class="mt-16 pt-8 border-t border-gold/20">
-      <a href="/news" class="link-back">← Back to News</a>
+      <ShareButtons 
+        url={Astro.url.href} 
+        title={item.data.title} 
+        description={item.data.description} 
+      />
+      <a href="/news" class="link-back mt-8 block">← Back to News</a>
     </footer>
   </article>
 </Layout>
