@@ -15,7 +15,9 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await render(project);
 
-const coverImage = project.data.cover || undefined;
+const coverImage = project.data.cover 
+  ? `${Astro.url.origin}${project.data.cover}` 
+  : undefined;
 
 const allBlogPosts = await getCollection("blog");
 const projectUpdates = allBlogPosts
