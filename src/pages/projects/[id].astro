@@ -28,80 +28,96 @@ const projectUpdates = allBlogPosts
   image={coverImage}
 >
   <Navbar />
-  <article class="project-page">
+  <article class="min-h-screen bg-black/30 pt-32">
     <header
-      class="project-header"
+      class="relative text-center py-16 px-8"
       style={project.data.cover
         ? `background-image: url(${project.data.cover}); background-size: cover; background-position: center;`
         : `background: ${project.data.gradient}`}
     >
-      {!project.data.cover && <div class="header-overlay" />}
-      <a href="/projects" class="back-link">← Back to Projects</a>
+      {project.data.cover && <div class="absolute inset-0 bg-black/60 z-0" />}
+      <a href="/projects" class="link-back absolute top-8 left-8 z-10"
+        >← Back to Projects</a
+      >
 
-      <h1>{project.data.title}</h1>
+      <h1
+        class="relative z-10 text-5xl text-white tracking-widest uppercase gradient-title mb-6"
+      >
+        {project.data.title}
+      </h1>
 
-      <div class="tags">
-        {project.data.tags.map((tag) => <span class="tag">{tag}</span>)}
+      <div class="relative z-10 flex gap-2 justify-center flex-wrap">
+        {
+          project.data.tags.map((tag) => (
+            <span class="tag bg-white/20 text-white">{tag}</span>
+          ))
+        }
       </div>
     </header>
 
     <div class="tabs">
-      <button class="tab-btn active" data-tab="overview">Overview</button>
+      <button class="tab-btn tab-btn-active" data-tab="overview"
+        >Overview</button
+      >
       <button class="tab-btn" data-tab="documentation">Documentation</button>
       <button class="tab-btn" data-tab="updates">Updates</button>
     </div>
 
-    <div class="tab-content">
-      <div id="overview" class="tab-pane active">
-        <div class="project-content">
-          <div class="content-body">
-            <Content />
-          </div>
+    <div class="tab-content min-h-[50vh]">
+      <div id="overview" class="tab-pane block p-8 max-w-[800px] mx-auto">
+        <div class="content-body">
+          <Content />
         </div>
       </div>
 
-      <div id="documentation" class="tab-pane">
-        <div class="project-content">
-          <div class="content-body">
-            <Content />
-          </div>
+      <div id="documentation" class="tab-pane hidden p-8 max-w-[800px] mx-auto">
+        <div class="content-body">
+          <Content />
         </div>
       </div>
 
-      <div id="updates" class="tab-pane">
-        <div class="updates-content">
-          {
-            projectUpdates.length > 0 ? (
-              <div class="updates-grid">
-                {projectUpdates.map((post) => (
-                  <a href={`/blog/${post.id}`} class="update-card">
-                    <div class="update-date">
-                      {post.data.pubDate.toLocaleDateString("en-US", {
-                        year: "numeric",
-                        month: "short",
-                        day: "numeric",
-                      })}
-                    </div>
-                    <h3>{post.data.title}</h3>
-                    <p>{post.data.description}</p>
-                    <div class="update-tags">
-                      {post.data.tags.map((tag) => (
-                        <span class="update-tag">{tag}</span>
-                      ))}
-                    </div>
-                  </a>
-                ))}
-              </div>
-            ) : (
-              <p class="no-updates">No updates yet for this project.</p>
-            )
-          }
-        </div>
+      <div id="updates" class="tab-pane hidden p-8 max-w-[1000px] mx-auto">
+        {
+          projectUpdates.length > 0 ? (
+            <div
+              class="grid gap-6"
+              style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));"
+            >
+              {projectUpdates.map((post) => (
+                <a
+                  href={`/blog/${post.id}`}
+                  class="block no-underline p-6 bg-gold/10 border border-gold/20 rounded-xl transition-all duration-200 hover:bg-gold/15 hover:translate-y-[-2px]"
+                >
+                  <div class="text-xs text-gold mb-2">
+                    {post.data.pubDate.toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "short",
+                      day: "numeric",
+                    })}
+                  </div>
+                  <h3 class="text-lg text-content mb-2">{post.data.title}</h3>
+                  <p class="text-sm text-content opacity-80 mb-4 line-height-relaxed">
+                    {post.data.description}
+                  </p>
+                  <div class="flex gap-2 flex-wrap">
+                    {post.data.tags.map((tag) => (
+                      <span class="tag-sm">{tag}</span>
+                    ))}
+                  </div>
+                </a>
+              ))}
+            </div>
+          ) : (
+            <p class="text-center text-content opacity-60 py-12">
+              No updates yet for this project.
+            </p>
+          )
+        }
       </div>
     </div>
 
-    <footer class="project-footer">
-      <a href="/projects" class="back-link">← Back to Projects</a>
+    <footer class="py-8 text-center border-t border-gold/20">
+      <a href="/projects" class="link-back">← Back to Projects</a>
     </footer>
   </article>
 </Layout>
@@ -112,502 +128,16 @@ const projectUpdates = allBlogPosts
       btn.addEventListener("click", () => {
         document
           .querySelectorAll(".tab-btn")
-          .forEach((b) => b.classList.remove("active"));
+          .forEach((b) => b.classList.remove("tab-btn-active"));
         document
           .querySelectorAll(".tab-pane")
-          .forEach((p) => p.classList.remove("active"));
+          .forEach((p) => p.classList.add("hidden"));
 
-        btn.classList.add("active");
-        document.getElementById(btn.dataset.tab)?.classList.add("active");
+        btn.classList.add("tab-btn-active");
+        document
+          .getElementById(btn.dataset.tab || "")
+          ?.classList.remove("hidden");
       });
     });
   });
 </script>
-
-<style>
-  .project-page {
-    padding-top: 8rem;
-    min-height: 100vh;
-    background: rgba(0, 0, 0, 0.3);
-  }
-
-  .project-header {
-    padding: 4rem 2rem;
-    text-align: center;
-    position: relative;
-  }
-
-  .header-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    z-index: 0;
-  }
-
-  .project-header > * {
-    position: relative;
-    z-index: 1;
-  }
-
-  .project-header .back-link {
-    position: absolute;
-    top: 2rem;
-    left: 2rem;
-    color: white;
-    text-decoration: none;
-    font-size: 0.9rem;
-    opacity: 0.8;
-    transition: opacity 0.2s;
-  }
-
-  .project-header .back-link:hover {
-    opacity: 1;
-  }
-
-  .project-icon {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    font-weight: bold;
-    background: rgba(194, 176, 103, 0.2);
-    color: #c2b067;
-    margin: 0 auto 2rem;
-  }
-
-  .project-header h1 {
-    font-size: 3rem;
-    margin: 0 0 1.5rem;
-    color: white;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-  }
-
-  .tags {
-    display: flex;
-    gap: 0.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-
-  .tag {
-    font-size: 0.7rem;
-    padding: 0.25rem 0.75rem;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: white;
-  }
-
-  .tabs {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    padding: 1rem 2rem;
-    border-bottom: 1px solid rgba(194, 176, 103, 0.2);
-    background: rgba(0, 0, 0, 0.2);
-  }
-
-  .tab-btn {
-    padding: 0.75rem 2rem;
-    background: transparent;
-    border: 1px solid rgba(194, 176, 103, 0.3);
-    border-radius: 8px;
-    color: #c2b067;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-
-  .tab-btn:hover {
-    background: rgba(194, 176, 103, 0.1);
-  }
-
-  .tab-btn.active {
-    background: #c2b067;
-    color: #1a1a2e;
-    border-color: #c2b067;
-  }
-
-  .tab-content {
-    min-height: 50vh;
-  }
-
-  .tab-pane {
-    display: none;
-  }
-
-  .tab-pane.active {
-    display: block;
-  }
-
-  .project-content {
-    padding: 3rem 2rem;
-    max-width: 800px;
-    margin: 0 auto;
-  }
-
-  .description {
-    font-size: 1.4rem;
-    color: #c2b067;
-    text-align: center;
-    margin-bottom: 3rem;
-    line-height: 1.6;
-  }
-
-  .content-body {
-    color: #f8f5fa;
-    line-height: 1.8;
-    font-size: 1.1rem;
-  }
-
-  .content-body :global(.google-play-badge) {
-    display: flex;
-    justify-content: center;
-    margin: 2rem 0;
-  }
-
-  .content-body :global(.google-play-badge img) {
-    max-width: 200px;
-    height: 50px;
-  }
-
-  .content-body :global(hr) {
-    border: none;
-    border-top: 1px solid rgba(194, 176, 103, 0.3);
-    margin: 2rem 0;
-  }
-
-  /* MDX Section Components - show by default */
-  .content-body :global(.section-overview),
-  .content-body :global(.section-documentation) {
-    display: block;
-  }
-
-  /* Hide documentation section in overview tab */
-  #overview .content-body :global(.section-documentation) {
-    display: none;
-  }
-
-  /* Hide overview section in documentation tab */
-  #documentation .content-body :global(.section-overview) {
-    display: none;
-  }
-
-  .content-body {
-    color: #f8f5fa;
-    line-height: 1.8;
-    font-size: 1.1rem;
-  }
-
-  .content-body :global(hr) {
-    border: none;
-    border-top: 1px solid rgba(194, 176, 103, 0.3);
-    margin: 2rem 0;
-  }
-
-  .content-body :global([data-section="documentation"]) {
-    display: none;
-  }
-
-  .tab-pane#documentation.active
-    .content-body
-    :global([data-section="overview"]) {
-    display: none;
-  }
-
-  .tab-pane#documentation.active
-    .content-body
-    :global([data-section="documentation"]) {
-    display: block;
-  }
-
-  .content-body .section-documentation {
-    display: none;
-  }
-
-  #documentation.active .content-body .section-overview {
-    display: none;
-  }
-
-  #documentation.active .content-body .section-documentation {
-    display: block;
-  }
-
-  .content-body :global(h1),
-  .content-body :global(h2),
-  .content-body :global(h3) {
-    color: #c2b067;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .content-body :global(h2) {
-    font-size: 1.75rem;
-    border-bottom: 1px solid rgba(194, 176, 103, 0.2);
-    padding-bottom: 0.5rem;
-  }
-
-  .content-body :global(p) {
-    margin-bottom: 1.5rem;
-  }
-
-  .content-body :global(ul),
-  .content-body :global(ol) {
-    margin-bottom: 1.5rem;
-    padding-left: 1.5rem;
-  }
-
-  .content-body :global(ol) {
-    list-style: none;
-    counter-reset: ordered-list;
-  }
-
-  .content-body :global(ol li) {
-    counter-increment: ordered-list;
-    position: relative;
-    padding-left: 2rem;
-    margin-bottom: 0.75rem;
-  }
-
-  .content-body :global(ol li::before) {
-    content: counter(ordered-list) ".";
-    position: absolute;
-    left: 0;
-    color: #c2b067;
-    font-weight: 600;
-  }
-
-  .content-body :global(li) {
-    margin-bottom: 0.5rem;
-  }
-
-  .content-body :global(a) {
-    color: #c2b067;
-    text-decoration: underline;
-  }
-
-  .content-body :global(strong) {
-    font-weight: 600;
-  }
-
-  .content-body :global(table) {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 2rem 0;
-    border: 2px solid #c2b067;
-    box-shadow: 0 0 10px rgba(194, 176, 103, 0.2);
-  }
-
-  .content-body :global(th),
-  .content-body :global(td) {
-    padding: 0.75rem 1rem;
-    text-align: left;
-    border: 1px solid rgba(194, 176, 103, 0.4);
-  }
-
-  .content-body :global(th) {
-    background: rgba(194, 176, 103, 0.2);
-    color: #c2b067;
-    font-weight: 600;
-  }
-
-  .content-body :global(tr:nth-child(even)) {
-    background: rgba(194, 176, 103, 0.05);
-  }
-
-  .content-body :global(tr:hover) {
-    background: rgba(194, 176, 103, 0.1);
-  }
-
-  .content-body :global(em) {
-    font-style: italic;
-  }
-
-  .content-body :global(blockquote) {
-    border-left: 3px solid #c2b067;
-    padding-left: 1.5rem;
-    margin: 2rem 0;
-    font-style: italic;
-    color: #f8f5fa;
-  }
-
-  .content-body h2 {
-    font-size: 1.75rem;
-    border-bottom: 1px solid rgba(194, 176, 103, 0.2);
-    padding-bottom: 0.5rem;
-  }
-
-  .content-body p {
-    margin-bottom: 1.5rem;
-  }
-
-  .content-body ul,
-  .content-body ol {
-    margin-bottom: 1.5rem;
-    padding-left: 1.5rem;
-  }
-
-  .content-body li {
-    margin-bottom: 0.5rem;
-  }
-
-  .content-body a {
-    color: #c2b067;
-    text-decoration: underline;
-  }
-
-  .content-body strong {
-    font-weight: 600;
-  }
-
-  .content-body em {
-    font-style: italic;
-  }
-
-  .content-body blockquote {
-    border-left: 3px solid #c2b067;
-    padding-left: 1.5rem;
-    margin: 2rem 0;
-    font-style: italic;
-    color: #f8f5fa;
-  }
-
-  .updates-content {
-    padding: 3rem 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .updates-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 1.5rem;
-  }
-
-  .update-card {
-    display: block;
-    padding: 1.5rem;
-    background: rgba(194, 176, 103, 0.1);
-    border: 1px solid rgba(194, 176, 103, 0.2);
-    border-radius: 12px;
-    text-decoration: none;
-    transition: all 0.2s;
-  }
-
-  .update-card:hover {
-    background: rgba(194, 176, 103, 0.15);
-    transform: translateY(-2px);
-  }
-
-  .update-date {
-    font-size: 0.8rem;
-    color: #c2b067;
-    margin-bottom: 0.5rem;
-  }
-
-  .update-card h3 {
-    color: #f8f5fa;
-    font-size: 1.1rem;
-    margin: 0 0 0.5rem;
-  }
-
-  .update-card p {
-    color: #f8f5fa;
-    opacity: 0.8;
-    font-size: 0.9rem;
-    margin: 0 0 1rem;
-    line-height: 1.5;
-  }
-
-  .update-tags {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-
-  .update-tag {
-    font-size: 0.65rem;
-    padding: 0.2rem 0.5rem;
-    background: rgba(194, 176, 103, 0.2);
-    border-radius: 10px;
-    color: #c2b067;
-  }
-
-  .no-updates {
-    text-align: center;
-    color: #f8f5fa;
-    opacity: 0.6;
-    padding: 3rem;
-  }
-
-  .project-footer {
-    padding: 2rem;
-    text-align: center;
-    border-top: 1px solid rgba(194, 176, 103, 0.2);
-  }
-
-  .project-footer .back-link {
-    color: #c2b067;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: opacity 0.2s;
-  }
-
-  .project-footer .back-link:hover {
-    opacity: 0.8;
-  }
-
-  @media (max-width: 600px) {
-    .project-page {
-      padding-top: 7rem;
-    }
-
-    .project-header {
-      padding: 3rem 1rem;
-    }
-
-    .project-header h1 {
-      font-size: 2rem;
-    }
-
-    .project-icon {
-      width: 80px;
-      height: 80px;
-      font-size: 2rem;
-    }
-
-    .project-content {
-      padding: 2rem 1rem;
-    }
-
-    .description {
-      font-size: 1.1rem;
-    }
-
-    .tabs {
-      padding: 0.75rem 1rem;
-      gap: 0.25rem;
-    }
-
-    .tab-btn {
-      padding: 0.5rem 1rem;
-      font-size: 0.9rem;
-    }
-
-    .updates-content {
-      padding: 2rem 1rem;
-    }
-
-    .updates-grid {
-      grid-template-columns: 1fr;
-    }
-  }
-</style>

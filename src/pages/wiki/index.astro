@@ -38,110 +38,27 @@ const categoryCount = categories.map((cat) => ({
 }));
 ---
 
-<Layout>
+<Layout title="Wiki - Omniversify" description="Explore the lore and history of the Omniversify multiverse.">
   <Navbar />
-  <main class="wiki-page">
-    <div class="wiki-header">
-      <h1>Wiki</h1>
-      <p>Explore the lore and history of the Omniversify multiverse</p>
-    </div>
-    <div class="categories-grid">
+  <main class="page-container">
+    <header class="text-center mb-12">
+      <h1 class="gradient-title">Wiki</h1>
+      <p class="text-xl text-gold opacity-80">Explore the lore and history of the Omniversify multiverse</p>
+    </header>
+    
+    <div class="grid gap-8 max-w-[1000px] mx-auto" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
       {
         categoryCount.map((cat) => (
-          <a href={`/wiki/${cat.id}`} class="category-card">
-            <span class="category-icon">{cat.icon}</span>
-            <h2>{cat.name}</h2>
-            <p>{cat.description}</p>
-            <span class="count">{cat.count} entries</span>
+          <a href={`/wiki/${cat.id}`} class="card-link">
+            <div class="text-center p-8">
+              <span class="text-4xl mb-4 block">{cat.icon}</span>
+              <h2 class="text-xl text-gold uppercase tracking-widest mb-2">{cat.name}</h2>
+              <p class="text-sm text-content opacity-80 mb-4">{cat.description}</p>
+              <span class="text-xs text-gold opacity-60">{cat.count} entries</span>
+            </div>
           </a>
         ))
       }
     </div>
   </main>
 </Layout>
-
-<style>
-  .wiki-page {
-    padding: 8rem 2rem 4rem;
-    min-height: 100vh;
-    background: rgba(0, 0, 0, 0.3);
-  }
-
-  .wiki-header {
-    text-align: center;
-    margin-bottom: 4rem;
-  }
-
-  .wiki-header h1 {
-    font-size: 3rem;
-    margin: 0 0 1rem;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    background: radial-gradient(
-      circle at 35% 35%,
-      #8a7a3a 0%,
-      #c2b067 50%,
-      #8a7a3a 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .wiki-header p {
-    color: #c2b067;
-    font-size: 1.25rem;
-    opacity: 0.8;
-  }
-
-  .categories-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
-  }
-
-  .category-card {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    padding: 2rem;
-    border-radius: 16px;
-    border: 2px solid rgba(194, 176, 103, 0.3);
-    background: rgba(0, 0, 0, 0.3);
-    text-decoration: none;
-    color: #c2b067;
-    transition: all 0.3s ease;
-  }
-
-  .category-card:hover {
-    box-shadow: 0 0 30px rgba(194, 176, 103, 0.4);
-    transform: translateY(-4px);
-  }
-
-  .category-icon {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-
-  .category-card h2 {
-    font-size: 1.5rem;
-    margin: 0 0 0.5rem;
-    color: #c2b067;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-  }
-
-  .category-card p {
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin: 0 0 1rem;
-  }
-
-  .count {
-    font-size: 0.8rem;
-    opacity: 0.6;
-  }
-</style>

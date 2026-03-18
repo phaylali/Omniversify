@@ -29,168 +29,29 @@ function getReadingTime(body: string): string {
 const readingTime = getReadingTime(item.body);
 ---
 
-<Layout>
+<Layout title={`${item.data.title} - Omniversify News`} description={item.data.description}>
   <Navbar />
-  <article class="news-post">
-    <header class="post-header">
-      <a href="/news" class="back-link">← Back to News</a>
+  <article class="page-container mx-auto max-w-[800px]">
+    <header class="mb-12 pb-8 border-b border-gold/20">
+      <a href="/news" class="link-back">← Back to News</a>
       
-      <span class="category">{item.data.category}</span>
+      <span class="tag mb-4">{item.data.category}</span>
       
-      <div class="post-meta">
-        <div class="meta-left">
-          <span class="date">{formatDate(item.data.pubDate)}</span>
-        </div>
-        <div class="meta-right">
-          <span class="reading-time">{readingTime}</span>
-        </div>
+      <div class="flex justify-between items-center text-sm text-gold opacity-70 mb-4">
+        <span>{formatDate(item.data.pubDate)}</span>
+        <span>{readingTime}</span>
       </div>
       
-      <h1>{item.data.title}</h1>
-      <p class="description">{item.data.description}</p>
+      <h1 class="text-4xl text-gold mb-4 leading-tight">{item.data.title}</h1>
+      <p class="text-xl text-gold opacity-80 leading-relaxed">{item.data.description}</p>
     </header>
     
-    <div class="post-content">
+    <div class="content-body">
       <Content />
     </div>
     
-    <footer class="post-footer">
-      <a href="/news" class="back-link">← Back to News</a>
+    <footer class="mt-16 pt-8 border-t border-gold/20">
+      <a href="/news" class="link-back">← Back to News</a>
     </footer>
   </article>
 </Layout>
-
-<style>
-  .news-post {
-    padding: 8rem 2rem 4rem;
-    max-width: 800px;
-    margin: 0 auto;
-    min-height: 100vh;
-    background: rgba(0, 0, 0, 0.3);
-  }
-
-  .post-header {
-    margin-bottom: 3rem;
-    padding-bottom: 2rem;
-    border-bottom: 1px solid rgba(194, 176, 103, 0.2);
-  }
-
-  .back-link {
-    display: inline-block;
-    color: #c2b067;
-    text-decoration: none;
-    font-size: 0.9rem;
-    margin-bottom: 1.5rem;
-    transition: opacity 0.2s;
-  }
-
-  .back-link:hover {
-    opacity: 0.8;
-  }
-
-  .category {
-    display: inline-block;
-    font-size: 0.7rem;
-    padding: 0.25rem 0.75rem;
-    background: rgba(194, 176, 103, 0.3);
-    border-radius: 20px;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: #c2b067;
-    margin-bottom: 1rem;
-  }
-
-  .post-meta {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 0.9rem;
-    color: #c2b067;
-    opacity: 0.7;
-    margin-bottom: 1rem;
-  }
-
-  .meta-left {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-  }
-
-  .meta-right {
-    display: flex;
-    gap: 0.5rem;
-    align-items: center;
-  }
-
-  .post-header h1 {
-    font-size: 2.5rem;
-    margin: 0 0 1rem;
-    color: #c2b067;
-    line-height: 1.2;
-  }
-
-  .description {
-    font-size: 1.25rem;
-    color: #c2b067;
-    opacity: 0.8;
-    margin: 0;
-    line-height: 1.6;
-  }
-
-  .post-content {
-    color: #F8F5FA;
-    line-height: 1.8;
-    font-size: 1.1rem;
-  }
-
-  .post-content :global(h1),
-  .post-content :global(h2),
-  .post-content :global(h3) {
-    color: #c2b067;
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .post-content :global(h2) {
-    font-size: 1.75rem;
-  }
-
-  .post-content :global(p) {
-    margin-bottom: 1.5rem;
-  }
-
-  .post-content :global(ul),
-  .post-content :global(ol) {
-    margin-bottom: 1.5rem;
-    padding-left: 1.5rem;
-  }
-
-  .post-content :global(li) {
-    margin-bottom: 0.5rem;
-  }
-
-  .post-content :global(a) {
-    color: #c2b067;
-    text-decoration: underline;
-  }
-
-  .post-content :global(strong) {
-    font-weight: 600;
-  }
-
-  .post-footer {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(194, 176, 103, 0.2);
-  }
-
-  @media (max-width: 600px) {
-    .news-post {
-      padding: 7rem 1rem 3rem;
-    }
-
-    .post-header h1 {
-      font-size: 1.75rem;
-    }
-  }
-</style>

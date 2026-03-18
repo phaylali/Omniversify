@@ -2,8 +2,6 @@
 @import "tw-animate-css";
 @import "@fontsource-variable/geist";
 
-@custom-variant dark (&:is(.dark *));
-
 :root {
     --background: oklch(1 0 0);
     --foreground: oklch(0.145 0 0);
@@ -131,7 +129,13 @@
     @apply font-sans;
     }
 }
-
+.google-play-badge{
+    height: 50px;
+    width: 200px;
+    align-self: center;
+    justify-self: center;
+    margin: 0 auto;
+  }
 /* Brand Color Utilities */
 .text-gold { color: #c2b067; }
 .text-gold-dark { color: #8a7a3a; }
@@ -425,6 +429,18 @@
 
 .content-body em {
   @apply italic;
+}
+
+.content-body code {
+  @apply bg-gold/10 px-2 py-0.5 rounded text-sm;
+}
+
+.content-body pre {
+  @apply bg-black/30 p-6 rounded-lg overflow-x-auto my-6;
+}
+
+.content-body pre code {
+  @apply bg-transparent p-0 text-base;
 }
 
 .content-body blockquote {

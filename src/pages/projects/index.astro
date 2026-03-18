@@ -1,85 +1,60 @@
 ---
 import Layout from "../../layouts/Layout.astro";
 import Navbar from "../../components/Navbar.astro";
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
 
-const projects = await getCollection('projects');
+const projects = await getCollection("projects");
 ---
 
-<Layout title="Projects - Omniversify" description="Explore our current and upcoming games.">
+<Layout
+  title="Projects - Omniversify"
+  description="Explore our current and upcoming games."
+>
   <Navbar />
   <main class="page-container">
-    <header class="page-header">
-      <h1 class="page-title">Projects</h1>
-      <p class="page-subtitle">Explore our current and upcoming games</p>
+    <header class="text-center mb-12">
+      <h1 class="gradient-title">Projects</h1>
+      <p class="text-xl text-gold opacity-80">Explore our current and upcoming games</p>
     </header>
-    
-    <div class="grid gap-8 max-w-[1200px] mx-auto" style="grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));">
-      {projects.length > 0 ? (
-        projects.map((project) => (
-          <a href={`/projects/${project.id}`} class="project-card">
-            <div 
-              class="flex-shrink-0 w-[150px] h-full flex items-center justify-center bg-cover bg-center"
-              style={project.data.cover ? { backgroundImage: `url(${project.data.cover})` } : { background: project.data.gradient }}
-            >
-              {!project.data.cover && (
-                <div class="w-20 h-20 rounded-full flex items-center justify-center text-2xl font-bold bg-gold/20 text-gold">
-                  <span>{project.data.title.charAt(0)}</span>
-                </div>
-              )}
-            </div>
-            <div class="flex-1 p-6 flex flex-col justify-center">
-              <h2 class="text-xl text-gold mb-3">{project.data.title}</h2>
-              <div class="flex gap-2 flex-wrap mb-3">
-                {project.data.tags.map((tag) => (
-                  <span class="tag">{tag}</span>
-                ))}
+
+    <div class="flex flex-col gap-6 max-w-[900px] mx-auto">
+      {
+        projects.length > 0 ? (
+          projects.map((project) => (
+            <a href={`/projects/${project.id}`} class="flex items-center gap-6 p-4 rounded-2xl no-underline border-2 border-gold/30 bg-black/30 transition-all duration-300 hover:shadow-[0_0_30px_rgba(194,176,103,0.4)] hover:translate-x-2">
+              <div
+                class="w-[180px] h-[100px] flex-shrink-0 rounded-xl bg-cover bg-center"
+                style={
+                  project.data.cover
+                    ? { backgroundImage: `url(${project.data.cover})` }
+                    : { background: project.data.gradient }
+                }
+              >
+                {!project.data.cover && (
+                  <div class="w-full h-full flex items-center justify-center">
+                    <span class="text-3xl font-bold text-gold">{project.data.title.charAt(0)}</span>
+                  </div>
+                )}
               </div>
-              <p class="text-sm text-gold opacity-80 leading-relaxed">{project.data.description}</p>
-            </div>
-          </a>
-        ))
-      ) : (
-        <p class="empty-message col-span-full">No projects yet. Coming soon!</p>
-      )}
+              <div class="flex-1 min-w-0">
+                <h2 class="text-xl text-gold mb-2">{project.data.title}</h2>
+                <div class="flex gap-2 flex-wrap mb-2">
+                  {project.data.tags.map((tag) => (
+                    <span class="tag-sm">{tag}</span>
+                  ))}
+                </div>
+                <p class="text-sm text-gold opacity-80 leading-relaxed mb-0 truncate">
+                  {project.data.description}
+                </p>
+              </div>
+            </a>
+          ))
+        ) : (
+          <p class="text-center text-gold opacity-60 py-12">
+            No projects yet. Coming soon!
+          </p>
+        )
+      }
     </div>
   </main>
 </Layout>
-
-<style>
-  .project-card {
-    display: flex;
-    border-radius: 16px;
-    overflow: hidden;
-    text-decoration: none;
-    color: white;
-    border: 2px solid rgba(194, 176, 103, 0.3);
-    transition: all 0.3s ease;
-    background: rgba(0, 0, 0, 0.3);
-  }
-
-  .project-card:hover {
-    box-shadow: 0 0 30px rgba(194, 176, 103, 0.4);
-    transform: translateY(-4px);
-  }
-
-  .empty-message {
-    text-align: center;
-    color: #c2b067;
-    opacity: 0.6;
-    padding: 3rem;
-    font-size: 1.1rem;
-    grid-column: 1 / -1;
-  }
-
-  @media (max-width: 600px) {
-    .project-card {
-      flex-direction: column;
-    }
-    
-    .project-card > div:first-child {
-      width: 100%;
-      height: 120px;
-    }
-  }
-</style>
