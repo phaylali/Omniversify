@@ -7,40 +7,24 @@ import cornerSvg from "../assets/corner.svg?raw";
 <Section class="hero-section">
   <div class="corner corner-left" set:html={cornerSvg} />
   <div class="corner corner-right" set:html={cornerSvg} />
-  <div class="hero-content">
-    <div class="logo-wrapper">
+  <div class="text-center text-white flex flex-col items-center justify-center">
+    <div class="mb-8 animate-pulse w-[120px] h-[120px] flex items-center justify-center">
       <div class="logo" set:html={faviconSvg} />
     </div>
-    <h1>Omniversify</h1>
-    <p>Where the Forgotten Become Immortal.</p>
+    <h1 class="gradient-title">
+      Omniversify
+    </h1>
+    <p class="text-2xl text-gold font-light">Where the Forgotten Become Immortal.</p>
   </div>
 </Section>
 
-<style>
-  :global(section.hero-section) {
+<style is:global>
+  .hero-section {
     height: 100vh;
   }
+</style>
 
-  .hero-content {
-    text-align: center;
-    color: white;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .logo-wrapper {
-    margin-bottom: 2rem;
-    animation: pulse 3s ease-in-out infinite;
-    width: 120px;
-    height: 120px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: visible;
-  }
-
+<style>
   .logo {
     width: 100%;
     height: 100%;
@@ -50,44 +34,7 @@ import cornerSvg from "../assets/corner.svg?raw";
     width: 100%;
     height: 100%;
     display: block;
-    /* Center the SVG content within its viewBox */
     transform: translate(-11.5%, -11.5%);
-  }
-
-  h1 {
-    font-size: 4rem;
-    font-weight: 700;
-    margin: 0 0 1rem 0;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    background: radial-gradient(
-      circle at 35% 35%,
-      #8a7a3a 0%,
-      #c2b067 50%,
-      #8a7a3a 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  p {
-    font-size: 1.5rem;
-    color: #c2b067;
-    margin: 0;
-    font-weight: 300;
-  }
-
-  @keyframes pulse {
-    0%,
-    100% {
-      transform: scale(1);
-      opacity: 1;
-    }
-    50% {
-      transform: scale(1.05);
-      opacity: 0.8;
-    }
   }
 
   .corner {

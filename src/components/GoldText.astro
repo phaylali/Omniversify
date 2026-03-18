@@ -1,0 +1,18 @@
+---
+interface Props {
+  class?: string;
+  size?: "sm" | "md" | "lg";
+}
+
+const { class: className, size = "md" } = Astro.props;
+
+const sizes = {
+  sm: "text-sm",
+  md: "text-base",
+  lg: "text-lg",
+};
+---
+
+<p class:list={["text-[#f8f5fa]", sizes[size], "leading-relaxed", className]}>
+  <slot />
+</p>

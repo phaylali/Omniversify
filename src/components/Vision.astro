@@ -3,114 +3,32 @@ import Section from "./Section.astro";
 ---
 
 <Section>
-  <div class="vision-content">
-    <h2>Our Vision</h2>
-    <div class="divider"></div>
-    <p>
-      Omniversify is a movement derived from the theory of infinite coexisting
-      realities. We exist to ensure our stories are seen, heard, and felt. We're
-      building an extended version of Moroccan history to fill the gaps and
-      create a full, comprehensive timeline without question marks. Through
-      immersive games, we celebrate Morocco's multicultural legacy, amplify the
-      Global South's silenced histories, and unite communities through shared
-      creativity.
+  <div class="max-w-[800px] mx-auto text-center text-white">
+    <h2 class="gradient-title">
+      Our Vision
+    </h2>
+    <div class="w-[100px] h-[3px] bg-gradient-to-r from-transparent via-gold to-transparent mx-auto mb-8"></div>
+    
+    <p class="text-xl text-gold leading-relaxed mb-6">
+      Omniversify is a movement derived from the theory of infinite coexisting realities. 
+      We exist to ensure our stories are seen, heard, and felt. We're building an extended 
+      version of Moroccan history to fill the gaps and create a full, comprehensive timeline 
+      without question marks. Through immersive games, we celebrate Morocco's multicultural legacy, 
+      amplify the Global South's silenced histories, and unite communities through shared creativity.
     </p>
-    <p>
-      For too long, Western narratives have reduced ours to footnotes or
-      caricatures. We flip the script by promoting Amazigh Heritage and
-      dismantling divisive myths, bridging cultures across the Maghreb through
-      North African Unity, and illuminating stories textbooks ignore with Global
-      South Solidarity. Our games are acts of resistance — blending history,
-      fantasy, and cultural truth.
+    
+    <p class="text-xl text-gold leading-relaxed mb-6">
+      For too long, Western narratives have reduced ours to footnotes or caricatures. 
+      We flip the script by promoting Amazigh Heritage and dismantling divisive myths, 
+      bridging cultures across the Maghreb through North African Unity, and illuminating 
+      stories textbooks ignore with Global South Solidarity. Our games are acts of 
+      resistance — blending history, fantasy, and cultural truth.
     </p>
-    <blockquote class="highlight">
-      "I'd be sure every time folks knew this version wasn't mine<br />
+    
+    <blockquote class="text-xl text-gold italic border-none p-6 bg-gold/10 rounded-lg leading-relaxed mt-8">
+      "I'd be sure every time folks knew this version wasn't mine<br class="my-2" />
       which is why it is called 'His story'"<br />
-      <cite>— Gil Scott-Heron</cite>
+      <cite class="block mt-4 text-base not-italic opacity-80">— Gil Scott-Heron</cite>
     </blockquote>
   </div>
 </Section>
-
-<style>
-  .vision-content {
-    max-width: 800px;
-    text-align: center;
-    color: white;
-  }
-
-  h2 {
-    font-size: 3rem;
-    margin: 0 0 1rem 0;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    background: radial-gradient(
-      circle at 35% 35%,
-      #8a7a3a 0%,
-      #c2b067 50%,
-      #8a7a3a 100%
-    );
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .divider {
-    width: 100px;
-    height: 3px;
-    background: linear-gradient(90deg, transparent, #c2b067, transparent);
-    margin: 0 auto 2rem;
-  }
-
-  p {
-    font-size: 1.25rem;
-    line-height: 1.8;
-    color: #c2b067;
-    margin: 0 0 1.5rem 0;
-  }
-
-  .highlight {
-    font-size: 1.25rem;
-    font-weight: 400;
-    margin-top: 2rem;
-    color: #c2b067;
-    font-style: italic;
-    border: none;
-    padding: 1.5rem;
-    background: rgba(194, 176, 103, 0.1);
-    border-radius: 8px;
-    line-height: 1.6;
-  }
-
-  .highlight br {
-    display: block;
-    content: "";
-    margin: 0.5rem 0;
-  }
-
-  .highlight cite {
-    display: block;
-    margin-top: 1rem;
-    font-size: 1rem;
-    font-style: normal;
-    opacity: 0.8;
-  }
-
-  @media (max-width: 768px) {
-    .vision-content {
-      max-width: 100%;
-    }
-
-    h2 {
-      font-size: 1.75rem;
-    }
-
-    p {
-      font-size: 1rem;
-      text-align: left;
-    }
-
-    .highlight {
-      font-size: 1.1rem;
-    }
-  }
-</style>

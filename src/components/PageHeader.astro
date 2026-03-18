@@ -1,0 +1,16 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  class?: string;
+}
+
+const { title, subtitle, class: className } = Astro.props;
+---
+
+<header class:list={["text-center mb-12 pb-8 border-b border-[#c2b067]/20", className]}>
+  <h1 class="text-4xl md:text-5xl mb-2 tracking-widest uppercase bg-gradient-to-r from-[#8a7a3a] via-[#c2b067] to-[#8a7a3a] bg-clip-text text-transparent">
+    {title}
+  </h1>
+  {subtitle && <p class="text-[#c2b067] text-xl opacity-80">{subtitle}</p>}
+</header>

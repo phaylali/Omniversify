@@ -3,50 +3,81 @@ import Section from "./Section.astro";
 ---
 
 <Section>
-  <section class="about-section cta">
-    <h2>Join the Omniverse</h2>
-    <p class="cta-intro">
+  <div class="text-center text-white w-full max-w-[900px] mx-auto">
+    <h2 class="gradient-title">Join the Omniverse</h2>
+    <p class="text-lg text-gold mb-8 max-w-2xl mx-auto">
       Omniversify is not a studio—it's a collaborative uprising. We seek raw,
       passionate talent eager to grow while reshaping narratives. No polished
-      resumes required—just a hunger to create.
+      resumes required—just a hunger to create and a Moroccan identity.
     </p>
-    <div class="roles-grid">
+
+    <div class="flex gap-6 justify-center flex-wrap mb-12">
       <div class="role-card">
-        <span class="role-icon">🎨</span>
-        <h3>Artists & 3D Modelers</h3>
-        <p>
+        <span class="text-2xl mb-2 block">🎨</span>
+        <h3 class="text-base text-gold mb-2">Artists & 3D Modelers</h3>
+        <p class="text-sm text-content opacity-80">
           Bring Amazigh symbols, Moroccan architecture, and African landscapes
           to life.
         </p>
       </div>
       <div class="role-card">
-        <span class="role-icon">🎵</span>
-        <h3>Musicians & Sound Designers</h3>
-        <p>
+        <span class="text-2xl mb-2 block">🎵</span>
+        <h3 class="text-base text-gold mb-2">Musicians & Sound Designers</h3>
+        <p class="text-sm text-content opacity-80">
           Fuse Gnawa rhythms, Andalusian melodies, and desert winds into
           haunting soundtracks.
         </p>
       </div>
       <div class="role-card">
-        <span class="role-icon">📜</span>
-        <h3>Writers & Historians</h3>
-        <p>
+        <span class="text-2xl mb-2 block">📜</span>
+        <h3 class="text-base text-gold mb-2">Writers & Historians</h3>
+        <p class="text-sm text-content opacity-80">
           Dive into archives and oral histories to craft stories that resonate
           with truth.
         </p>
       </div>
       <div class="role-card">
-        <span class="role-icon">💻</span>
-        <h3>Programmers & Game Devs</h3>
-        <p>Build engines for worlds that defy colonial logic.</p>
+        <span class="text-2xl mb-2 block">💻</span>
+        <h3 class="text-base text-gold mb-2">Programmers & Game Devs</h3>
+        <p class="text-sm text-content opacity-80">
+          Build engines for worlds that defy colonial logic.
+        </p>
       </div>
       <div class="role-card">
-        <span class="role-icon">🎙️</span>
-        <h3>Voice Actors & Narrators</h3>
-        <p>
+        <span class="text-2xl mb-2 block">🎙️</span>
+        <h3 class="text-base text-gold mb-2">Voice Actors & Narrators</h3>
+        <p class="text-sm text-content opacity-80">
           Speak Tifinagh, Darija, and Arabic in games where language is power.
         </p>
       </div>
     </div>
-  </section>
+  </div>
 </Section>
+
+<style>
+  .gradient-title {
+    font-size: 2.5rem;
+    margin: 0 0 2rem 0;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    background: radial-gradient(
+      circle at 35% 35%,
+      #8a7a3a 0%,
+      #c2b067 50%,
+      #8a7a3a 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .role-card {
+    background: rgba(194, 176, 103, 0.1);
+    padding: 1.5rem;
+    border-radius: 12px;
+    border: 1px solid rgba(194, 176, 103, 0.2);
+    max-width: 250px;
+    text-align: center;
+  }
+</style>

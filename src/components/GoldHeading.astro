@@ -1,0 +1,21 @@
+---
+interface Props {
+  level?: 1 | 2 | 3 | 4;
+  class?: string;
+}
+
+const { level = 2, class: className } = Astro.props;
+
+const tag = `h${level}`;
+const classes = {
+  1: "text-4xl",
+  2: "text-2xl",
+  3: "text-xl",
+  4: "text-lg",
+};
+---
+
+{tag === "h1" && <h1 class:list={[classes[1], "text-[#c2b067] mb-6 pb-2 border-b border-[#c2b067]/20", className]}><slot /></h1>}
+{tag === "h2" && <h2 class:list={[classes[2], "text-[#c2b067] mb-6 pb-2 border-b border-[#c2b067]/20", className]}><slot /></h2>}
+{tag === "h3" && <h3 class:list={[classes[3], "text-[#c2b067] mb-4", className]}><slot /></h3>}
+{tag === "h4" && <h4 class:list={[classes[4], "text-[#c2b067] mb-3", className]}><slot /></h4>}

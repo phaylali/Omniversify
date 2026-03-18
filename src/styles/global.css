@@ -113,6 +113,11 @@
     --radius-2xl: calc(var(--radius) * 1.8);
     --radius-3xl: calc(var(--radius) * 2.2);
     --radius-4xl: calc(var(--radius) * 2.6);
+
+    /* Brand Colors */
+    --color-gold: #c2b067;
+    --color-gold-dark: #8a7a3a;
+    --color-content: #f8f5fa;
 }
 
 @layer base {
@@ -125,4 +130,365 @@
   html {
     @apply font-sans;
     }
+}
+
+/* Brand Color Utilities */
+.text-gold { color: #c2b067; }
+.text-gold-dark { color: #8a7a3a; }
+.text-content { color: #f8f5fa; }
+
+.bg-gold\/10 { background-color: rgba(194, 176, 103, 0.1); }
+.bg-gold\/15 { background-color: rgba(194, 176, 103, 0.15); }
+.bg-gold\/20 { background-color: rgba(194, 176, 103, 0.2); }
+.bg-black\/30 { background-color: rgba(0, 0, 0, 0.3); }
+
+.border-gold { border-color: #c2b067; }
+.border-gold\/20 { border-color: rgba(194, 176, 103, 0.2); }
+.border-gold\/30 { border-color: rgba(194, 176, 103, 0.3); }
+
+.hover\:text-gold:hover { color: #c2b067; }
+.hover\:bg-gold\/20:hover { background-color: rgba(194, 176, 103, 0.2); }
+
+/* Gradient Text */
+.text-gradient-gold {
+  background: linear-gradient(circle at 35% 35%, #8a7a3a 0%, #c2b067 50%, #8a7a3a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Page Container */
+.page-container {
+  @apply px-8 py-32 mx-auto max-w-4xl min-h-screen bg-black/30;
+}
+
+@media (max-width: 768px) {
+  .page-container {
+    @apply px-4 py-28;
+  }
+}
+
+/* Section Styles */
+.section-pad {
+  @apply py-16 px-8;
+}
+
+/* Card Styles */
+.card {
+  @apply rounded-xl p-6 border-2 border-gold/30 bg-black/30;
+}
+
+.card-hover {
+  @apply transition-all duration-300 hover:shadow-[0_0_30px_rgba(194,176,103,0.4)] hover:translate-y-[-4px];
+}
+
+/* Gold Divider */
+.divider-gold {
+  @apply w-24 h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent mx-auto;
+}
+
+/* List Styles */
+.list-gold-marker li {
+  @apply relative pl-6 mb-3 text-content;
+}
+
+.list-gold-marker li::before {
+  content: "◆";
+  @apply absolute left-0 text-gold;
+}
+
+/* Blockquote */
+.blockquote-gold {
+  @apply text-lg italic text-gold border-l-4 border-gold pl-6 py-2 bg-gold/10 rounded-r-lg;
+}
+
+/* Page Header Styles */
+.page-header {
+  @apply text-center mb-12 pb-8 border-b border-gold/20;
+}
+
+.page-title {
+  @apply text-4xl md:text-5xl mb-2 tracking-widest uppercase;
+  background: linear-gradient(circle at 35% 35%, #8a7a3a 0%, #c2b067 50%, #8a7a3a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-subtitle {
+  @apply text-xl text-gold opacity-80;
+}
+
+/* Section/Page Title - Gold */
+.section-heading {
+  font-size: 2.5rem;
+  margin: 0 0 2rem 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #c2b067;
+}
+
+/* Gradient Title - Gold */
+.gradient-title {
+  font-size: 2.5rem;
+  margin: 0 0 2rem 0;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  background: radial-gradient(
+    circle at 35% 35%,
+    #8a7a3a 0%,
+    #c2b067 50%,
+    #8a7a3a 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+}
+
+/* ============ COMPREHENSIVE UTILITIES ============ */
+
+/* Text Sizes */
+.text-content-base { @apply text-base leading-relaxed; }
+.text-content-lg { @apply text-lg leading-relaxed; }
+.text-content-xl { @apply text-xl leading-relaxed; }
+
+/* Margins */
+.mb-section { @apply mb-12; }
+.mb-element { @apply mb-6; }
+.mb-small { @apply mb-4; }
+.mt-section { @apply mt-12; }
+.mt-element { @apply mt-6; }
+
+/* Padding */
+.p-card { @apply p-6; }
+.p-section { @apply p-8; }
+.py-section { @apply py-16; }
+.px-section { @apply px-8; }
+
+/* Borders */
+.border-b-gold { @apply border-b border-gold/20; }
+.border-t-gold { @apply border-t border-gold/20; }
+.border-gold-2 { @apply border-2 border-gold/30; }
+
+/* Shadows */
+.shadow-gold { box-shadow: 0 0 30px rgba(194, 176, 103, 0.4); }
+.shadow-gold-sm { box-shadow: 0 0 20px rgba(194, 176, 103, 0.3); }
+
+/* Transitions */
+.transition-card { @apply transition-all duration-300; }
+
+/* ============ PAGE HEADER STYLES ============ */
+.page-header {
+  @apply text-center mb-12 pb-8 border-b border-gold/20;
+}
+
+.page-title {
+  @apply text-4xl md:text-5xl mb-2 tracking-widest uppercase;
+  background: linear-gradient(circle at 35% 35%, #8a7a3a 0%, #c2b067 50%, #8a7a3a 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.page-subtitle {
+  @apply text-xl text-gold opacity-80;
+}
+
+/* ============ SECTION STYLES ============ */
+.content-section {
+  @apply mb-12;
+}
+
+.section-title {
+  @apply text-2xl text-gold mb-6 pb-2 border-b border-gold/20;
+}
+
+.section-highlight {
+  @apply bg-gold/10 p-8 rounded-xl border-gold/20 border;
+}
+
+/* ============ GRID STYLES ============ */
+.grid-cards {
+  @apply grid gap-6;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.grid-cards-sm {
+  @apply grid gap-4;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+}
+
+/* ============ CARD VARIANTS ============ */
+.card-link {
+  @apply block no-underline rounded-xl overflow-hidden border-2 border-gold/30 bg-black/30 transition-all duration-300;
+  @apply hover:shadow-[0_0_30px_rgba(194,176,103,0.4)] hover:translate-y-[-4px];
+}
+
+.card-plain {
+  @apply rounded-xl p-6 border-2 border-gold/30 bg-black/30;
+}
+
+/* ============ TAG STYLES ============ */
+.tag {
+  @apply text-xs px-3 py-1 bg-gold/20 rounded-full uppercase tracking-wider text-gold;
+}
+
+.tag-sm {
+  @apply text-[0.65rem] px-2 py-0.5;
+}
+
+/* ============ BUTTON STYLES ============ */
+.btn-gold {
+  @apply px-6 py-3 bg-gold text-black rounded-lg font-medium transition-all duration-200;
+  @apply hover:bg-gold/80;
+}
+
+.btn-gold-outline {
+  @apply px-6 py-3 border-2 border-gold text-gold rounded-lg transition-all duration-200;
+  @apply hover:bg-gold/20;
+}
+
+/* ============ LINK STYLES ============ */
+.link-gold {
+  @apply text-gold underline hover:opacity-80 transition-opacity;
+}
+
+.link-back {
+  @apply inline-block text-gold no-underline text-sm mb-6 transition-opacity;
+  @apply hover:opacity-80;
+}
+
+/* ============ FEED / LIST STYLES ============ */
+.feed-item {
+  @apply flex items-center gap-4 p-4 border-2 border-gold/30 rounded-xl bg-black/30 transition-all duration-300;
+  @apply hover:shadow-[0_0_20px_rgba(194,176,103,0.3)] hover:translate-x-2;
+}
+
+.feed-item-color {
+  @apply w-2 h-12 rounded-full flex-shrink-0;
+}
+
+/* ============ TAB STYLES ============ */
+.tabs {
+  @apply flex gap-2 p-4 border-b border-gold/20 bg-black/20;
+}
+
+.tab-btn {
+  @apply px-6 py-3 bg-transparent border border-gold/30 rounded-lg text-gold cursor-pointer transition-all duration-200;
+  @apply hover:bg-gold/10;
+}
+
+.tab-btn-active {
+  @apply bg-gold text-black border-gold;
+}
+
+/* ============ CONTENT BODY STYLES ============ */
+.content-body {
+  @apply text-content leading-relaxed text-lg;
+}
+
+.content-body h1,
+.content-body h2,
+.content-body h3 {
+  @apply text-gold mt-8 mb-4;
+}
+
+.content-body h2 {
+  @apply text-2xl pb-2 border-b border-gold/20;
+}
+
+.content-body h3 {
+  @apply text-xl;
+}
+
+.content-body p {
+  @apply mb-6;
+}
+
+.content-body ul,
+.content-body ol {
+  @apply mb-6 pl-6;
+}
+
+.content-body li {
+  @apply mb-2;
+}
+
+.content-body a {
+  @apply text-gold underline;
+}
+
+.content-body strong {
+  @apply font-semibold;
+}
+
+.content-body em {
+  @apply italic;
+}
+
+.content-body blockquote {
+  @apply border-l-4 border-gold pl-6 py-2 italic text-content my-8;
+}
+
+/* ============ TABLE STYLES ============ */
+.content-body table {
+  @apply w-full border-collapse my-8 border-2 border-gold shadow-[0_0_10px_rgba(194,176,103,0.2)];
+}
+
+.content-body th,
+.content-body td {
+  @apply p-3 text-left border border-gold/40;
+}
+
+.content-body th {
+  @apply bg-gold/20 text-gold font-semibold;
+}
+
+.content-body tr:nth-child(even) {
+  @apply bg-gold/5;
+}
+
+.content-body tr:hover {
+  @apply bg-gold/10;
+}
+
+/* ============ NUMBERED LIST ============ */
+.content-body ol {
+  list-style: none;
+  counter-reset: ordered-list;
+}
+
+.content-body ol li {
+  counter-increment: ordered-list;
+  @apply relative pl-8 mb-3;
+}
+
+.content-body ol li::before {
+  content: counter(ordered-list) ".";
+  @apply absolute left-0 text-gold font-semibold;
+}
+
+/* ============ RESPONSIVE HELPERS ============ */
+@media (max-width: 768px) {
+  .page-title {
+    @apply text-2xl;
+  }
+  
+  .page-subtitle {
+    @apply text-base;
+  }
+  
+  .section-title {
+    @apply text-xl;
+  }
+  
+  .content-body {
+    @apply text-base;
+  }
+  
+  .grid-cards,
+  .grid-cards-sm {
+    @apply grid-cols-1;
+  }
 }
