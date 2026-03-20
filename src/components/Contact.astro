@@ -23,6 +23,33 @@ import Section from "./Section.astro";
       </a>
     </div>
 
+    <!-- Map -->
+    <div class="mt-16 mb-12">
+      <h2 class="gradient-title">Visit Us</h2>
+      <p class="text-lg text-gold mb-6">45 Av. Al Massira, Oued Laou, Tetouan 93250, Morocco</p>
+      <div class="map-container rounded-xl overflow-hidden border-2 border-gold/30">
+        <iframe 
+          width="100%" 
+          height="300" 
+          frameborder="0" 
+          scrolling="no" 
+          marginheight="0" 
+          marginwidth="0" 
+          src="https://www.openstreetmap.org/node/13663830573?layers=NDG&zoom=19"
+          style="border: 0; filter: grayscale(100%) invert(92%) contrast(83%);"
+          loading="lazy"
+        ></iframe>
+      </div>
+      <a 
+        href="https://www.openstreetmap.org/node/13663830573#map=19/35.440081/-5.084843&layers=NDG" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="inline-block mt-4 text-gold hover:text-gold/80 transition-colors"
+      >
+        View larger map →
+      </a>
+    </div>
+
     <!-- Contact Form -->
     <div class="contact-form max-w-md mx-auto">
       <h2 class="gradient-title">Get in Touch</h2>
@@ -119,6 +146,10 @@ import Section from "./Section.astro";
     .support-card {
       min-width: 120px;
       padding: 1.5rem;
+    }
+
+    .map-container iframe {
+      height: 250px;
     }
   }
 </style>

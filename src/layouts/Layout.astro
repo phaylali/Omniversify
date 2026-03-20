@@ -10,16 +10,12 @@ interface Props {
 }
 
 const {
-  title = "Omniversify",
-  description = "Derived from the theory of the Omniverse—the idea of infinite coexisting realities— Omniversify is a movement to ensure our realities are seen, heard, and felt. Our mission is simple yet radical: to challenge dominant perspectives and elevate the stories erased by colonialism, neglect, or prejudice. Through immersive video games, we will celebrate Morocco's multicultural legacy, amplify the Global South's silenced histories, and unite communities through shared creativity.",
+  title = "Omniversify - Made by Moroccans, For the Omniverse",
+  description = "A Moroccan game studio reclaiming history and culture through immersive games. Where the Forgotten Become Immortal.",
   image = "/logo.webp",
 } = Astro.props;
 ---
 
-<script
-  defer
-  src="https://cloud.umami.is/script.js"
-  data-website-id="22e78069-ce07-4dbb-b366-5ec19e250ffb"></script>
 <html lang="en" class="dark">
   <head>
     <meta charset="UTF-8" />
@@ -36,6 +32,10 @@ const {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
+    <script
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="22e78069-ce07-4dbb-b366-5ec19e250ffb"></script>
   </head>
   <body>
     <BackgroundPattern />
