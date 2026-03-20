@@ -9,7 +9,11 @@ interface Props {
   image?: string;
 }
 
-const { title = "Omniversify", description = "Where infinite worlds converge", image = "/og-image.png" } = Astro.props;
+const {
+  title = "Omniversify",
+  description = "Where infinite worlds converge",
+  image = "/og-image.png",
+} = Astro.props;
 ---
 
 <script is:inline>
@@ -35,7 +39,10 @@ const { title = "Omniversify", description = "Where infinite worlds converge", i
     });
   }
 </script>
-
+<script
+  defer
+  src="https://cloud.umami.is/script.js"
+  data-website-id="22e78069-ce07-4dbb-b366-5ec19e250ffb"></script>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
