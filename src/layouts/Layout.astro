@@ -11,34 +11,11 @@ interface Props {
 
 const {
   title = "Omniversify",
-  description = "Where infinite worlds converge",
-  image = "/og-image.png",
+  description = "Derived from the theory of the Omniverse—the idea of infinite coexisting realities— Omniversify is a movement to ensure our realities are seen, heard, and felt. Our mission is simple yet radical: to challenge dominant perspectives and elevate the stories erased by colonialism, neglect, or prejudice. Through immersive video games, we will celebrate Morocco's multicultural legacy, amplify the Global South's silenced histories, and unite communities through shared creativity.",
+  image = "/logo.webp",
 } = Astro.props;
 ---
 
-<script is:inline>
-  const getThemePreference = () => {
-    if (typeof localStorage !== "undefined" && localStorage.getItem("theme")) {
-      return localStorage.getItem("theme");
-    }
-    return window.matchMedia("(prefers-color-scheme: dark)").matches
-      ? "dark"
-      : "light";
-  };
-  const isDark = getThemePreference() === "dark";
-  document.documentElement.classList[isDark ? "add" : "remove"]("dark");
-
-  if (typeof localStorage !== "undefined") {
-    const observer = new MutationObserver(() => {
-      const isDark = document.documentElement.classList.contains("dark");
-      localStorage.setItem("theme", isDark ? "dark" : "light");
-    });
-    observer.observe(document.documentElement, {
-      attributes: true,
-      attributeFilter: ["class"],
-    });
-  }
-</script>
 <script
   defer
   src="https://cloud.umami.is/script.js"
@@ -48,7 +25,6 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="icon" href="/favicon.ico" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
