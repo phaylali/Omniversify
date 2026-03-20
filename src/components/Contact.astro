@@ -4,7 +4,6 @@ import Section from "./Section.astro";
 
 <Section>
   <div class="text-center text-white w-full max-w-[900px] mx-auto">
-    <!-- Support Section -->
     <h2 class="gradient-title">Support Us</h2>
     <p class="text-xl text-gold mb-12">Help us build infinite worlds</p>
 
@@ -23,39 +22,59 @@ import Section from "./Section.astro";
       </a>
     </div>
 
-    <!-- Map -->
     <div class="mt-16 mb-12">
       <h2 class="gradient-title">Visit Us</h2>
-      <p class="text-lg text-gold mb-6">45 Av. Al Massira, Oued Laou, Tetouan 93250, Morocco</p>
+      <p class="text-lg text-gold mb-6">
+        45 Av. Al Massira, Oued Laou, Tetouan 93250, Morocco
+      </p>
       <div class="map-container rounded-xl overflow-hidden border-2 border-gold/30">
-        <iframe 
-          width="100%" 
-          height="300" 
-          frameborder="0" 
-          scrolling="no" 
-          marginheight="0" 
-          marginwidth="0" 
-          src="https://www.openstreetmap.org/node/13663830573?layers=NDG&zoom=19"
+        <iframe
+          width="100%"
+          height="300"
+          frameborder="0"
+          scrolling="no"
+          marginheight="0"
+          marginwidth="0"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=-5.0870%2C35.4380%2C-5.0825%2C35.4420&layer=mapnik&marker=35.4401%2C-5.0848"
           style="border: 0; filter: grayscale(100%) invert(92%) contrast(83%);"
-          loading="lazy"
-        ></iframe>
+          loading="lazy"></iframe>
       </div>
-      <a 
-        href="https://www.openstreetmap.org/node/13663830573#map=19/35.440081/-5.084843&layers=NDG" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        class="inline-block mt-4 text-gold hover:text-gold/80 transition-colors"
-      >
-        View larger map →
-      </a>
+      <div class="flex gap-4 mt-4 justify-center">
+        <a
+          href="https://www.openstreetmap.org/node/13663830573"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-2 px-4 py-2 rounded-lg border border-gold/50 text-gold hover:bg-gold/10 transition-colors"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"
+            ></path>
+          </svg>
+          OpenStreetMap
+        </a>
+        <a
+          href="https://www.google.com/maps/place/Omniversify/@35.4279362,-5.0960211,13z/data=!4m6!3m5!1s0xd0b3594d6ea867d:0xf4cc908008275cc!8m2!3d35.44016!4d-5.0860317!16s%2Fg%2F11t065bzq0?entry=ttu&g_ep=EgoyMDI2MDMxNy4wIKXMDSoASAFQAw%3D%3D"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex items-center gap-2 px-4 py-2 rounded-lg border border-gold/50 text-gold hover:bg-gold/10 transition-colors"
+        >
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M12 0C7.802 0 4.03 3.603 4.03 7.635c0 5.932 7.97 16.365 7.97 16.365s7.97-10.433 7.97-16.365C19.97 3.603 16.198 0 12 0zm0 10.5c-1.569 0-2.842-1.263-2.842-2.817 0-1.554 1.273-2.817 2.842-2.817 1.568 0 2.841 1.263 2.841 2.817 0 1.554-1.273 2.817-2.841 2.817z"
+            ></path>
+          </svg>
+          Google Maps
+        </a>
+      </div>
     </div>
 
-    <!-- Contact Form -->
     <div class="contact-form max-w-md mx-auto">
       <h2 class="gradient-title">Get in Touch</h2>
       <form class="flex flex-col gap-4">
         <input type="email" placeholder="Your email" class="form-input" />
-        <textarea placeholder="Your message" rows="4" class="form-input"></textarea>
+        <textarea placeholder="Your message" rows="4" class="form-input"
+        ></textarea>
         <button type="submit" class="btn-gold">Send</button>
       </form>
     </div>

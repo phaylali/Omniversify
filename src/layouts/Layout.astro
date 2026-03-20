@@ -24,6 +24,7 @@ const {
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={Astro.url.href} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={image} />
@@ -32,10 +33,31 @@ const {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
-    <script
-      defer
-      src="https://cloud.umami.is/script.js"
-      data-website-id="22e78069-ce07-4dbb-b366-5ec19e250ffb"></script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="22e78069-ce07-4dbb-b366-5ec19e250ffb"></script>
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Omniversify",
+        "url": "https://omniversify.com",
+        "logo": "https://omniversify.com/logo.webp",
+        "description": "A Moroccan game studio reclaiming history and culture through immersive games.",
+        "foundingDate": "2025",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "45 Av. Al Massira",
+          "addressLocality": "Oued Laou",
+          "addressRegion": "Tetouan",
+          "postalCode": "93250",
+          "addressCountry": "MA"
+        },
+        "sameAs": [
+          "https://twitter.com/omniversify",
+          "https://discord.gg/omniversify",
+          "https://github.com/omniversify"
+        ]
+      }
+    </script>
   </head>
   <body>
     <BackgroundPattern />
