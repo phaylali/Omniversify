@@ -1,0 +1,30 @@
+---
+title: "Warframe Tools is Now Available on Google Play Store"
+description: "Track your void relic inventory on the go with our new Android app. Download now and never lose track of your farming progress."
+pubDate: 2026-03-21
+category: "Release"
+featured: true
+cover: "/images/covers/warframetoolsicon.png"
+project: "warframe_tools"
+---
+
+We are thrilled to announce that **Warframe Tools** is now officially available on the Google Play Store! 
+
+Our void relic inventory manager, built with Flutter, is designed to help Warframe players track their relics across all conditions (Intact, Exceptional, Flawless, and Radiant) with a beautiful Moroccan luxury-themed UI.
+
+## Key Features
+
+- **Offline-First**: All 724 relics are bundled in the app
+- **Cloud Sync**: Optional PocketBase integration for backup
+- **Modern UI**: Black & Gold luxury design with Moon & Space modes
+- **Statistics**: Detailed breakdown of your collection
+
+## Download Now
+
+Get it on Google Play and start organizing your relic farming sessions today!
+
+<div align="center" class="mb-6">
+  <a href="https://play.google.com/store/apps/details?id=com.omniversify.warframe.warframe_tools&hl=en_US" target="_blank" rel="noopener noreferrer">
+    <img src="/images/GetItOnGooglePlay_Badge_Web_color_English.svg" alt="Get it on Google Play" height="60" width="180" />
+  </a>
+</div>

@@ -4,161 +4,53 @@ import faviconSvg from "../../public/favicon.svg?raw";
 ---
 
 <Section>
-  <div class="footer-content">
-    <div class="logo">
-      <div class="logo-svg" set:html={faviconSvg} />
-      <span>Omniversify</span>
+  <div class="text-center text-white w-full">
+    <div class="flex items-center justify-center gap-4 mb-8">
+      <div class="w-16 h-16 [&_svg]:w-full [&_svg]:h-full" set:html={faviconSvg} />
+      <span class="text-2xl font-semibold tracking-wider gradient-title">Omniversify</span>
     </div>
 
-    <div class="links-group">
-      <div class="link-column">
-        <h4>Company</h4>
-        <a href="/about">About</a>
-        <a href="#">Careers</a>
-        <a href="#">Press Kit</a>
+    <div class="flex gap-12 justify-center flex-wrap mb-8 sm:gap-8">
+      <div class="flex flex-col gap-2">
+        <h4 class="my-0 text-base uppercase tracking-wider text-gold">Company</h4>
+        <a href="/about" class="text-gold no-underline opacity-80 hover:opacity-100 transition-opacity">About</a>
+        <a href="#" class="text-gold no-underline opacity-80 hover:opacity-100 transition-opacity">Careers</a>
+        <a href="#" class="text-gold no-underline opacity-80 hover:opacity-100 transition-opacity">Press Kit</a>
       </div>
-      <div class="link-column">
-        <h4>Legal</h4>
-        <a href="#">Privacy Policy</a>
-        <a href="#">Terms of Service</a>
-        <a href="#">Cookie Policy</a>
+      <div class="flex flex-col gap-2">
+        <h4 class="my-0 text-base uppercase tracking-wider text-gold">Legal</h4>
+        <a href="#" class="text-gold no-underline opacity-80 hover:opacity-100 transition-opacity">Privacy Policy</a>
+        <a href="#" class="text-gold no-underline opacity-80 hover:opacity-100 transition-opacity">Terms of Service</a>
+        <a href="#" class="text-gold no-underline opacity-80 hover:opacity-100 transition-opacity">Cookie Policy</a>
       </div>
-      <div class="link-column">
-        <h4>Resources</h4>
-        <a href="#">Documentation</a>
-        <a href="#">API</a>
-        <a href="#">Brand Assets</a>
+      <div class="flex flex-col gap-2">
+        <h4 class="my-0 text-base uppercase tracking-wider text-gold">Resources</h4>
+        <a href="#" class="text-gold no-underline opacity-80 hover:opacity-100 transition-opacity">Documentation</a>
+        <a href="#" class="text-gold no-underline opacity-80 hover:opacity-100 transition-opacity">API</a>
+        <a href="#" class="text-gold no-underline opacity-80 hover:opacity-100 transition-opacity">Brand Assets</a>
       </div>
-      <div class="link-column">
-        <h4>Community</h4>
-        <a href="#">Discord</a>
-        <a href="#">Twitter</a>
-        <a href="#">GitHub</a>
-      </div>
-    </div>
-
-    <div class="licenses">
-      <p>Open Source Licenses</p>
-      <div class="license-list">
-        <span>Astro</span>
-        <span>React</span>
-        <span>TailwindCSS</span>
-        <span>Embla Carousel</span>
-        <span>Lucide Icons</span>
+      <div class="flex flex-col gap-2">
+        <h4 class="my-0 text-base uppercase tracking-wider text-gold">Community</h4>
+        <a href="#" class="text-gold no-underline opacity-80 hover:opacity-100 transition-opacity">Discord</a>
+        <a href="#" class="text-gold no-underline opacity-80 hover:opacity-100 transition-opacity">Twitter</a>
+        <a href="#" class="text-gold no-underline opacity-80 hover:opacity-100 transition-opacity">GitHub</a>
       </div>
     </div>
 
-    <div class="copyright">
-      <p>&copy; 2026 Omniversify. All rights reserved.</p>
-      <p>Made with ∞ across the multiverse</p>
+    <div class="inline-block mb-8 p-4 bg-gold/10 border border-gold/20 rounded-lg">
+      <p class="m-0 mb-2 text-sm text-gold">Open Source Licenses</p>
+      <div class="flex gap-4 flex-wrap justify-center">
+        <span class="text-sm px-3 py-1 bg-gold/20 rounded text-gold">Astro</span>
+        <span class="text-sm px-3 py-1 bg-gold/20 rounded text-gold">React</span>
+        <span class="text-sm px-3 py-1 bg-gold/20 rounded text-gold">TailwindCSS</span>
+        <span class="text-sm px-3 py-1 bg-gold/20 rounded text-gold">Embla Carousel</span>
+        <span class="text-sm px-3 py-1 bg-gold/20 rounded text-gold">Tabler Icons</span>
+      </div>
+    </div>
+
+    <div class="text-gold">
+      <p class="my-1 text-sm">&copy; 2026 Omniversify. All rights reserved.</p>
+      <p class="my-1 text-sm">Made with ∞ across the multiverse</p>
     </div>
   </div>
 </Section>
-
-<style>
-  .footer-content {
-    text-align: center;
-    color: white;
-    width: 100%;
-  }
-
-  .logo {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .logo-svg {
-    width: 60px;
-    height: 60px;
-  }
-
-  .logo-svg :global(svg) {
-    width: 100%;
-    height: 100%;
-  }
-
-  .logo span {
-    font-size: 1.5rem;
-    font-weight: 600;
-    letter-spacing: 0.1em;
-    background: radial-gradient(circle at 35% 35%, #8a7a3a 0%, #C2B067 50%, #8a7a3a 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-  }
-
-  .links-group {
-    display: flex;
-    gap: 3rem;
-    justify-content: center;
-    flex-wrap: wrap;
-    margin-bottom: 2rem;
-  }
-
-  .link-column {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .link-column h4 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: #C2B067;
-  }
-
-  .link-column a {
-    color: #C2B067;
-    text-decoration: none;
-    opacity: 0.8;
-    transition: opacity 0.2s;
-  }
-
-  .link-column a:hover {
-    opacity: 1;
-  }
-
-  .licenses {
-    margin-bottom: 2rem;
-    padding: 1rem;
-    background: rgba(194, 176, 103, 0.1);
-    border: 1px solid rgba(194, 176, 103, 0.2);
-    border-radius: 8px;
-    display: inline-block;
-  }
-
-  .licenses p {
-    margin: 0 0 0.5rem 0;
-    font-size: 0.9rem;
-    color: #C2B067;
-  }
-
-  .license-list {
-    display: flex;
-    gap: 1rem;
-    flex-wrap: wrap;
-    justify-content: center;
-  }
-
-  .license-list span {
-    font-size: 0.8rem;
-    padding: 0.25rem 0.75rem;
-    background: rgba(194, 176, 103, 0.2);
-    border-radius: 4px;
-    color: #C2B067;
-  }
-
-  .copyright {
-    color: #C2B067;
-  }
-
-  .copyright p {
-    margin: 0.25rem 0;
-    font-size: 0.9rem;
-  }
-</style>

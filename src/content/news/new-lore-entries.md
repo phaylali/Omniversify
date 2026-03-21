@@ -3,9 +3,8 @@ title: "Omega Update: New Lore Entries Added"
 description: "Six new wiki entries have been added to our growing multiverse lore."
 pubDate: 2026-03-01
 category: "Update"
+cover: "https://picsum.photos/seed/lore-entries/1920/600"
 ---
-
-# New Lore Entries Added
 
 Our lore team has been busy! We've added six new entries to the wiki, expanding the Omniversify multiverse.
 

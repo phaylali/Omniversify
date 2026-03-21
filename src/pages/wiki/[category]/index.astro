@@ -1,6 +1,6 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
-import Navbar from "../../../components/Navbar.astro";
+import ButtonRow from "../../../components/ButtonRow.astro";
 import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -27,10 +27,10 @@ const categoryInfo: Record<string, { name: string; icon: string }> = {
 ---
 
 <Layout title={`${categoryInfo[category].name} - Omniversify Wiki`} description={`Explore ${categoryInfo[category].name.toLowerCase()} in the Omniversify multiverse.`}>
-  <Navbar />
   <main class="page-container">
+    <ButtonRow items={[{ href: "/wiki", label: "Back to Wiki" }]} />
+    
     <header class="text-center mb-12">
-      <a href="/wiki" class="link-back">← Back to Wiki</a>
       <span class="text-4xl block mb-4">{categoryInfo[category].icon}</span>
       <h1 class="gradient-title">{categoryInfo[category].name}</h1>
     </header>

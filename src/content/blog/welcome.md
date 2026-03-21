@@ -5,9 +5,8 @@ pubDate: 2026-01-15
 author: "Omniversify Team"
 tags: ["Announcement", "Introduction"]
 project: ""
+cover: "https://picsum.photos/seed/omniversify-welcome/1920/600"
 ---
-
-# Welcome to Omniversify
 
 We're thrilled to introduce you to Omniversify — a creative studio dedicated to building unified multiverses that span across games, anime, series, books, and beyond.
 

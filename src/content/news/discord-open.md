@@ -3,9 +3,8 @@ title: "Community Discord Now Open!"
 description: "Join our Discord server to connect with fellow fans and get exclusive updates."
 pubDate: 2026-02-10
 category: "Event"
+cover: "https://picsum.photos/seed/discord-open/1920/600"
 ---
-
-# Community Discord Now Open!
 
 We're thrilled to announce that our official Discord server is now live!
 

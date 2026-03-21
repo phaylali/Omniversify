@@ -5,9 +5,8 @@ pubDate: 2026-03-18
 author: "Omniversify Team"
 tags: ["Guide", "Android"]
 project: ""
+cover: "https://picsum.photos/seed/android-release/1920/600"
 ---
-
-# Android Release Preparation Guide
 
 This guide outlines the steps to securely prepare an Android app for release on the Google Play Store.
 

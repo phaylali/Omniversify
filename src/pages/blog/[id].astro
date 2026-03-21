@@ -1,11 +1,11 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Navbar from "../../components/Navbar.astro";
 import ShareButtons from "../../components/ShareButtons.astro";
-import { getCollection, render } from 'astro:content';
+import ButtonRow from "../../components/ButtonRow.astro";
+import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const posts = await getCollection('blog');
+  const posts = await getCollection("blog");
   return posts.map((post) => ({
     params: { id: post.id },
     props: { post },
@@ -16,63 +16,91 @@ const { post } = Astro.props;
 const { Content } = await render(post);
 
 function formatDate(date: Date) {
-	const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-	return `${date.getFullYear()} ${months[date.getMonth()]} ${date.getDate()}`;
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  return `${date.getFullYear()} ${months[date.getMonth()]} ${date.getDate()}`;
 }
 
 function getReadingTime(body: string): string {
-	const wordsPerMinute = 200;
-	const words = body.trim().split(/\s+/).length;
-	const minutes = Math.ceil(words / wordsPerMinute);
-	return `${minutes} min read`;
+  const wordsPerMinute = 200;
+  const words = body.trim().split(/\s+/).length;
+  const minutes = Math.ceil(words / wordsPerMinute);
+  return `${minutes} min read`;
 }
 
 const readingTime = getReadingTime(post.body);
 
-const coverImage = post.data.image 
-  ? `${Astro.url.origin}${post.data.image}` 
+const coverImage = post.data.image
+  ? `${Astro.url.origin}${post.data.image}`
   : `${Astro.url.origin}/logo.webp`;
+
+const headerCover =
+  post.data.cover || "https://picsum.photos/seed/default-blog/1920/600";
 ---
 
-<Layout 
-  title={`${post.data.title} - Omniversify Blog`} 
+<Layout
+  title={`${post.data.title} - Omniversify Blog`}
   description={post.data.description}
   image={coverImage}
 >
-  <Navbar />
-  <article class="page-container mx-auto max-w-[800px]">
-    <header class="mb-12 pb-8 border-b border-gold/20">
-      <a href="/blog" class="link-back">← Back to Blog</a>
-       
-      <div class="flex justify-between items-center text-sm text-gold opacity-70 mb-4">
-        <div class="flex gap-2 items-center">
-          <span>{formatDate(post.data.pubDate)}</span>
-          <span>•</span>
-          <span>by {post.data.author}</span>
-        </div>
-        <span>{readingTime}</span>
+  <article class="mx-auto max-w-[800px]">
+    <header class="relative border-b border-gold/20">
+      <div
+        class="absolute inset-0 z-0"
+        style={`background-image: url('${headerCover}'); background-size: cover; background-position: center;`}
+      >
+        <div class="absolute inset-0 bg-black/60"></div>
       </div>
-      
-      <h1 class="text-4xl text-gold mb-4 leading-tight">{post.data.title}</h1>
-      <p class="text-xl text-gold opacity-80 mb-6 leading-relaxed">{post.data.description}</p>
-      
-      <div class="flex gap-2 flex-wrap">
-        {post.data.tags.map((tag) => (
-          <span class="tag">{tag}</span>
-        ))}
+
+      <div class="relative z-10 pt-20 px-4 md:px-8">
+        <ButtonRow items={[{ href: "/blog", label: "Back to Blog" }]} />
+
+        <h1 class="text-4xl text-white mt-8 mb-6 leading-tight">
+          {post.data.title}
+        </h1>
+        <p class="text-xl text-white/80 leading-relaxed mb-2">
+          {post.data.description}
+        </p>
+        <div class="flex justify-between items-center text-sm text-white/90 py-4">
+          <div class="flex gap-2 items-center">
+            <span>{formatDate(post.data.pubDate)}</span>
+            <span>•</span>
+            <span>by {post.data.author}</span>
+          </div>
+          <span>{readingTime}</span>
+        </div>
+        <div class="flex gap-2 flex-wrap mb-6">
+          {post.data.tags.map((tag) => (
+            <span class="tag bg-white/20 text-white">{tag}</span>
+          ))}
+        </div>
       </div>
     </header>
-    
-    <div class="content-body">
-      <Content />
+
+    <div class="bg-black/60 px-4 md:px-8 pt-8">
+      <div class="content-body">
+        <Content />
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-gold/20">
+        <ShareButtons
+          url={Astro.url.href}
+          title={post.data.title}
+          description={post.data.description}
+        />
+      </footer>
     </div>
-    
-    <footer class="mt-16 pt-8 border-t border-gold/20">
-      <ShareButtons 
-        url={Astro.url.href} 
-        title={post.data.title} 
-        description={post.data.description} 
-      />
-    </footer>
   </article>
 </Layout>

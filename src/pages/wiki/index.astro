@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Navbar from "../../components/Navbar.astro";
+import BackButton from "../../components/BackButton.astro";
 import { getCollection } from "astro:content";
 
 const wiki = await getCollection("wiki");
@@ -39,8 +39,8 @@ const categoryCount = categories.map((cat) => ({
 ---
 
 <Layout title="Wiki - Omniversify" description="Explore the lore and history of the Omniversify multiverse.">
-  <Navbar />
   <main class="page-container">
+    <BackButton href="/" label="Back to Home" />
     <header class="text-center mb-12">
       <h1 class="gradient-title">Wiki</h1>
       <p class="text-xl text-gold opacity-80">Explore the lore and history of the Omniversify multiverse</p>

@@ -4,75 +4,16 @@ import faviconSvg from "../../public/favicon.svg?raw";
 import cornerSvg from "../assets/corner.svg?raw";
 ---
 
-<Section class="hero-section">
-  <div class="corner corner-left" set:html={cornerSvg} />
-  <div class="corner corner-right" set:html={cornerSvg} />
+<Section class="h-screen relative">
+  <div class="absolute bottom-2.5 left-2.5 w-[120px] h-auto pointer-events-none opacity-60 z-10 [&_svg]:w-full [&_svg]:h-auto [&_svg]:block" set:html={cornerSvg} />
+  <div class="absolute bottom-2.5 right-2.5 w-[120px] h-auto pointer-events-none opacity-60 z-10 scale-x-[-1] [&_svg]:w-full [&_svg]:h-auto [&_svg]:block" set:html={cornerSvg} />
   <div class="text-center text-white flex flex-col items-center justify-center">
     <div class="mb-8 animate-pulse w-[120px] h-[120px] flex items-center justify-center">
-      <div class="logo" set:html={faviconSvg} />
+      <div class="w-full h-full [&_svg]:w-full [&_svg]:h-full [&_svg]:block [&_svg]:-translate-x-[11.5%] [&_svg]:-translate-y-[11.5%]" set:html={faviconSvg} />
     </div>
-    <h1 class="gradient-title">
+    <h1 class="gradient-title text-5xl sm:text-4xl">
       Omniversify
     </h1>
-    <p class="text-2xl text-gold font-light">Where the Forgotten Become Immortal.</p>
+    <p class="text-2xl text-gold font-light sm:text-base">Where the Forgotten Become Immortal.</p>
   </div>
 </Section>
-
-<style is:global>
-  .hero-section {
-    height: 100vh;
-  }
-</style>
-
-<style>
-  .logo {
-    width: 100%;
-    height: 100%;
-  }
-
-  .logo :global(svg) {
-    width: 100%;
-    height: 100%;
-    display: block;
-    transform: translate(-11.5%, -11.5%);
-  }
-
-  .corner {
-    position: absolute;
-    bottom: 10px;
-    width: 120px;
-    height: auto;
-    pointer-events: none;
-    opacity: 0.6;
-    z-index: 1;
-  }
-
-  .corner-left {
-    left: 10px;
-  }
-
-  .corner-right {
-    right: 10px;
-    transform: scaleX(-1);
-  }
-
-  .corner :global(svg) {
-    width: 100%;
-    height: auto;
-  }
-
-  @media (max-width: 768px) {
-    h1 {
-      font-size: 2.5rem;
-    }
-
-    p {
-      font-size: 1rem;
-    }
-
-    .logo-wrapper {
-      width: 80px;
-      height: 80px;
-    }
-  }
-</style>

@@ -1,11 +1,11 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Navbar from "../../components/Navbar.astro";
 import ShareButtons from "../../components/ShareButtons.astro";
-import { getCollection, render } from 'astro:content';
+import ButtonRow from "../../components/ButtonRow.astro";
+import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const news = await getCollection('news');
+  const news = await getCollection("news");
   return news.map((item) => ({
     params: { id: item.id },
     props: { item },
@@ -16,51 +16,85 @@ const { item } = Astro.props;
 const { Content } = await render(item);
 
 function formatDate(date: Date) {
-	const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
-	return `${date.getFullYear()} ${months[date.getMonth()]} ${date.getDate()}`;
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  return `${date.getFullYear()} ${months[date.getMonth()]} ${date.getDate()}`;
 }
 
 function getReadingTime(body: string): string {
-	const wordsPerMinute = 200;
-	const words = body.trim().split(/\s+/).length;
-	const minutes = Math.ceil(words / wordsPerMinute);
-	return `${minutes} min read`;
+  const wordsPerMinute = 200;
+  const words = body.trim().split(/\s+/).length;
+  const minutes = Math.ceil(words / wordsPerMinute);
+  return `${minutes} min read`;
 }
 
 const readingTime = getReadingTime(item.body);
+
+const headerCover =
+  item.data.cover || "https://picsum.photos/seed/default-news/1920/600";
 ---
 
-<Layout 
-  title={`${item.data.title} - Omniversify News`} 
+<Layout
+  title={`${item.data.title} - Omniversify News`}
   description={item.data.description}
   image={`${Astro.url.origin}/logo.webp`}
 >
-  <Navbar />
-  <article class="page-container mx-auto max-w-[800px]">
-    <header class="mb-12 pb-8 border-b border-gold/20">
-      <a href="/news" class="link-back">← Back to News</a>
-      
-      <span class="tag mb-4">{item.data.category}</span>
-      
-      <div class="flex justify-between items-center text-sm text-gold opacity-70 mb-4">
-        <span>{formatDate(item.data.pubDate)}</span>
-        <span>{readingTime}</span>
+  <article class="mx-auto max-w-[800px]">
+    <header class="relative border-b border-gold/20">
+      <div
+        class="absolute inset-0 z-0"
+        style={`background-image: url('${headerCover}'); background-size: cover; background-position: center;`}
+      >
+        <div class="absolute inset-0 bg-black/60"></div>
       </div>
-      
-      <h1 class="text-4xl text-gold mb-4 leading-tight">{item.data.title}</h1>
-      <p class="text-xl text-gold opacity-80 leading-relaxed">{item.data.description}</p>
+
+      <div class="relative z-10 pt-20 px-4 md:px-8">
+        <ButtonRow
+          items={[
+            { href: "/news", label: "Back to News" },
+            { text: item.data.category, class: "tag bg-white/20 text-white" },
+          ]}
+        />
+
+        <h1 class="text-4xl text-white mt-8 mb-6 leading-tight">
+          {item.data.title}
+        </h1>
+        <p class="text-xl text-white/80 leading-relaxed mb-2">
+          {item.data.description}
+        </p>
+        <div
+          class="flex justify-between items-center text-sm text-white/90 py-4"
+        >
+          <span>{formatDate(item.data.pubDate)}</span>
+          <span>{readingTime}</span>
+        </div>
+      </div>
     </header>
-    
-    <div class="content-body">
-      <Content />
+
+    <div class="bg-black/60 px-4 md:px-8 pt-8">
+      <div class="content-body">
+        <Content />
+      </div>
+
+      <footer class="mt-16 pt-8 border-t border-gold/20">
+        <ShareButtons
+          url={Astro.url.href}
+          title={item.data.title}
+          description={item.data.description}
+        />
+      </footer>
     </div>
-    
-    <footer class="mt-16 pt-8 border-t border-gold/20">
-      <ShareButtons 
-        url={Astro.url.href} 
-        title={item.data.title} 
-        description={item.data.description} 
-      />
-    </footer>
   </article>
 </Layout>

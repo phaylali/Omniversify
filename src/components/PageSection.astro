@@ -1,18 +1,11 @@
 ---
 interface Props {
   class?: string;
-  fullHeight?: boolean;
 }
 
 const { class: className } = Astro.props;
 ---
 
-<section class:list={["w-full flex flex-col items-center justify-center relative p-8 box-border", className]}>
+<section class:list={["w-full flex flex-col items-center justify-center relative p-8 box-border min-h-0", className]}>
   <slot />
 </section>
-
-<style>
-  section {
-    min-height: auto;
-  }
-</style>

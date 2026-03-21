@@ -1,7 +1,7 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
-import Navbar from "../../../components/Navbar.astro";
 import ShareButtons from "../../../components/ShareButtons.astro";
+import ButtonRow from "../../../components/ButtonRow.astro";
 import { getCollection, render } from 'astro:content';
 
 export async function getStaticPaths() {
@@ -37,10 +37,9 @@ const readingTime = getReadingTime(item.body);
   description={item.data.description}
   image={`${Astro.url.origin}/logo.webp`}
 >
-  <Navbar />
   <article class="page-container mx-auto max-w-[800px]">
     <header class="mb-12 pb-8 border-b border-gold/20">
-      <a href={`/wiki/${item.data.category}`} class="link-back">← Back to {categoryInfo[item.data.category].name}</a>
+      <ButtonRow items={[{ href: `/wiki/${item.data.category}`, label: `Back to ${categoryInfo[item.data.category].name}` }]} />
       
       <div class="flex justify-between items-center text-sm mb-4">
         <span class="tag">{categoryInfo[item.data.category].icon} {categoryInfo[item.data.category].name}</span>

@@ -4,9 +4,8 @@ description: "We're excited to reveal the first five projects in development at 
 pubDate: 2026-01-20
 category: "Announcement"
 featured: true
+cover: "https://picsum.photos/seed/first-projects/1920/600"
 ---
-
-# Announcing Our First Five Projects
 
 Today marks a major milestone for Omniversify — we're officially announcing our first five projects!
 

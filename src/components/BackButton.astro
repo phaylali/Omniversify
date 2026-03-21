@@ -1,0 +1,22 @@
+---
+import decorSvg from "../assets/decorationbutton.svg?raw";
+
+interface Props {
+  href: string;
+  label: string;
+  class?: string;
+}
+
+const { href, label, class: className = "" } = Astro.props;
+---
+
+<a 
+  href={href} 
+  class={`back-btn relative inline-flex items-center justify-center w-12 h-12 bg-no-repeat bg-center bg-contain text-gold hover:scale-110 transition-transform ${className}`}
+  style={`background-image: url("data:image/svg+xml,${encodeURIComponent(decorSvg)}"); background-size: 100% 100%;`}
+  aria-label={label}
+>
+  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M19 12H5M12 19l-7-7 7-7"/>
+  </svg>
+</a>

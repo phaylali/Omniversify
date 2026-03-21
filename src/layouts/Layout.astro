@@ -34,10 +34,7 @@ const {
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={image} />
-    <script
-      defer
-      src="https://cloud.umami.is/script.js"
-      data-website-id="22e78069-ce07-4dbb-b366-5ec19e250ffb"></script>
+    <script defer src="https://cloud.umami.is/script.js" data-website-id="22e78069-ce07-4dbb-b366-5ec19e250ffb"></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -63,19 +60,9 @@ const {
       }
     </script>
   </head>
-  <body>
+  <body class="m-0 p-0 w-full h-full">
     <BackgroundPattern />
     <Navbar />
     <slot />
   </body>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    height: 100%;
-  }
-</style>

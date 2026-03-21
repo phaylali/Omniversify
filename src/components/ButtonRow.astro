@@ -1,0 +1,56 @@
+---
+import BackButton from "./BackButton.astro";
+
+interface Button {
+  href: string;
+  label: string;
+}
+
+interface TextLabel {
+  text: string;
+  class?: string;
+}
+
+type Item = Button | TextLabel;
+
+interface Props {
+  items: Item[];
+}
+
+const { items = [] } = Astro.props;
+---
+
+{items.length > 0 && (
+  <div class={`flex items-center mb-4 ${items.length > 1 ? 'justify-between' : ''}`}>
+    {"href" in items[0] ? (
+      <BackButton href={items[0].href} label={items[0].label} />
+    ) : (
+      <span class={items[0].class}>{items[0].text}</span>
+    )}
+    
+    {items.length === 2 && (
+      "href" in items[1] ? (
+        <BackButton href={items[1].href} label={items[1].label} />
+      ) : (
+        <span class={items[1].class}>{items[1].text}</span>
+      )
+    )}
+    
+    {items.length > 2 && (
+      <div class="flex items-center gap-4">
+        {items.slice(1, -1).map((item) => (
+          "href" in item ? (
+            <BackButton href={item.href} label={item.label} />
+          ) : (
+            <span class={item.class}>{item.text}</span>
+          )
+        ))}
+        {"href" in items[items.length - 1] ? (
+          <BackButton href={items[items.length - 1].href} label={items[items.length - 1].label} />
+        ) : (
+          <span class={items[items.length - 1].class}>{items[items.length - 1].text}</span>
+        )}
+      </div>
+    )}
+  </div>
+)}

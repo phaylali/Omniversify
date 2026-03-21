@@ -1,6 +1,6 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Navbar from "../../components/Navbar.astro";
+import ButtonRow from "../../components/ButtonRow.astro";
 import { getCollection } from 'astro:content';
 
 const news = (await getCollection('news')).sort(
@@ -19,8 +19,9 @@ const categories = [...new Set(news.map((item) => item.data.category))];
 ---
 
 <Layout title="News - Omniversify" description="Announcements, updates, and latest happenings.">
-  <Navbar />
   <main class="page-container">
+    <ButtonRow items={[{ href: "/", label: "Back to Home" }]} />
+    
     <header class="text-center mb-12">
       <h1 class="gradient-title">News</h1>
       <p class="text-xl text-gold opacity-80">Announcements, updates, and latest happenings</p>

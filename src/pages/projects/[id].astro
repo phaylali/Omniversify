@@ -1,7 +1,7 @@
 ---
 import Layout from "../../layouts/Layout.astro";
-import Navbar from "../../components/Navbar.astro";
 import ShareButtons from "../../components/ShareButtons.astro";
+import ButtonRow from "../../components/ButtonRow.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -15,14 +15,24 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { Content } = await render(project);
 
-const coverImage = project.data.cover 
-  ? `${Astro.url.origin}${project.data.cover}` 
+const coverImage = project.data.cover
+  ? `${Astro.url.origin}${project.data.cover}`
   : undefined;
 
 const allBlogPosts = await getCollection("blog");
-const projectUpdates = allBlogPosts
+const allNews = await getCollection("news");
+
+const blogUpdates = allBlogPosts
   .filter((post) => post.data.project === project.id)
-  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
+  .map((post) => ({ ...post, collection: "blog" as const }));
+
+const newsUpdates = allNews
+  .filter((item) => item.data.project === project.id)
+  .map((item) => ({ ...item, collection: "news" as const }));
+
+const projectUpdates = [...blogUpdates, ...newsUpdates].sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
 ---
 
 <Layout
@@ -30,121 +40,143 @@ const projectUpdates = allBlogPosts
   description={project.data.description}
   image={coverImage}
 >
-  <Navbar />
-  <article class="min-h-screen bg-black/30 pt-32">
-    <header
-      class="relative text-center py-16 px-8"
-      style={project.data.cover
-        ? `background-image: url(${project.data.cover}); background-size: cover; background-position: center;`
-        : `background: ${project.data.gradient}`}
-    >
-      {project.data.cover && <div class="absolute inset-0 bg-black/60 z-0" />}
-      <a href="/projects" class="link-back absolute top-8 left-8 z-10"
-        >← Back to Projects</a
-      >
-
-      <h1
-        class="relative z-10 text-5xl text-white tracking-widest uppercase gradient-title mb-6"
-      >
-        {project.data.title}
-      </h1>
-
-      <div class="relative z-10 flex gap-2 justify-center flex-wrap">
-        {
-          project.data.tags.map((tag) => (
-            <span class="tag bg-white/20 text-white">{tag}</span>
-          ))
+  <article class="mx-auto max-w-[800px]">
+    <header class="relative border-b border-gold/20">
+      <div
+        class="absolute inset-0 z-0"
+        style={
+          project.data.cover
+            ? `background-image: url(${project.data.cover}); background-size: cover; background-position: center;`
+            : `background: ${project.data.gradient}`
         }
+      >
+        <div class="absolute inset-0 bg-black/60"></div>
       </div>
 
-      {project.data.repo && (
-        <div class="relative z-10 mt-6">
-          <a
-            href={project.data.repo}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="inline-flex items-center gap-2 px-4 py-2 bg-black/50 hover:bg-black/70 text-white rounded-lg transition-colors"
-          >
-            <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
-            </svg>
-            View on GitHub
-          </a>
+      <div class="relative z-10 pt-20 px-4 md:px-8">
+        <ButtonRow items={[{ href: "/projects", label: "Back to Projects" }]} />
+
+        <h1 class="text-5xl text-white mt-8 mb-6 leading-tight uppercase">
+          {project.data.title}
+        </h1>
+
+        <div class="flex gap-2 flex-wrap mb-6">
+          {
+            project.data.tags.map((tag) => (
+              <span class="tag bg-white/20 text-white">{tag}</span>
+            ))
+          }
         </div>
-      )}
+
+        <div class="flex gap-4 flex-wrap justify-center mb-6">
+          {project.data.repo && (
+            <a
+              href={project.data.repo}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-flex items-center gap-2 px-4 py-2 bg-black/50 hover:bg-black/70 text-white rounded-lg transition-colors"
+            >
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+              View on GitHub
+            </a>
+          )}
+          {project.data.playstore && (
+            <a
+              href={project.data.playstore}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block"
+            >
+              <img src="/images/GetItOnGooglePlay_Badge_Web_color_English.svg" alt="Get it on Google Play" class="h-10" />
+            </a>
+          )}
+        </div>
+      </div>
     </header>
 
-    <div class="flex border-b border-gold/20">
-      <button
-        class="tab-btn flex-1 py-4 text-center rounded-none border-b-2 border-transparent data-[active=true]:border-gold data-[active=true]:text-gold"
-        data-tab="documentation"
-        data-active="true"
-      >
-        Documentation
-      </button>
-      <button
-        class="tab-btn flex-1 py-4 text-center rounded-none border-b-2 border-transparent data-[active=true]:border-gold data-[active=true]:text-gold"
-        data-tab="updates"
-        data-active={projectUpdates.length > 0 ? "true" : "false"}
-      >
-        Updates ({projectUpdates.length})
-      </button>
-    </div>
+    <div class="bg-black/60 px-4 md:px-8 pt-8">
+      <div class="flex border-b border-gold/20 mb-8">
+        <button
+          class="tab-btn flex-1 py-4 text-center rounded-none border-b-2 border-transparent data-[active=true]:border-gold data-[active=true]:text-gold"
+          data-tab="documentation"
+          data-active="true"
+        >
+          Documentation
+        </button>
+        <button
+          class="tab-btn flex-1 py-4 text-center rounded-none border-b-2 border-transparent data-[active=true]:border-gold data-[active=true]:text-gold"
+          data-tab="updates"
+          data-active={projectUpdates.length > 0 ? "true" : "false"}
+        >
+          Updates ({projectUpdates.length})
+        </button>
+      </div>
 
-    <div class="tab-content min-h-[50vh]">
-      <div id="documentation" class="tab-pane block p-8 max-w-[800px] mx-auto">
-        <div class="content-body">
-          <Content />
+      <div class="tab-content min-h-[50vh]">
+        <div id="documentation" class="tab-pane block">
+          <div class="content-body">
+            <Content />
+          </div>
+        </div>
+
+        <div id="updates" class="tab-pane hidden">
+          {
+            projectUpdates.length > 0 ? (
+              <div
+                class="grid gap-6"
+                style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));"
+              >
+                {projectUpdates.map((item) => {
+                  const href = item.collection === "blog" ? `/blog/${item.id}` : `/news/${item.id}`;
+                  const tags = item.collection === "blog" 
+                    ? item.data.tags 
+                    : item.data.category ? [item.data.category] 
+                    : [];
+                  return (
+                    <a
+                      href={href}
+                      class="block no-underline p-6 bg-gold/10 border border-gold/20 rounded-xl transition-all duration-200 hover:bg-gold/15 hover:translate-y-[-2px]"
+                    >
+                      <div class="flex items-center gap-2 text-xs text-gold mb-2">
+                        <span>{item.data.pubDate.toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                          day: "numeric",
+                        })}</span>
+                        <span class="px-2 py-0.5 bg-gold/20 rounded text-[0.65rem] uppercase">{item.collection}</span>
+                      </div>
+                      <h3 class="text-lg text-content mb-2">{item.data.title}</h3>
+                      <p class="text-sm text-content opacity-80 mb-4 line-height-relaxed">
+                        {item.data.description}
+                      </p>
+                      <div class="flex gap-2 flex-wrap">
+                        {tags.map((tag) => (
+                          <span class="tag-sm">{tag}</span>
+                        ))}
+                      </div>
+                    </a>
+                  );
+                })}
+              </div>
+            ) : (
+              <p class="text-center text-content opacity-60 py-12">
+                No updates yet for this project.
+              </p>
+            )
+          }
         </div>
       </div>
 
-      <div id="updates" class="tab-pane hidden p-8 max-w-[1000px] mx-auto">
-        {
-          projectUpdates.length > 0 ? (
-            <div
-              class="grid gap-6"
-              style="grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));"
-            >
-              {projectUpdates.map((post) => (
-                <a
-                  href={`/blog/${post.id}`}
-                  class="block no-underline p-6 bg-gold/10 border border-gold/20 rounded-xl transition-all duration-200 hover:bg-gold/15 hover:translate-y-[-2px]"
-                >
-                  <div class="text-xs text-gold mb-2">
-                    {post.data.pubDate.toLocaleDateString("en-US", {
-                      year: "numeric",
-                      month: "short",
-                      day: "numeric",
-                    })}
-                  </div>
-                  <h3 class="text-lg text-content mb-2">{post.data.title}</h3>
-                  <p class="text-sm text-content opacity-80 mb-4 line-height-relaxed">
-                    {post.data.description}
-                  </p>
-                  <div class="flex gap-2 flex-wrap">
-                    {post.data.tags.map((tag) => (
-                      <span class="tag-sm">{tag}</span>
-                    ))}
-                  </div>
-                </a>
-              ))}
-            </div>
-          ) : (
-            <p class="text-center text-content opacity-60 py-12">
-              No updates yet for this project.
-            </p>
-          )
-        }
-      </div>
+      <footer class="mt-16 pt-8 border-t border-gold/20">
+        <ShareButtons
+          url={Astro.url.href}
+          title={project.data.title}
+          description={project.data.description}
+        />
+      </footer>
     </div>
-
-    <footer class="py-8 text-center border-t border-gold/20">
-      <ShareButtons 
-        url={Astro.url.href} 
-        title={project.data.title} 
-        description={project.data.description} 
-      />
-    </footer>
   </article>
 </Layout>
 

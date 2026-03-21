@@ -2,25 +2,25 @@
 import Search from "astro-pagefind/components/Search";
 ---
 
-<button class="search-trigger" id="searchTrigger" aria-label="Open search">
+<button class="bg-transparent border-none text-gold cursor-pointer p-2 flex items-center justify-center hover:opacity-70 transition-opacity" id="searchTrigger" aria-label="Open search">
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
     <circle cx="11" cy="11" r="8"></circle>
     <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
   </svg>
 </button>
 
-<div class="search-overlay" id="searchOverlay">
-  <div class="search-modal">
-    <div class="search-header">
-      <h2>Search</h2>
-      <button class="close-btn" id="closeSearch" aria-label="Close search">
+<div class="fixed top-0 left-0 right-0 bottom-0 bg-black/85 flex items-start justify-center pt-[15vh] z-[10000] opacity-0 invisible transition-all duration-300" id="searchOverlay">
+  <div class="w-[90%] max-w-[600px] bg-[#0a0a0a] border-2 border-gold rounded-xl overflow-hidden translate-y-[-20px] transition-transform duration-300" id="searchModal">
+    <div class="flex justify-between items-center p-4 border-b border-gold/30">
+      <h2 class="m-0 text-gold text-xl font-semibold">Search</h2>
+      <button class="bg-transparent border-none text-gold cursor-pointer p-1 flex items-center justify-center hover:opacity-70 transition-opacity" id="closeSearch" aria-label="Close search">
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="18" y1="6" x2="6" y2="18"></line>
           <line x1="6" y1="6" x2="18" y2="18"></line>
         </svg>
       </button>
     </div>
-    <div class="search-content">
+    <div class="p-6">
       <Search />
     </div>
   </div>
@@ -29,10 +29,12 @@ import Search from "astro-pagefind/components/Search";
 <script>
   const trigger = document.getElementById('searchTrigger');
   const overlay = document.getElementById('searchOverlay');
+  const modal = document.getElementById('searchModal');
   const closeBtn = document.getElementById('closeSearch');
 
   function openSearch() {
-    overlay.classList.add('active');
+    overlay.classList.add('!opacity-100', '!visible');
+    modal.classList.add('!translate-y-0');
     setTimeout(() => {
       const input = overlay.querySelector('.pagefind-ui__search-input') as HTMLInputElement;
       input?.focus();
@@ -40,7 +42,8 @@ import Search from "astro-pagefind/components/Search";
   }
 
   function closeSearch() {
-    overlay.classList.remove('active');
+    overlay.classList.remove('!opacity-100', '!visible');
+    modal.classList.remove('!translate-y-0');
   }
 
   trigger?.addEventListener('click', openSearch);
@@ -51,107 +54,18 @@ import Search from "astro-pagefind/components/Search";
   });
 
   document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && overlay?.classList.contains('active')) {
+    if (e.key === 'Escape' && overlay?.classList.contains('!opacity-100')) {
       closeSearch();
     }
   });
 </script>
 
 <style is:global>
-  .search-trigger {
-    background: none;
-    border: none;
-    color: #c2b067;
-    cursor: pointer;
-    padding: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.2s ease;
-  }
-
-  .search-trigger:hover {
-    opacity: 0.7;
-  }
-
-  .search-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.85);
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding-top: 15vh;
-    z-index: 10000;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-  }
-
-  .search-overlay.active {
-    opacity: 1;
-    visibility: visible;
-  }
-
-  .search-modal {
-    width: 90%;
-    max-width: 600px;
-    background: #0a0a0a;
-    border: 2px solid #c2b067;
-    border-radius: 12px;
-    overflow: hidden;
-    transform: translateY(-20px);
-    transition: transform 0.3s ease;
-  }
-
-  .search-overlay.active .search-modal {
-    transform: translateY(0);
-  }
-
-  .search-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 1rem 1.5rem;
-    border-bottom: 1px solid rgba(194, 176, 103, 0.3);
-  }
-
-  .search-header h2 {
-    margin: 0;
-    color: #c2b067;
-    font-size: 1.25rem;
-    font-weight: 600;
-  }
-
-  .close-btn {
-    background: none;
-    border: none;
-    color: #c2b067;
-    cursor: pointer;
-    padding: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.2s ease;
-  }
-
-  .close-btn:hover {
-    opacity: 0.7;
-  }
-
-  .search-content {
-    padding: 1.5rem;
-  }
-
-  /* Pagefind overrides */
-  .search-content .pagefind-ui {
+  .pagefind-ui {
     width: 100% !important;
   }
 
-  .search-content .pagefind-ui__search-input {
+  .pagefind-ui__search-input {
     background: #1a1a1a !important;
     border: 2px solid rgba(194, 176, 103, 0.5) !important;
     color: #c2b067 !important;
@@ -162,35 +76,23 @@ import Search from "astro-pagefind/components/Search";
     box-sizing: border-box !important;
   }
 
-  .search-content .pagefind-ui__search-input:focus {
+  .pagefind-ui__search-input:focus {
     outline: none !important;
     border-color: #c2b067 !important;
   }
 
-  .search-content .pagefind-ui__search-input::placeholder {
+  .pagefind-ui__search-input::placeholder {
     color: rgba(194, 176, 103, 0.5) !important;
   }
 
-  .search-content .pagefind-ui__search-icon {
+  .pagefind-ui__search-icon,
+  .pagefind-ui__button,
+  .pagefind-ui__reset {
     display: none !important;
   }
 
-  .search-content .pagefind-ui__button {
-    display: none !important;
-  }
-
-  .search-content .pagefind-ui__reset {
-    display: none !important;
-  }
-
-  .search-content .pagefind-ui__reset svg,
-  .search-content .pagefind-ui__button svg {
-    display: none !important;
-  }
-
-  /* Force hide any clear/reset buttons */
-  .search-content [data-pagefind-reset],
-  .search-content .pagefind-ui__search-clear {
+  [data-pagefind-reset],
+  .pagefind-ui__search-clear {
     display: none !important;
     visibility: hidden !important;
     width: 0 !important;
@@ -200,7 +102,7 @@ import Search from "astro-pagefind/components/Search";
     border: none !important;
   }
 
-  .search-content .pagefind-ui__drawer {
+  .pagefind-ui__drawer {
     background: transparent !important;
     border: none !important;
     margin-top: 1rem !important;
@@ -208,33 +110,29 @@ import Search from "astro-pagefind/components/Search";
     overflow-y: auto !important;
   }
 
-  .search-content .pagefind-ui__result {
+  .pagefind-ui__result {
     border-bottom: 1px solid rgba(194, 176, 103, 0.3) !important;
     padding: 12px !important;
   }
 
-  .search-content .pagefind-ui__result-title {
+  .pagefind-ui__result-title,
+  .pagefind-ui__result-link {
     color: #c2b067 !important;
     font-weight: 600 !important;
     font-size: 15px !important;
     text-decoration: none !important;
   }
 
-  .search-content .pagefind-ui__result-link {
-    color: #c2b067 !important;
-    text-decoration: none !important;
-  }
-
-  .search-content .pagefind-ui__result-excerpt {
+  .pagefind-ui__result-excerpt {
     color: rgba(194, 176, 103, 0.7) !important;
     font-size: 13px !important;
   }
 
-  .search-content .pagefind-ui__result-thumb {
+  .pagefind-ui__result-thumb {
     display: none !important;
   }
 
-  .search-content .pagefind-ui__message {
+  .pagefind-ui__message {
     color: rgba(194, 176, 103, 0.6) !important;
     padding: 1rem !important;
   }
