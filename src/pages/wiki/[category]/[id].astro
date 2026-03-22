@@ -2,12 +2,12 @@
 import Layout from "../../../layouts/Layout.astro";
 import ShareButtons from "../../../components/ShareButtons.astro";
 import ButtonRow from "../../../components/ButtonRow.astro";
-import { getCollection, render } from 'astro:content';
+import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
-  const wiki = await getCollection('wiki');
+  const wiki = await getCollection("wiki");
   return wiki.map((item) => ({
-    params: { category: item.data.category, id: item.id.split('/').pop() },
+    params: { category: item.data.category, id: item.id.split("/").pop() },
     props: { item },
   }));
 }
@@ -16,49 +16,61 @@ const { item } = Astro.props;
 const { Content } = await render(item);
 
 const categoryInfo: Record<string, { name: string; icon: string }> = {
-  characters: { name: 'Characters', icon: '👤' },
-  realms: { name: 'Realms', icon: '🌍' },
-  weapons: { name: 'Weapons', icon: '⚔️' },
-  events: { name: 'Events', icon: '📜' },
+  characters: { name: "Characters", icon: "👤" },
+  realms: { name: "Realms", icon: "🌍" },
+  weapons: { name: "Weapons", icon: "⚔️" },
+  events: { name: "Events", icon: "📜" },
 };
 
 function getReadingTime(body: string): string {
-	const wordsPerMinute = 200;
-	const words = body.trim().split(/\s+/).length;
-	const minutes = Math.ceil(words / wordsPerMinute);
-	return `${minutes} min read`;
+  const wordsPerMinute = 200;
+  const words = body.trim().split(/\s+/).length;
+  const minutes = Math.ceil(words / wordsPerMinute);
+  return `${minutes} min read`;
 }
 
 const readingTime = getReadingTime(item.body);
 ---
 
-<Layout 
-  title={`${item.data.title} - Omniversify Wiki`} 
+<Layout
+  title={`${item.data.title} - Omniversify Wiki`}
   description={item.data.description}
   image={`${Astro.url.origin}/logo.webp`}
 >
   <article class="page-container mx-auto max-w-[800px]">
     <header class="mb-12 pb-8 border-b border-gold/20">
-      <ButtonRow items={[{ href: `/wiki/${item.data.category}`, label: `Back to ${categoryInfo[item.data.category].name}` }]} />
-      
+      <ButtonRow
+        items={[
+          {
+            href: `/wiki/${item.data.category}`,
+            label: `Back to ${categoryInfo[item.data.category].name}`,
+          },
+        ]}
+      />
+
       <div class="flex justify-between items-center text-sm mb-4">
-        <span class="tag">{categoryInfo[item.data.category].icon} {categoryInfo[item.data.category].name}</span>
+        <span class="tag"
+          >{categoryInfo[item.data.category].icon}
+          {categoryInfo[item.data.category].name}</span
+        >
         <span class="text-gold opacity-70 text-sm">{readingTime}</span>
       </div>
-      
+
       <h1 class="text-4xl text-gold mb-4 leading-tight">{item.data.title}</h1>
-      <p class="text-xl text-gold opacity-80 leading-relaxed">{item.data.description}</p>
+      <p class="text-xl text-gold opacity-80 leading-relaxed">
+        {item.data.description}
+      </p>
     </header>
-    
+
     <div class="content-body">
       <Content />
     </div>
-    
-    <footer class="mt-16 pt-8 border-t border-gold/20">
-      <ShareButtons 
-        url={Astro.url.href} 
-        title={item.data.title} 
-        description={item.data.description} 
+
+    <footer class="my-16 pt-8 border-t border-gold/20">
+      <ShareButtons
+        url={Astro.url.href}
+        title={item.data.title}
+        description={item.data.description}
       />
     </footer>
   </article>
