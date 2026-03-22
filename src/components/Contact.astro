@@ -4,26 +4,23 @@ import Section from "./Section.astro";
 
 <Section>
   <div class="text-center text-white w-full max-w-[900px] mx-auto">
-    <h2 class="gradient-title">Support Us</h2>
+    <h2 class="gradient-section-title">Support Us</h2>
     <p class="text-xl text-gold mb-12">Help us build infinite worlds</p>
 
     <div class="flex gap-8 justify-center flex-wrap mb-16 sm:gap-4">
       <a href="https://ko-fi.com/omniversify" class="flex flex-col items-center justify-center p-8 sm:p-6 rounded-2xl border-2 border-gold/30 bg-black/30 text-white no-underline transition-all duration-300 min-w-[150px] hover:shadow-[0_0_30px_rgba(194,176,103,0.4)] hover:-translate-y-1">
-        <span class="text-3xl mb-2">☕</span>
-        <span class="text-lg">Buy us Ko-Fi</span>
+        <img src="/images/kofi_logo.svg" alt="Ko-Fi" class="w-24 h-24" />
       </a>
       <a href="https://www.patreon.com/omniversify" class="flex flex-col items-center justify-center p-8 sm:p-6 rounded-2xl border-2 border-gold/30 bg-black/30 text-white no-underline transition-all duration-300 min-w-[150px] hover:shadow-[0_0_30px_rgba(194,176,103,0.4)] hover:-translate-y-1">
-        <span class="text-3xl mb-2">⚡</span>
-        <span class="text-lg">Patreon</span>
+        <img src="/images/patreon_logo.svg" alt="Patreon" class="w-24 h-24" />
       </a>
-      <a href="https://discord.omniversify.com" class="flex flex-col items-center justify-center p-8 sm:p-6 rounded-2xl border-2 border-gold/30 bg-black/30 text-white no-underline transition-all duration-300 min-w-[150px] hover:shadow-[0_0_30px_rgba(194,176,103,0.4)] hover:-translate-y-1">
-        <span class="text-3xl mb-2">💬</span>
-        <span class="text-lg">Discord</span>
+      <a href="https://buymeacoffee.com/omniversify" class="flex flex-col items-center justify-center p-8 sm:p-6 rounded-2xl border-2 border-gold/30 bg-black/30 text-white no-underline transition-all duration-300 min-w-[150px] hover:shadow-[0_0_30px_rgba(194,176,103,0.4)] hover:-translate-y-1">
+        <img src="/images/bmc-full-logo.svg" alt="Buy Me a Coffee" class="h-16" />
       </a>
     </div>
 
     <div class="mt-16 mb-12">
-      <h2 class="gradient-title">Visit Us</h2>
+      <h2 class="gradient-section-title">Visit Us</h2>
       <p class="text-lg text-gold mb-6">
         45 Av. Al Massira, Oued Laou, Tetouan 93250, Morocco
       </p>
@@ -71,12 +68,55 @@ import Section from "./Section.astro";
     </div>
 
     <div class="max-w-md mx-auto">
-      <h2 class="gradient-title">Get in Touch</h2>
-      <form class="flex flex-col gap-4">
-        <input type="email" placeholder="Your email" class="w-full p-4 rounded-lg border-2 border-gold/30 bg-black/30 text-white placeholder:text-white/50 focus:outline-none focus:border-gold transition-colors" />
-        <textarea placeholder="Your message" rows="4" class="w-full p-4 rounded-lg border-2 border-gold/30 bg-black/30 text-white placeholder:text-white/50 focus:outline-none focus:border-gold transition-colors resize-none"></textarea>
+      <h2 class="gradient-section-title">Get in Touch</h2>
+      <p class="text-gold/60 mb-6">Or email us directly at <a href="mailto:support@omniversify.com" class="text-gold underline">support@omniversify.com</a></p>
+      <form id="contact-form" class="flex flex-col gap-4">
+        <input type="email" id="email" placeholder="Your email" required class="w-full p-4 rounded-lg border-2 border-gold/30 bg-black/30 text-white placeholder:text-white/50 focus:outline-none focus:border-gold transition-colors" />
+        <textarea id="message" placeholder="Your message" rows="4" required class="w-full p-4 rounded-lg border-2 border-gold/30 bg-black/30 text-white placeholder:text-white/50 focus:outline-none focus:border-gold transition-colors resize-none"></textarea>
         <button type="submit" class="p-4 bg-gold text-[#1a1a2e] border-none rounded-lg font-semibold cursor-pointer transition-all hover:bg-gold/80 sm:p-4">Send</button>
       </form>
     </div>
+
+    <div class="mt-16 text-center">
+      <h2 class="gradient-section-title mb-6">Join Our Discord</h2>
+      <div class="rounded-xl overflow-hidden border-2 border-gold/30 inline-block">
+        <iframe
+          id="discord-widget"
+          data-src="https://discord.com/widget?id=547089655359864844&theme=dark"
+          width="350"
+          height="500"
+          allowtransparency="true"
+          frameborder="0"
+          sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"
+          class="lazy-iframe"
+        ></iframe>
+      </div>
+    </div>
   </div>
 </Section>
+
+<script>
+  const form = document.getElementById('contact-form');
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const email = (document.getElementById('email') as HTMLInputElement).value;
+    const message = (document.getElementById('message') as HTMLTextAreaElement).value;
+    const subject = encodeURIComponent('Contact from Omniversify website');
+    const body = encodeURIComponent(`From: ${email}\n\n${message}`);
+    window.location.href = `mailto:support@omniversify.com?subject=${subject}&body=${body}`;
+    form.reset();
+  });
+
+  const lazyIframe = document.querySelector('.lazy-iframe');
+  if (lazyIframe instanceof HTMLIFrameElement) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          lazyIframe.src = lazyIframe.dataset.src || '';
+          observer.unobserve(lazyIframe);
+        }
+      });
+    });
+    observer.observe(lazyIframe);
+  }
+</script>

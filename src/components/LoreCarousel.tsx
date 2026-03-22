@@ -1,5 +1,6 @@
 import * as React from "react";
 import useEmblaCarousel from "embla-carousel-react";
+import { CarouselNavButton } from "./CarouselNavButton";
 
 interface WikiEntry {
   id: string;
@@ -27,7 +28,7 @@ export function LoreCarousel({ wiki }: Props) {
 
   return (
     <div className="carousel-wrapper">
-      <h2>Lore: Characters & Events</h2>
+      <h2 className="gradient-section-title">Lore: Characters & Events</h2>
       <div className="embla" ref={emblaRef}>
         <div className="embla__container">
           {wiki.map((item) => {
@@ -45,8 +46,8 @@ export function LoreCarousel({ wiki }: Props) {
         </div>
       </div>
       <div className="carousel-controls">
-        <button onClick={() => emblaApi?.scrollPrev()}>←</button>
-        <button onClick={() => emblaApi?.scrollNext()}>→</button>
+        <CarouselNavButton direction="prev" onClick={() => emblaApi?.scrollPrev()} ariaLabel="Previous" />
+        <CarouselNavButton direction="next" onClick={() => emblaApi?.scrollNext()} ariaLabel="Next" />
       </div>
     </div>
   );
