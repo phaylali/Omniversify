@@ -3,6 +3,7 @@
 ## Table of Contents
 
 - [Project Overview](#project-overview)
+- [Recent Changes](#recent-changes)
 - [Tech Stack](#tech-stack)
 - [Project Structure](#project-structure)
 - [Component Architecture](#component-architecture)
@@ -23,8 +24,51 @@ Omniversify is a multi-page website for a **Moroccan game development studio** c
 
 **Type**: Static multi-page website  
 **Target Users**: Gamers, lore enthusiasts, potential collaborators, and supporters  
-**Browser Support**: Modern browsers (Chrome, Firefox, Safari, Edge)
+**Browser Support**: Modern browsers (Chrome, Firefox, Safari, Edge)  
 **Language**: English (primary)
+
+---
+
+## Recent Changes
+
+### Major Additions (March 2026)
+
+#### New Layouts
+- **DocumentLayout.astro** — Base layout for legal/documentation pages with back button and content styling
+
+#### New Components
+| Component | Type | Purpose |
+|-----------|------|---------|
+| BackButton.astro | Astro | Back navigation with SVG decoration |
+| ButtonRow.astro | Astro | Flexible button row (single or multiple) |
+| OutlinedButton.astro | Astro | Button with border styling |
+| CarouselNavButton.tsx | React | Navigation buttons for Embla carousels |
+| Copyright.astro | Astro | Footer copyright notice |
+| ShareButtons.astro | Astro | Full social sharing suite |
+
+#### New Pages
+- **Legal**: `/docs/privacy-policy`, `/docs/terms`, `/docs/license`, `/docs/faq`
+- **Setup**: `/docs/software-stack`, `/docs/hardware`
+
+#### New Content
+- RSS feed endpoint at `/rss.xml` (blog + news posts)
+- Warframe Tools project now has Google Play Store badge and screenshot gallery
+- Team section in About page with 20 roles (Founder, Game Director, Lead Programmer, etc.)
+- News post for Warframe Tools Play Store release
+- News post for Discord server opening with embedded widget
+
+#### UI Improvements
+- Support buttons with custom SVG logos (Ko-Fi, Patreon, Buy Me a Coffee)
+- Role chips on About page
+- Project screenshots with lightbox image viewer (click to zoom)
+- Tabbed interface on project pages (Documentation + Updates)
+- Footer reorganized into Studio, Legal, Setup, Community sections
+- Gradient title classes: `gradient-title` (large), `gradient-section-title` (smaller)
+
+#### Bug Fixes
+- Fixed blog/news detail page background images with proper dark overlay
+- Fixed MDX parse errors by avoiding curly braces in headings
+- Fixed OG images requiring absolute URLs for social sharing
 
 ---
 
@@ -121,15 +165,17 @@ Omniversify is a multi-page website for a **Moroccan game development studio** c
 ### Layout Layer
 
 - **Layout.astro** — Root layout with:
-  - Theme detection (dark/light mode)
   - Global CSS imports
-  - SEO meta tags (Open Graph, Twitter Cards)
+  - SEO meta tags (Open Graph, Twitter Cards, Schema.org)
   - Font loading (Geist Variable)
   - Background pattern
+  - Navbar
+  - Copyright footer
+- **DocumentLayout.astro** — Layout for legal/doc pages with back button
 
 ### Navigation
 
-- **Navbar.astro** — Fixed navigation with logo, search, and menu
+- **Navbar.astro** — Fixed navigation with logo, search, and mobile menu overlay
 
 ### Page Components
 
@@ -139,10 +185,15 @@ Omniversify is a multi-page website for a **Moroccan game development studio** c
 | Vision | Astro | Studio mission statement |
 | ProjectsCarousel | React | Horizontal project cards |
 | LoreCarousel | React | Horizontal wiki/character cards |
-| Contact | Astro | Support options (Ko-Fi, Patreon) |
-| Footer | Astro | Navigation links, copyright |
+| Contact | Astro | Support options (Ko-Fi, Patreon, BMC) |
+| Footer | Astro | Navigation links organized by category |
 | Search | Astro | Pagefind search overlay |
 | ShareButtons | Astro | Social media sharing with Tabler icons |
+| BackButton.astro | Astro | Back navigation with SVG decoration |
+| ButtonRow.astro | Astro | Flexible button row |
+| OutlinedButton.astro | Astro | Button with border styling |
+| CarouselNavButton.tsx | React | Carousel navigation buttons |
+| Copyright.astro | Astro | Footer copyright notice |
 
 ---
 
@@ -176,7 +227,28 @@ Projects support:
 - `gradient` (string) - CSS gradient fallback
 - `cover` (string, optional) - Cover image path
 - `repo` (string, optional) - GitHub repository URL
+- `playstore` (string, optional) - Google Play Store URL
 - `featured` (boolean) - Featured status
+
+### News Schema
+
+News articles support:
+- `title` (string) - Article title
+- `description` (string) - Short description
+- `pubDate` (date) - Publication date
+- `category` (string, optional) - Category tag
+- `project` (string, optional) - Linked project ID
+- `cover` (string, optional) - Cover image path
+
+### Blog Schema
+
+Blog posts support:
+- `title` (string) - Post title
+- `description` (string) - Short description
+- `pubDate` (date) - Publication date
+- `tags` (string[]) - Array of tags
+- `project` (string, optional) - Linked project ID
+- `cover` (string, optional) - Cover image path
 
 ---
 
@@ -196,6 +268,18 @@ Projects support:
 | Gold Dark | `#8a7a3a` | Gradient endpoints |
 | Content Text | `#F8F5FA` | Body text |
 
+### Custom CSS Classes
+
+| Class | Purpose |
+|-------|---------|
+| `.gradient-title` | Large gold gradient text (font-size: 2rem) |
+| `.gradient-section-title` | Smaller gold gradient text (font-size: 1.5rem) |
+| `.tag` | Gold background pill for tags |
+| `.tag-sm` | Smaller tag variant |
+| `.content-body` | Styled markdown/MDX content |
+| `.section-overview` | Overview section marker |
+| `.section-documentation` | Documentation section marker |
+
 ### Content Page Styling
 
 - **Tables** — Gold borders, alternating rows, hover effects
@@ -213,6 +297,7 @@ Projects support:
 
 ### 2. Embla Carousels
 - Interactive carousels for projects and wiki entries
+- Custom navigation buttons with SVG decorations
 - Loop mode, previous/next navigation
 - Cover images or gradient backgrounds
 
@@ -221,17 +306,43 @@ Projects support:
 - Overlay modal with dark theme
 
 ### 4. Project Features
-- Optional cover images in `public/images/covers/`
+- Cover images in `public/images/covers/`
 - GitHub link button
-- Documentation + Updates tabs
+- Google Play Store badge (when applicable)
+- Tabbed interface: Documentation + Updates
+- Screenshots gallery with clickable lightbox preview
 
-### 5. SEO Support
+### 5. RSS Feed
+- Endpoint at `/rss.xml`
+- Includes blog posts and news articles
+- Sorted by publication date (newest first)
+- Requires `site` URL in `astro.config.mjs`
+
+### 6. SEO Support
 - Open Graph meta tags (og:title, og:description, og:image)
 - Twitter Card meta tags
+- Schema.org JSON-LD for Organization
 - Absolute URLs for images (required for social sharing)
+- Canonical URL
 
-### 6. MDX Support
-Project pages support MDX with section markers.
+### 7. MDX Support
+Project pages support MDX with section markers and custom components.
+
+### 8. Support Integration
+- Ko-Fi, Patreon, Buy Me a Coffee buttons
+- Custom SVG logos for each platform
+- Displayed on Contact section and About page
+
+### 9. Legal & Setup Pages
+- Privacy Policy, Terms of Service, License, FAQ
+- Software Stack (Flutter, Godot, Ren'Py, etc.)
+- Hardware recommendations
+- DocumentLayout with consistent styling
+
+### 10. Team Section
+- 20 roles displayed on About page
+- Role chips with gold styling
+- Owner highlighted differently
 
 ---
 
@@ -302,10 +413,11 @@ Deploys to **Cloudflare Pages**:
 
 - CMS Integration for dynamic content
 - Multi-language support
-- Analytics tracking
+- Analytics tracking (already has Umami)
 - Shop functionality
 - More wiki content (weapons, events)
 - Image optimization pipeline
+- Dark/Light theme toggle
 
 ---
 
@@ -326,10 +438,11 @@ Deploys to **Cloudflare Pages**:
 
 1. Clone the repository
 2. Run `bun install` to install dependencies
-3. Run `bun dev` to start the development server
-4. Make changes to components in `src/components/`
+3. Run `bun dev` to start the development server at `localhost:4321`
+4. Make changes to components in `src/components/` or content in `src/content/`
 5. Test with `bun build` before submitting
-6. Deploy with `bun run deploy`
+6. Preview production build with `bun preview`
+7. Deploy with `bun run deploy` (Cloudflare Pages)
 
 ---
 
@@ -339,11 +452,25 @@ Deploys to **Cloudflare Pages**:
 
 - Cover images belong in `public/images/covers/` and are referenced as `/images/covers/filename.ext`
 - Do not use `/src/assets/` paths in frontmatter - these won't work in production
+- Screenshots belong in `public/images/screenshots/`
 
 ### OG Images
 
 - All detail pages use absolute URLs for OG images (domain + path)
 - Projects use cover image, others fallback to `/logo.webp`
+
+### MDX Parsing
+
+- Avoid curly braces `{}` in headings within MDX files
+- YAML-style comments like `{#cookie-policy}` cause parse errors
+- Use onclick handlers sparingly in MDX - prefer Astro components for interactivity
+
+### Navigation Z-Index
+
+- Navbar: `z-[100]`
+- Mobile menu overlay: `z-[200]`
+- Image viewer: `z-[300]`
+- Search modal: handled by Tailwind's default stacking
 
 ---
 

@@ -58,24 +58,31 @@ Our universe features the **Barghawata Confederacy** — a Berber tribal confede
 ### Pages
 
 - **Home** — Landing page with Hero, Vision, Projects, Lore, and Contact sections
-- **Projects** — Showcase of games in development with GitHub links
+- **Projects** — Showcase of games and apps with GitHub links, Play Store badges, screenshots with lightbox preview
 - **Wiki** — Comprehensive lore database (Characters, Realms, Weapons, Events)
 - **Blog** — Developer updates, stories, and insights
-- **News** — Announcements and community updates
-- **About** — Our mission, vision, and story
+- **News** — Announcements and community updates with RSS feed
+- **About** — Our mission, vision, team with 20 roles, and story
+- **Legal Pages** — Privacy Policy, Terms of Service, License, FAQ
+- **Setup Pages** — Software Stack, Hardware recommendations
 
 ### Technical Features
 
 - Full-text search via Pagefind
+- RSS feed at `/rss.xml` (blog + news posts)
 - Open Graph & Twitter Card support for social sharing
 - Responsive design for all devices
-- Social media sharing buttons on all content pages
+- Social media sharing buttons on all content pages (X, Threads, Bluesky, WhatsApp, Telegram, Messenger, Facebook, LinkedIn, Reddit, Pinterest, Email, Copy Link)
+- Support buttons (Ko-Fi, Patreon, Buy Me a Coffee) with custom SVG logos
+- Project screenshots with clickable lightbox preview
+- Tabbed interface (Documentation + Updates) on project pages
 
 ## Connect With Us
 
 - [Discord](https://discord.omniversify.com) — Join our community
 - [X/Twitter](https://twitter.com/omniversify) — Follow updates
 - [GitHub](https://github.com/phaylali) — Explore our work
+- [RSS Feed](/rss.xml) — Subscribe to updates
 
 ## Support Us
 
@@ -83,9 +90,10 @@ Help us weaponize creativity and reclaim our narratives:
 
 - [Buy us a coffee](https://ko-fi.com/omniversify)
 - [Support on Patreon](https://patreon.com/omniversify)
+- [Buy Me a Coffee](https://buymeacoffee.com/omniversify)
 
 ---
 
 &copy; 2026 Omniversify. All rights reserved.
 
-_Made with ∞ across the multiverse_
+_Made by Moroccans, for the Omniverse_
