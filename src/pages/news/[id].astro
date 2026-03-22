@@ -64,7 +64,10 @@ const headerCover =
         <ButtonRow
           items={[
             { href: "/news", label: "Back to News" },
-            { text: item.data.category, class: "tag bg-white/20 text-white" },
+            {
+              text: item.data.category || "News",
+              class: "tag bg-white/20 text-white",
+            },
           ]}
         />
 
