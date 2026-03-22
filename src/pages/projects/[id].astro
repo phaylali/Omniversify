@@ -178,11 +178,17 @@ const projectUpdates = [...blogUpdates, ...newsUpdates].sort(
       </footer>
     </div>
   </article>
+
 </Layout>
 
-<script>
+<div id="imageViewer" class="fixed inset-0 z-[300] hidden bg-black/95 backdrop-blur-sm" onclick="if(event.target === this) closeImageViewer()">
+  <button class="absolute top-4 right-4 text-white/70 hover:text-white text-4xl font-light bg-transparent border-0 cursor-pointer z-10 w-12 h-12 flex items-center justify-center" onclick="closeImageViewer()">&times;</button>
+  <img id="viewerImage" src="" alt="" class="w-full h-full object-contain" />
+</div>
+
+<script is:inline>
   document.addEventListener("DOMContentLoaded", () => {
-    document.querySelectorAll<HTMLButtonElement>(".tab-btn").forEach((btn) => {
+    document.querySelectorAll(".tab-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         document
           .querySelectorAll(".tab-btn")
@@ -198,4 +204,19 @@ const projectUpdates = [...blogUpdates, ...newsUpdates].sort(
       });
     });
   });
+
+  function openImageViewer(el) {
+    const viewer = document.getElementById('imageViewer');
+    const img = document.getElementById('viewerImage');
+    img.src = el.dataset.src || '';
+    img.alt = el.dataset.alt || '';
+    viewer.classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeImageViewer() {
+    const viewer = document.getElementById('imageViewer');
+    viewer.classList.add('hidden');
+    document.body.style.overflow = '';
+  }
 </script>

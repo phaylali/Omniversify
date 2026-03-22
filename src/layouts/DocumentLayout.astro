@@ -1,0 +1,28 @@
+---
+import Layout from "./Layout.astro";
+import ButtonRow from "../components/ButtonRow.astro";
+
+interface Props {
+  title: string;
+  description?: string;
+  backHref?: string;
+  backLabel?: string;
+}
+
+const {
+  title,
+  description = "",
+  backHref = "/",
+  backLabel = "Back",
+} = Astro.props;
+---
+
+<Layout title={title} description={description}>
+  <article class="mx-auto max-w-[800px] pt-20">
+    <ButtonRow items={[{ href: backHref, label: backLabel }]} />
+    
+    <div class="content-body px-4 md:px-8 py-8">
+      <slot />
+    </div>
+  </article>
+</Layout>

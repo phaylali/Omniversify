@@ -1,5 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
+import ButtonRow from "../components/ButtonRow.astro";
 ---
 
 <Layout
@@ -7,9 +8,11 @@ import Layout from "../layouts/Layout.astro";
   description="Learn about Omniversify - a Moroccan game development studio reclaiming history, culture, and identity through immersive games."
 >
   <main class="page-container">
+    <ButtonRow items={[{ href: "/", label: "Back to Home" }]} />
+    
     <!-- Hero -->
     <header class="page-header">
-      <h1 class="gradient-title">About Omniversify</h1>
+      <h1 class="gradient-section-title">About Omniversify</h1>
       <p class="page-subtitle">Where the Forgotten Become Immortal</p>
     </header>
 
@@ -96,14 +99,14 @@ import Layout from "../layouts/Layout.astro";
       <div class="grid-cards-sm">
         <div class="card-plain">
           <h3 class="text-lg text-gold mb-2">Deserted Tales I</h3>
-          <p class="text-sm text-content opacity-80">
+          <p class="text-lg text-content opacity-80">
             Our debut game. A stealth-action RPG set in Portuguese-occupied
             Mazagan. Created using Unreal Engine 5.
           </p>
         </div>
         <div class="card-plain">
           <h3 class="text-lg text-gold mb-2">Deserted Tales: Origins</h3>
-          <p class="text-sm text-content opacity-80">
+          <p class="text-lg text-content opacity-80">
             A narrative-driven game rediscovering the Morccan history in a
             telltail style game, created using Ren'Py engine.
           </p>
@@ -129,6 +132,116 @@ import Layout from "../layouts/Layout.astro";
         Bring your rage, your hope, your half-finished demos. Let's weaponize
         creativity.
       </p>
+    </section>
+
+    <!-- Team -->
+    <section class="content-section">
+      <h2 class="gradient-section-title">Meet the Team</h2>
+      <p class="text-content-base text-center mb-8">
+        We're a growing team of passionate creators. These are the roles we're looking to fill.
+      </p>
+      <div class="grid gap-8" style="grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));">
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <span class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">Game Director</span>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">Lead Programmer</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">Android Developer</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">Linux Developer</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">Web Developer</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">Unreal Engine Dev</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">Ren'Py Developer</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">Flutter Developer</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">UI/UX Designer</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">Graphic Designer</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">3D Artist</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">Concept Artist</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">Level Designer</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">VFX Artist</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">Composer</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">Sound Designer</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">Writer</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">Lore Researcher</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">Marketing Manager</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+        <div class="flex flex-col items-center text-center">
+          <img src="https://avatars.githubusercontent.com/u/28639648?v=4" alt="Phaylali" class="w-24 h-24 rounded-full mb-3 object-cover border-2 border-gold/50" />
+          <p class="text-lg px-4 py-1 rounded-full border border-gold/50 bg-gold/10 text-gold">Social Media</p>
+          <p class="text-lg text-gold">Phaylali</p>
+        </div>
+      </div>
     </section>
 
     <!-- Closing -->
