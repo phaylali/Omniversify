@@ -88,20 +88,16 @@ Our universe features the **Barghawata Confederacy** — a Berber tribal confede
 
 <p align="center">
   <a href="https://ko-fi.com/omniversify">
-    <img src="public/images/kofi_logo.svg" width="80" alt="Ko-Fi" />
+    <img src="public/images/kofi_logo.svg" width="200" alt="Ko-Fi" />
   </a>
 </p>
 
 <p align="center">
-  <strong style="color: #c2b067;">Keep us going</strong>
-</p>
-
-<p align="center">
-  <a href="https://ko-fi.com/omniversify" style="color: #c2b067;">https://ko-fi.com/omniversify</a>
+  <strong>## Keep us going ##</strong>
 </p>
 
 ---
 
-&copy; 2026 Omniversify. All rights reserved.
+&copy; 2026 [Omniversify](https://omniversify.com). All rights reserved.
 
 _Made by Moroccans, for the Omniverse_
