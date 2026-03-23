@@ -5,11 +5,9 @@ import Search from "./Search.astro";
 ---
 
 <nav class="fixed top-0 left-0 right-0 flex items-center justify-between p-4 sm:p-3 z-[100]">
-  <div class="absolute left-1/2 -translate-x-1/2 sm:static sm:translate-x-0">
-    <a href="/" class="flex items-center text-gold no-underline" aria-label="Omniversify Home">
-      <div class="w-10 h-10 [&_svg]:w-full [&_svg]:h-full" set:html={faviconSvg} />
-    </a>
-  </div>
+  <a href="/" class="flex items-center text-gold no-underline" aria-label="Omniversify Home">
+    <div class="w-10 h-10 [&_svg]:w-full [&_svg]:h-full" set:html={faviconSvg} />
+  </a>
 
   <div class="flex items-center gap-2">
     <button id="menuBtn" class="bg-transparent border-none text-gold cursor-pointer p-2 flex items-center justify-center hover:opacity-70 transition-opacity" aria-label="Open menu">

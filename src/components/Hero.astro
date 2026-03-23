@@ -14,17 +14,17 @@ import AudioDiveButton from "./AudioDiveButton.astro";
     class="absolute bottom-2.5 right-2.5 w-[120px] h-auto pointer-events-none opacity-60 z-10 scale-x-[-1] [&_svg]:w-full [&_svg]:h-auto [&_svg]:block"
     set:html={cornerSvg}
   />
-  <div class="text-center text-white flex flex-col items-center justify-center">
+  <div class="text-center text-white flex flex-col items-center justify-center w-full px-4">
     <div
-      class="mb-8 animate-pulse w-[120px] h-[120px] flex items-center justify-center"
+      class="mb-8 animate-pulse w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] flex items-center justify-center"
     >
       <div
         class="w-full h-full [&_svg]:w-full [&_svg]:h-full [&_svg]:block [&_svg]:-translate-x-[11.5%] [&_svg]:-translate-y-[11.5%]"
         set:html={faviconSvg}
       />
     </div>
-    <h1 class="gradient-title text-5xl md:text-7xl">Omniversify</h1>
-    <p class="text-gold text-lg md:text-xl">
+    <h1 class="gradient-title text-4xl sm:text-5xl md:text-7xl">Omniversify</h1>
+    <p class="text-gold text-base sm:text-lg md:text-xl">
       Where the Forgotten Become Immortal.
     </p>
   </div>
