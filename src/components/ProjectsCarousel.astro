@@ -7,5 +7,5 @@ const projects = await getCollection('projects');
 ---
 
 <Section>
-  <ProjectsCarousel client:only="react" projects={projects} />
+  <ProjectsCarousel client:visible projects={projects} />
 </Section>

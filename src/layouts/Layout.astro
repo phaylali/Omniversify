@@ -44,7 +44,8 @@ const {
     <script
       defer
       src="https://cloud.umami.is/script.js"
-      data-website-id="22e78069-ce07-4dbb-b366-5ec19e250ffb"></script>
+      data-website-id="22e78069-ce07-4dbb-b366-5ec19e250ffb"
+      onerror="this.remove()"></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -71,9 +72,14 @@ const {
     </script>
   </head>
   <body class="m-0 p-0 w-full h-full">
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-gold focus:text-black focus:rounded">
+      Skip to main content
+    </a>
     <BackgroundPattern />
     <Navbar />
-    <slot />
-    <Copyright />
+    <main id="main-content">
+      <slot />
+      <Copyright />
+    </main>
   </body>
 </html>

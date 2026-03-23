@@ -1,12 +1,12 @@
 ---
-import decorSvg from "../assets/decorationxxlgbutton.svg?raw";
 ---
 
 <div id="dustButtonTest" class="flex flex-col items-center gap-4 py-8">
   <button
+    id="dustBtn"
     class="dust-btn relative w-[200px] h-[50px] text-gold text-lg font-bold cursor-pointer border-0 bg-transparent hover:scale-105 transition-transform"
-    style={`background-image: url("data:image/svg+xml,${encodeURIComponent(decorSvg)}"); background-size: 100% 100%; background-repeat: no-repeat;`}
   >
+    <img src="/decorationxxlgbutton.svg" alt="" class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 0; width: 100%; height: 100%;" />
     <span class="relative z-10">CLICK ME</span>
   </button>
   <p class="text-gold/60 text-sm">Click the button to see the dust effect</p>
@@ -14,7 +14,6 @@ import decorSvg from "../assets/decorationxxlgbutton.svg?raw";
 
 <script is:inline>
   (function() {
-    var dustContainer = null;
     var isAnimating = false;
 
     function createDustParticle(x, y, color) {
@@ -27,24 +26,25 @@ import decorSvg from "../assets/decorationxxlgbutton.svg?raw";
       var rotation = Math.random() * 360;
       var opacity = Math.random() * 0.8 + 0.2;
       
-      particle.style.cssText = `
-        position: absolute;
-        width: ${size}px;
-        height: ${size}px;
-        background: ${color};
-        border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
-        pointer-events: none;
-        left: ${x}px;
-        top: ${y}px;
-        opacity: ${opacity};
-        transform: rotate(${rotation}deg);
-        z-index: 1000;
-      `;
+      particle.style.cssText = 
+        'position: fixed; ' +
+        'width: ' + size + 'px; ' +
+        'height: ' + size + 'px; ' +
+        'background: ' + color + '; ' +
+        'border-radius: ' + (Math.random() > 0.5 ? '50%' : '0') + '; ' +
+        'pointer-events: none; ' +
+        'left: ' + x + 'px; ' +
+        'top: ' + y + 'px; ' +
+        'opacity: ' + opacity + '; ' +
+        'transform: rotate(' + rotation + 'deg); ' +
+        'z-index: 9999;';
       
       document.body.appendChild(particle);
       
       var startTime = performance.now();
       var duration = 600;
+      var startX = x;
+      var startY = y;
       
       function animate(currentTime) {
         var elapsed = currentTime - startTime;
@@ -52,14 +52,14 @@ import decorSvg from "../assets/decorationxxlgbutton.svg?raw";
         
         if (progress < 1) {
           var eased = 1 - Math.pow(1 - progress, 3);
-          var currentX = x + vx * eased;
-          var currentY = y + vy * eased + 150 * eased * eased;
+          var currentX = startX + vx * eased;
+          var currentY = startY + vy * eased + 150 * eased * eased;
           var currentRotation = rotation + 360 * eased;
           var currentOpacity = opacity * (1 - progress);
           
           particle.style.left = currentX + 'px';
           particle.style.top = currentY + 'px';
-          particle.style.transform = `rotate(${currentRotation}deg)`;
+          particle.style.transform = 'rotate(' + currentRotation + 'deg)';
           particle.style.opacity = currentOpacity;
           
           requestAnimationFrame(animate);
@@ -86,20 +86,24 @@ import decorSvg from "../assets/decorationxxlgbutton.svg?raw";
       }
     }
 
-    document.addEventListener('DOMContentLoaded', function() {
-      var btn = document.querySelector('.dust-btn');
-      if (!btn) return;
-
-      btn.addEventListener('click', function(e) {
-        if (isAnimating) return;
-        isAnimating = true;
-        
-        createDustCloud(btn);
-        
-        setTimeout(function() {
-          isAnimating = false;
-        }, 100);
-      });
-    });
+    function init() {
+      var btn = document.getElementById('dustBtn');
+      if (btn) {
+        btn.onclick = function(e) {
+          if (isAnimating) return;
+          isAnimating = true;
+          createDustCloud(btn);
+          setTimeout(function() { isAnimating = false; }, 100);
+        };
+      } else {
+        setTimeout(init, 100);
+      }
+    }
+    
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
   })();
 </script>

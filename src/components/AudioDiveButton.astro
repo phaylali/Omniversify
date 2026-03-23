@@ -20,13 +20,13 @@
     
     <!-- Audio controls -->
     <span id="audioControls" class="absolute flex items-center gap-2" style="top: 50%; left: 50%; transform: translate(-50%, -50%); display: none; width: 260px; z-index: 20;">
-      <button id="pauseBtn" class="text-gold hover:text-white p-1 flex-shrink-0" aria-label="Pause" style="background: transparent; border: none; cursor: pointer;">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <button id="pauseBtn" aria-label="Pause or resume music" style="background: transparent; border: none; cursor: pointer; padding: 4px;">
+        <svg class="w-5 h-5 text-gold hover:text-white" fill="currentColor" viewBox="0 0 24 24">
           <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
         </svg>
       </button>
-      <button id="muteBtn" class="text-gold hover:text-white p-1 flex-shrink-0" aria-label="Mute" style="background: transparent; border: none; cursor: pointer;">
-        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+      <button id="muteBtn" aria-label="Mute or unmute music" style="background: transparent; border: none; cursor: pointer; padding: 4px;">
+        <svg class="w-5 h-5 text-gold hover:text-white" fill="currentColor" viewBox="0 0 24 24">
           <path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
         </svg>
       </button>
@@ -34,13 +34,13 @@
         <svg class="w-3 h-3 text-gold flex-shrink-0" fill="currentColor" viewBox="0 0 24 24">
           <path d="M3 9v6h4l5 5V4L7 9H3z"/>
         </svg>
-        <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5" style="flex: 1; height: 4px; accent-color: #C2B067;" />
+        <input type="range" id="volumeSlider" min="0" max="1" step="0.1" value="0.5" aria-label="Volume" style="flex: 1; height: 4px; accent-color: #C2B067;" />
       </div>
     </span>
   </div>
   
   <!-- Invisible click target for DIVE -->
-  <button id="diveBtn" type="button" style="position: absolute; top: 0; left: 0; width: 280px; height: 57px; background: transparent; border: none; cursor: pointer; opacity: 0; z-index: 30;"></button>
+  <button id="diveBtn" type="button" aria-label="Play background music" style="position: absolute; top: 0; left: 0; width: 280px; height: 57px; background: transparent; border: none; cursor: pointer; opacity: 0; z-index: 30;"></button>
 </div>
 
 <audio id="bgAudio" src="/DesertedTalesSymph.mp3" preload="auto"></audio>
