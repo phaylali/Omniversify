@@ -6,13 +6,10 @@ import faviconSvg from "../../public/favicon.svg?raw";
 <Section>
   <div class="text-center text-white w-full">
     <div class="flex items-center justify-center gap-4 mb-8">
-      <div
-        class="w-16 h-16 [&_svg]:w-full [&_svg]:h-full"
-        set:html={faviconSvg}
-      />
-      <span class="text-2xl font-semibold tracking-wider gradient-title"
-        >Omniversify</span
-      >
+      <div class="w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 flex-shrink-0 flex items-center justify-center">
+        <div class="w-full h-full [&_svg]:w-full [&_svg]:h-full" set:html={faviconSvg} />
+      </div>
+      <span class="text-xl sm:text-2xl font-semibold tracking-wider gradient-title">Omniversify</span>
     </div>
 
     <div class="flex gap-12 justify-center flex-wrap mb-8 sm:gap-8">

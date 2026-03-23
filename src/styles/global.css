@@ -756,20 +756,25 @@
 
 @media (max-width: 768px) {
   .project-slide {
-    flex: 0 0 85vw;
-    min-width: 280px;
-    max-width: 350px;
+    flex: 0 0 90vw;
+    min-width: unset;
+    max-width: unset;
+    padding: 0.5rem;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
   }
 
   .project-card {
+    width: 100%;
     height: auto;
-    min-height: 400px;
+    min-height: 350px;
     flex-direction: column;
   }
 
   .project-image {
-    flex: 0 0 180px;
-    padding: 1.5rem;
+    flex: 0 0 150px;
+    padding: 1rem;
   }
 
   .image-placeholder {
