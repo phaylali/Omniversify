@@ -1,0 +1,105 @@
+---
+import decorSvg from "../assets/decorationxxlgbutton.svg?raw";
+---
+
+<div id="dustButtonTest" class="flex flex-col items-center gap-4 py-8">
+  <button
+    class="dust-btn relative w-[200px] h-[50px] text-gold text-lg font-bold cursor-pointer border-0 bg-transparent hover:scale-105 transition-transform"
+    style={`background-image: url("data:image/svg+xml,${encodeURIComponent(decorSvg)}"); background-size: 100% 100%; background-repeat: no-repeat;`}
+  >
+    <span class="relative z-10">CLICK ME</span>
+  </button>
+  <p class="text-gold/60 text-sm">Click the button to see the dust effect</p>
+</div>
+
+<script is:inline>
+  (function() {
+    var dustContainer = null;
+    var isAnimating = false;
+
+    function createDustParticle(x, y, color) {
+      var particle = document.createElement('div');
+      var size = Math.random() * 6 + 2;
+      var angle = Math.random() * Math.PI * 2;
+      var velocity = Math.random() * 80 + 40;
+      var vx = Math.cos(angle) * velocity;
+      var vy = Math.sin(angle) * velocity - 50;
+      var rotation = Math.random() * 360;
+      var opacity = Math.random() * 0.8 + 0.2;
+      
+      particle.style.cssText = `
+        position: absolute;
+        width: ${size}px;
+        height: ${size}px;
+        background: ${color};
+        border-radius: ${Math.random() > 0.5 ? '50%' : '0'};
+        pointer-events: none;
+        left: ${x}px;
+        top: ${y}px;
+        opacity: ${opacity};
+        transform: rotate(${rotation}deg);
+        z-index: 1000;
+      `;
+      
+      document.body.appendChild(particle);
+      
+      var startTime = performance.now();
+      var duration = 600;
+      
+      function animate(currentTime) {
+        var elapsed = currentTime - startTime;
+        var progress = elapsed / duration;
+        
+        if (progress < 1) {
+          var eased = 1 - Math.pow(1 - progress, 3);
+          var currentX = x + vx * eased;
+          var currentY = y + vy * eased + 150 * eased * eased;
+          var currentRotation = rotation + 360 * eased;
+          var currentOpacity = opacity * (1 - progress);
+          
+          particle.style.left = currentX + 'px';
+          particle.style.top = currentY + 'px';
+          particle.style.transform = `rotate(${currentRotation}deg)`;
+          particle.style.opacity = currentOpacity;
+          
+          requestAnimationFrame(animate);
+        } else {
+          particle.remove();
+        }
+      }
+      
+      requestAnimationFrame(animate);
+    }
+
+    function createDustCloud(btn) {
+      var rect = btn.getBoundingClientRect();
+      var centerX = rect.left + rect.width / 2;
+      var centerY = rect.top + rect.height / 2;
+      
+      var colors = ['#C2B067', '#8a7a3a', '#d4c488', '#a89060'];
+      
+      for (var i = 0; i < 20; i++) {
+        var offsetX = (Math.random() - 0.5) * rect.width * 0.8;
+        var offsetY = (Math.random() - 0.5) * rect.height * 0.8;
+        var color = colors[Math.floor(Math.random() * colors.length)];
+        createDustParticle(centerX + offsetX, centerY + offsetY, color);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+      var btn = document.querySelector('.dust-btn');
+      if (!btn) return;
+
+      btn.addEventListener('click', function(e) {
+        if (isAnimating) return;
+        isAnimating = true;
+        
+        createDustCloud(btn);
+        
+        setTimeout(function() {
+          isAnimating = false;
+        }, 100);
+      });
+    });
+  })();
+</script>
