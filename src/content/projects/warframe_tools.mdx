@@ -148,8 +148,15 @@ For cloud sync functionality, you'll need a PocketBase instance running:
    - `relics_owned` (json)
 
 3. **Configure the app**
-   - Update `lib/core/services/pocketbase_service.dart` if using a different URL
-   - On first launch, app loads from bundled `assets/data/relics.json`
+   - Update 
+   ```
+   lib/core/services/pocketbase_service.dart
+   ```
+    if using a different URL
+   - On first launch, app loads from bundled 
+   ```
+   assets/data/relics.json
+   ```
    - Cloud sync only needed for backup/restore
 
 ## Usage

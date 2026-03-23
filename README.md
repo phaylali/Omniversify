@@ -88,9 +88,12 @@ Our universe features the **Barghawata Confederacy** — a Berber tribal confede
 
 Help us weaponize creativity and reclaim our narratives:
 
-- [Buy us a coffee](https://ko-fi.com/omniversify)
-- [Support on Patreon](https://patreon.com/omniversify)
-- [Buy Me a Coffee](https://buymeacoffee.com/omniversify)
+<p align="center">
+  <a href="https://ko-fi.com/omniversify" style="text-decoration: none;">
+    <img src="public/images/kofi_logo.svg" alt="Ko-Fi" width="60" style="vertical-align: middle; margin-right: 12px;" />
+    <span style="font-size: 1.4em; color: #c2b067; font-weight: bold;">Keep us going</span>
+  </a>
+</p>
 
 ---
 
