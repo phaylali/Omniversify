@@ -12,28 +12,39 @@ const projects = await getCollection("projects");
 >
   <main class="page-container">
     <ButtonRow items={[{ href: "/", label: "Back to Home" }]} />
-    
+
     <header class="text-center mb-12">
       <h1 class="gradient-section-title">Projects</h1>
-      <p class="text-xl text-gold opacity-80">Explore our current and upcoming games</p>
+      <p class="text-xl text-gold opacity-80">
+        Explore our current and upcoming games
+      </p>
     </header>
 
     <div class="flex flex-col gap-6 max-w-[900px] mx-auto">
       {
         projects.length > 0 ? (
           projects.map((project) => (
-            <a href={`/projects/${project.id}`} class="flex flex-col sm:flex-row items-stretch sm:gap-6 p-4 rounded-2xl no-underline border-2 border-gold/30 bg-black/30 overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(194,176,103,0.4)] hover:translate-x-2">
+            <a
+              href={`/projects/${project.id}`}
+              class="flex flex-col sm:flex-row items-stretch sm:gap-6 p-4 rounded-2xl no-underline border-2 border-gold/30 bg-black/30 overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(194,176,103,0.4)] hover:translate-x-2"
+            >
               <div
                 class="w-full sm:w-[200px] h-[150px] sm:h-[auto] flex-shrink-0 rounded-xl bg-cover bg-center"
                 style={
                   project.data.cover
-                    ? { backgroundImage: `url(${project.data.cover})`, backgroundSize: 'cover', backgroundPosition: 'center' }
+                    ? {
+                        backgroundImage: `url(${project.data.cover})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }
                     : { background: project.data.gradient }
                 }
               >
                 {!project.data.cover && (
                   <div class="w-full h-full flex items-center justify-center">
-                    <span class="text-3xl font-bold text-gold">{project.data.title.charAt(0)}</span>
+                    <span class="text-3xl font-bold text-gold">
+                      {project.data.title.charAt(0)}
+                    </span>
                   </div>
                 )}
               </div>
