@@ -98,7 +98,7 @@ Our universe features the **Barghawata Confederacy** — a Berber tribal confede
 
 ---
 
-&copy; 2026 [Omniversify](https://omniversify.com). All rights reserved.
+Licensed under [The Unlicense](LICENSE.md) — public domain dedication.
 
 _Made by Moroccans, for the Omniverse_
 
