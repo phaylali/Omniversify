@@ -1,0 +1,108 @@
+---
+title: "Flag Color Explorer"
+description: "An interactive web app to explore 196 country flags by color — select colors, find matching flags, and see them highlighted on a world map."
+tags: ["Astro", "Flags", "Map", "API"]
+color: "#667eea"
+gradient: "linear-gradient(135deg, #0f0f1a 0%, #667eea 100%)"
+featured: true
+repo: "https://github.com/phaylali/omniversify-flags-search-engine"
+---
+
+<div class="section-overview">
+
+## Overview
+
+An interactive web application that lets you explore country flags by their colors. Select colors to instantly find matching flags and see countries highlighted on a world map. Built with Astro, Tailwind CSS v4, and Cloudflare Workers.
+
+## Features
+
+- **Color-based flag search** — Click colors to find flags containing them
+- **"Any" button** — Show all 196 flags at once
+- **AND logic filtering** — Find flags containing ALL selected colors
+- **Color chips** — Each flag displays its colors as stadium-shaped chips with hex codes
+- **Copy color code** — Click any color chip to copy the hex code to clipboard
+- **Flag preview modal** — Click any flag to see it full-screen with colors
+- **Interactive SVG map** — Countries highlight in gold when their flags match your selection
+- **Zoom & Pan** — Mouse wheel to zoom, drag to pan, reset button included
+- **Local flag SVGs** — 196 country flags stored locally (no CDN dependency)
+- **REST API** — Access country data programmatically via JSON endpoints
+- **Dark theme** — Easy on the eyes
+
+## Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| Astro | Static site generator with API routes |
+| Bun | JavaScript runtime |
+| Tailwind CSS v4.2 | Utility-first CSS |
+| Cloudflare Workers | SSR + deployment |
+| d3-geo | Map rendering |
+| Turf.js | Geospatial operations (build scripts) |
+
+## Data Flow
+
+```
+flags.json ─────────────┐
+                        ├──▶ Client JS ──▶ Filtered Flags ──▶ DOM Update
+world.geojson ──────────┘                                     │
+                                                              ▼
+                                              SVG Map Highlight
+```
+
+## API Endpoints
+
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/:country` | Full country data (name, code, colors, svgUrl) |
+| `GET /api/:country/colors` | Just the colors array |
+| `GET /api/:country/svgUrl` | Just the SVG URL |
+
+Accepts ISO code, kebab-case name, or name without spaces.
+
+## Project Structure
+
+```
+public/
+├── flags.json            # 196 countries with extracted colors
+├── flags-svgs/           # Local SVG flags (196 files)
+└── world.geojson         # Custom world map data
+
+scripts/
+├── download-flags.sh     # Download flags from GitHub
+├── filter-svgs.sh        # Filter to 196 countries
+├── extract-svg-colors.ts # Extract colors from SVGs
+├── filter-countries.ts   # Filter to official countries
+└── normalize-colors.ts   # Normalize similar colors
+
+src/
+├── pages/
+│   ├── index.astro       # Main app (UI + filters + map)
+│   └── api/[country]/    # REST API routes
+├── layouts/
+│   └── Layout.astro
+└── styles/
+    └── global.css
+```
+
+## Quick Start
+
+```bash
+git clone https://github.com/phaylali/omniversify-flags-search-engine.git
+cd FlagsSearchEngine
+bun install
+bun run dev
+```
+
+App at `http://localhost:4321`. Deploy with `bun run deploy` to Cloudflare Workers.
+
+## Data Sources
+
+- **Flags**: [flag-icons](https://github.com/lipis/flag-icons) by Lipis
+- **Map**: Natural Earth vector data, merged with Turf.js
+- **Colors**: Extracted directly from SVG files
+
+## Countries
+
+**196 total** — all UN member states + Vatican City, Palestine, Taiwan. Israel is permanently excluded from data and scripts.
+
+</div>

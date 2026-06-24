@@ -1,0 +1,77 @@
+---
+title: "Glyphs 3D Visualizer"
+description: "A browser-based tool to convert SVG font glyphs into spinning 3D objects with material controls, slideshow mode, font extraction, and GLB export."
+tags: ["3D", "Three.js", "Fonts", "SVG"]
+color: "#00d4aa"
+gradient: "linear-gradient(135deg, #0a1628 0%, #00d4aa 100%)"
+featured: true
+repo: "https://github.com/phaylali/glyphs_3d_visualizer"
+---
+
+<div class="section-overview">
+
+## Overview
+
+A browser-based tool to convert SVG font glyphs into spinning 3D objects and export them as `.glb` files. Includes font glyph extraction from `.otf`/`.ttf` files and a coin generator that produces 3D coins from front/back images via Blender CLI.
+
+## Features
+
+### 3D Conversion
+- Import one or more SVG files with multi-select support
+- Auto-extrudes 2D paths into 3D geometry with configurable depth
+- HD Quality toggle for smoother curves
+- Adjustable material: color picker + roughness/metalness sliders
+- OrbitControls: pan, zoom, rotate around the model
+- Horizontal spin animation
+- Export any glyph as `.glb`
+
+### Multi-SVG & Slideshow
+- Load multiple SVGs at once with prev/next navigation
+- Slideshow mode cycles through glyphs at configurable speed
+- Current glyph name displayed prominently
+
+### Font Glyph Extraction
+- Upload `.otf` or `.ttf` font files
+- Every glyph exported as individual SVG into `input/[FontName]Glyphs/`
+- Files named by Unicode hex (e.g. `0041.svg`)
+
+### Coin Generator (WIP)
+- Upload front/back PNG images with alpha channel
+- Blender CLI builds 3D mesh and returns GLB
+- Configurable width, height, depth
+
+## Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| Three.js | 3D engine (CDN) |
+| SVGLoader | SVG path parsing |
+| ExtrudeGeometry | 2D → 3D extrusion |
+| GLTFExporter | GLB export |
+| opentype.js | Font glyph extraction (server) |
+| Bun | Static file server |
+| Blender CLI | Coin mesh generation |
+
+## Architecture
+
+The app uses a pure-frontend approach for 3D processing — Three.js loads SVGs, converts them to Shape objects, extrudes with depth/beveling, and exports as GLB. The server side handles font glyph extraction and coin generation via Blender CLI.
+
+```
+SVG Upload → SVGLoader → Shape → ExtrudeGeometry → 3D Mesh → GLTFExporter → .glb
+                                                      ↓
+                                          Material Controls
+                                    (color, roughness, metalness)
+```
+
+## Quick Start
+
+```bash
+git clone https://github.com/phaylali/glyphs_3d_visualizer.git
+cd glyphs_3d_visualizer
+bun install
+bun run dev
+```
+
+Open `http://localhost:3000`. Blender 5.1+ required for coin generation.
+
+</div>

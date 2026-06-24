@@ -1,0 +1,95 @@
+---
+title: "Moroccan Time API"
+description: "A powerful API for accurate date conversions between Gregorian, Islamic (Hijri), and Amazigh (Berber) calendars with full Tifinagh script support."
+tags: ["API", "Calendar", "Hono"]
+color: "#e63946"
+gradient: "linear-gradient(135deg, #1d3557 0%, #e63946 100%)"
+featured: true
+repo: "https://github.com/phaylali/moroccan-time-api"
+---
+
+<div class="section-overview">
+
+## Overview
+
+A powerful API that provides accurate date conversions between **Gregorian**, **Islamic (Hijri)**, and **Amazigh (Berber)** calendars — all with support for Tifinagh script.
+
+Built with **Hono** and **Bun** for edge performance, deployed seamlessly to Vercel.
+
+## Features
+
+- **Real-time Date Conversion** — Convert any date between three calendar systems
+- **Islamic/Hijri Dates** — Powered by the Aladhan API for accurate Hijri dates
+- **Amazigh Calendar** — Julian-based calendar with Tifinagh script support
+- **Morocco Timezone** — All dates calculated for Africa/Casablanca timezone
+- **Edge Ready** — Deploys seamlessly to Vercel
+
+## API Endpoints
+
+### Current Date
+
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/date/` | All three calendars for today |
+| `GET /api/amazigh/` | Today's Amazigh date |
+| `GET /api/gregorian/` | Today's Gregorian date |
+| `GET /api/islamic/` | Today's Islamic date |
+| `GET /api/time/` | Current Morocco time |
+
+### Date Conversion
+
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/amazigh/{year}/{month}/{day}/` | Convert Gregorian to Amazigh |
+| `GET /api/gregorian/{year}/{month}/{day}/` | Validate/format Gregorian date |
+| `GET /api/islamic/{year}/{month}/{day}/` | Convert Gregorian to Islamic |
+
+### Month Names
+
+| Endpoint | Description |
+|----------|-------------|
+| `GET /api/amazighMonths/` | Amazigh months with Tifinagh |
+| `GET /api/gregorianMonths/` | Gregorian months with Tifinagh |
+| `GET /api/islamicMonths/` | Islamic months with Tifinagh |
+
+## Calendar Information
+
+- **Gregorian** — Standard civil calendar
+- **Islamic (Hijri)** — Lunar calendar, dates from Aladhan API
+- **Amazigh (Berber)** — Julian-based: Amazigh year = Julian year + 950 CE, New Year on Yennayer 1 (January 14), 12 months with Berber names in Latin, Arabic, and Tifinagh
+
+## Tech Stack
+
+| Technology | Purpose |
+|------------|---------|
+| TypeScript | Type-safe JavaScript |
+| Hono | Lightweight web framework |
+| Bun | Fast JavaScript runtime |
+| Vercel | Edge deployment platform |
+| Aladhan API | Islamic date calculations |
+
+## Project Structure
+
+```
+src/
+├── index.ts              # Main API routes
+├── amazighDate.ts        # Amazigh calendar conversion
+├── amazighCalendar.ts    # Amazigh month names
+├── gregorianDate.ts      # Gregorian date utilities
+├── gregorianCalendar.ts  # Gregorian month names
+├── islamicDate.ts        # Islamic date API integration
+└── islamicCalendar.ts    # Islamic month names
+```
+
+## Quick Start
+
+```bash
+git clone https://github.com/phaylali/moroccan-time-api.git
+cd moroccan-time-api
+bun install
+bun run dev
+```
+
+Server starts at `http://localhost:3000`. No environment variables required.
+
+</div>

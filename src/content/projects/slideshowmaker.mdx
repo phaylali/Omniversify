@@ -1,0 +1,80 @@
+---
+title: "WPlace Timelapse Recorder"
+description: "Automatically captures map timelapses from WPlace archives — screenshots every historical snapshot and assembles them into MP4 videos using Playwright and FFmpeg."
+tags: ["Python", "Playwright", "Timelapse", "Automation"]
+color: "#ff6b6b"
+gradient: "linear-gradient(135deg, #1a0000 0%, #ff6b6b 100%)"
+featured: true
+repo: "https://github.com/phaylali/slideshowmaker"
+---
+
+<div class="section-overview">
+
+## Overview
+
+Automatically captures map timelapses from WPlace archives — screenshots every historical snapshot at your chosen location and assembles them into an MP4 video. Built primarily to document the **Spanish invasion of Moroccan territories** visible on the WPlace canvas over time.
+
+## Supported Archives
+
+| Site | Snapshots | Period | Command |
+|------|-----------|--------|---------|
+| [Samuel Scheit](https://wplace.samuelscheit.com) | ~40 | Aug 2025 – May 2026 | `./start.sh samuel` |
+| [Eralyon](https://wplace.eralyon.net) | ~250+ | Aug 2025 – Jun 2026 | `./start.sh eralyon` |
+
+## Quick Start
+
+```bash
+./start.sh eralyon
+```
+
+1. A Chromium window opens to the archive
+2. Pan & zoom to the area you want to document
+3. Click the red **Start Recording** button at the top of the page
+4. The script steps through every snapshot, overlays the date, and produces an MP4
+
+Output saved to `eralyon_output/run_<timestamp>/` or `samuel_output/run_<timestamp>/`.
+
+## Architecture
+
+Single-file Playwright agents that launch headed Chromium, inject a floating "Start Recording" button, iterate all snapshots (oldest → newest), screenshot the map, overlay the date via Pillow, and assemble the MP4 via FFmpeg.
+
+```
+Playwright → Headed Chromium → Inject recording button
+    → Iterate slider snapshots (oldest → newest)
+    → Wait for MapLibre tiles to load
+    → Screenshot composited map
+    → Overlay date (Pillow)
+    → FFmpeg → MP4
+```
+
+## Requirements
+
+- Python 3
+- Playwright for Python (auto-installed)
+- FFmpeg
+
+## Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| Browser Automation | Playwright (Python) |
+| Image Processing | Pillow |
+| Video Encoding | FFmpeg (libx264, CRF 18) |
+| Map Rendering | MapLibre GL (via browser) |
+| License | The Unlicense |
+
+## Key Technical Details
+
+- Uses `Object.getOwnPropertyDescriptor` to bypass React's intercept of the slider value setter
+- Waits for `.maplibregl-tile-loading` / `.maplibregl-image-loading` selectors to disappear (up to 20s)
+- Extra 2.5s settle time for tile rasterisation
+- Screenshots via Playwright's built-in compositing (avoids WebGL `preserveDrawingBuffer` issues)
+- Date labels parsed from hash params (Samuel) or slider label (Eralyon)
+
+## Future Features
+
+- Date range filtering: `./start.sh eralyon s=06-12-2025 e=07-02-2026`
+- Configurable frame rate: `fps=4`
+- Both combinable: `./start.sh eralyon s=01-01-2026 e=01-06-2026 fps=2`
+
+</div>

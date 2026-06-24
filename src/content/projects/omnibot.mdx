@@ -1,0 +1,132 @@
+---
+title: "Omnibot"
+description: "A modular Discord bot built with Bun, TypeScript, and discord.js v14 — featuring 28 slash commands, Tifinagh dictionary & quiz, XP/leveling, reaction roles, RSS monitoring, and more."
+tags: ["Discord Bot", "TypeScript", "Community"]
+color: "#5865F2"
+gradient: "linear-gradient(135deg, #1e1e2e 0%, #5865F2 100%)"
+featured: true
+repo: "https://github.com/phaylali/omnibot"
+---
+
+<div class="section-overview">
+
+## Overview
+
+**Omnibot** is a modular Discord bot built with [Bun](https://bun.sh) + [TypeScript](https://www.typescriptlang.org/) + [discord.js](https://discord.js.org) v14.
+
+Originally made for the Omniversify server and Moroccan communities, but anyone can fork and adapt it.
+
+## Features
+
+- **Modular command system** — each command is a self-contained file in `src/commands/`
+- **28 slash commands** — test, challenge (RPS), userinfo, flip, help, config, dadjoke, freegames, hug, slap, bonk, pet, tifinagh, quiz, xp, leaderboard, init-roles, show-roles, relay, clear-channel, dog, cat, bored, facepalm, pat, animequote, holidays, date
+- **Tifinagh dictionary** — `/tifinagh` translate/transliterate/random, powered by a standalone Hono API
+- **Tifinagh quiz** — `/quiz tifinagh` with 33 Neo-Tifinagh IRCAM letters, 4-choice buttons, per-guild leaderboard
+- **XP + leveling** — message-based XP (15-25 per message, 30s cooldown), 20 levels with titles, level-up announcements, progress bar
+- **Reaction roles** — `/init-roles` creates roles, category, per-role channels with locked permissions, selection embed with toggle buttons
+- **Coin flip** — `/flip` with live buttons, per-guild leaderboard, top-3 embed, crypto randomness
+- **Social actions** — `/hug`, `/slap`, `/bonk`, `/pet`, `/pat`, `/facepalm` with reaction GIFs from nekos.best
+- **RSS monitoring** — watches RSS/Atom feeds and posts new items as embeds to a configured channel
+- **Word of the Day** — posts random Tifinagh words to a configured channel on a schedule
+- **Channel relay** — `/relay` bulk-copies messages between channels with attachment re-upload and dedup
+- **Channel clear** — `/clear-channel` deletes all messages in a channel
+- **Free games monitor** — auto-polls GamerPower API every 3h, posts active game giveaways
+- **Moroccan date** — `/date` shows Gregorian, Islamic, and Amazigh calendars with Tifinagh/Arabic names
+- **Moroccan holidays** — `/holidays` countdown to next public holidays via Nager.Date
+- **Welcome/leave events** — green embed on join, sassy red embed on leave (both humans and bots)
+- **Per-guild data** — all configs stored in `data/<guildId>/`, global data in `data/global/`
+- **The Unlicense** — public domain, do whatever you want with it
+
+## Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| Runtime | Bun |
+| Language | TypeScript |
+| Library | discord.js v14 |
+| Data | File-based JSON |
+| APIs | nekos.best, dog.ceo, cataas.com, boredapi.com, GamerPower, Nager.Date, icanhazdadjoke, moroccan-time-api |
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `/animequote` | Random anime quote from a curated list |
+| `/bonk <user>` | Bonk someone |
+| `/bored` | Suggest a random activity |
+| `/cat` | Random cat picture |
+| `/challenge [object]` | Rock-Paper-Scissors with buttons + select menus |
+| `/clear-channel` | Delete all messages in current channel |
+| `/config` | Server configuration (notify, word, rss groups) |
+| `/dadjoke` | Random dad joke |
+| `/date today` | Gregorian, Islamic, and Amazigh calendars |
+| `/date convert` | Convert dates between calendars |
+| `/date months` | Month names in Latin, Arabic, Tifinagh |
+| `/date time` | Current Morocco time |
+| `/dog` | Random dog picture |
+| `/facepalm` | Facepalm reaction GIF |
+| `/flip [heads\|tails]` | Coin flip guessing game with leaderboard |
+| `/freegames` | Browse free game giveaways |
+| `/help` | Show all commands |
+| `/holidays` | Countdown to Moroccan public holidays |
+| `/hug <user>` | Hug someone |
+| `/init-roles <group> <roles>` | Create reaction role group |
+| `/leaderboard` | Top 10 XP leaderboard |
+| `/pat <user>` | Pat someone |
+| `/pet <user>` | Pet someone |
+| `/quiz tifinagh` | Tifinagh letter quiz |
+| `/relay <source> <target>` | Bulk-copy messages between channels |
+| `/show-roles [group]` | Re-post role selection embeds |
+| `/slap <user>` | Slap someone |
+| `/test` | Sanity check |
+| `/tifinagh translate <from> <text>` | Translate between Latin/Arabic/Tifinagh |
+| `/tifinagh random` | Random Tifinagh word |
+| `/userinfo [user]` | Discord account info + XP |
+| `/xp [user]` | XP, level, and progress bar |
+
+## Project Structure
+
+```
+src/
+├── index.ts              # Entry point
+├── config.ts             # Env vars & constants
+├── types.ts              # Shared interfaces
+├── deploy.ts             # Command registration
+├── commands/             # 28 command files
+│   ├── _index.ts         # Command registry
+│   └── *.ts
+├── events/
+│   ├── interactionCreate.ts
+│   ├── guildMemberEvents.ts
+│   └── messageCreate.ts
+├── games/
+│   └── rps.ts            # RPS game engine
+├── services/
+│   ├── freeGamesMonitor.ts
+│   ├── rssMonitor.ts
+│   └── wordMonitor.ts
+├── lib/                  # Data stores & utilities
+│   ├── store.ts          # Generic JSON read/write
+│   ├── configStore.ts
+│   ├── rolesStore.ts
+│   ├── xpStore.ts
+│   ├── flipStats.ts
+│   ├── quizStats.ts
+│   ├── relayStore.ts
+│   ├── freeGamesStore.ts
+│   ├── rssParser.ts
+│   ├── commandLoader.ts
+│   └── logger.ts
+└── utils/
+    ├── helpers.ts
+    ├── discordApi.ts
+    └── social.ts
+```
+
+## Adding a New Command
+
+1. Create `src/commands/<name>.ts` exporting `data` (SlashCommandBuilder) and `execute` (handler)
+2. Import and add it to `commandList` in `src/commands/_index.ts`
+3. Run `bun run deploy`
+
+</div>

@@ -1,0 +1,88 @@
+---
+title: "OmniversifyFont"
+description: "A modern multilingual typeface that bridges Latin, Arabic (Moroccan Maghrebi), and Tamazight (Tifinagh) scripts into a cohesive Moroccan Luxury design."
+tags: ["Font", "Typography", "Open Source"]
+color: "#c9a94e"
+gradient: "linear-gradient(135deg, #1a1a2e 0%, #c9a94e 100%)"
+cover: "/images/covers/omniversifyfont.png"
+featured: true
+repo: "https://github.com/phaylali/OmniversifyFont"
+---
+
+<div class="section-overview">
+
+## Overview
+
+**OmniversifyFont** is a modern multilingual typeface designed to bridge cultures and scripts. It uniquely combines Latin (English), Arabic (Moroccan/Maghrebi script), and Tamazight (Tifinagh script) into a cohesive, high-performance font family.
+
+Inspired by the rich architectural and calligraphic heritage of Morocco, OmniversifyFont brings a **"Moroccan Luxury"** aesthetic to digital typography, ensuring legibility and elegance across diverse linguistic landscapes.
+
+## Supported Scripts
+
+- **Latin (English)** — Modern, clean, and highly legible. Complements the organic flow of Arabic and the geometric precision of Tifinagh.
+- **Arabic (Moroccan Maghrebi)** — Dedicated to the traditional Moroccan Maghrebi script with its distinctive roundness and unique diacritic placements, optimized for digital displays.
+- **Tamazight (Tifinagh)** — Honoring the ancestral script of North Africa with a balance of geometric tradition and modern clarity.
+
+## Key Features
+
+- **Harmonious Multi-script Design** — Consistent weight and optical balance across all three scripts
+- **Moroccan Aesthetic** — Subtle nods to Moroccan artistry and geometry
+- **Modern Performance** — Optimized for web, mobile, and print applications
+- **OpenType Support** — Advanced features for ligature handling, mark/mkmk positioning, and script switching
+- **SIL Open Font License 1.1** — Fully open source
+
+## Roadmap
+
+### Phase 1: Foundation & Design (Complete)
+
+- ASCII Character Set
+- Latin-1 Supplement
+- Tifinagh Character Set
+- Arabic Character Set
+- Arabic Presentation Forms-A & Forms-B
+- Currency Symbols
+- Superscripts and Subscripts
+- General Punctuation
+- Mathematical Operators
+- Letterlike Symbols
+
+### Phase 2: Refinement & Production (WIP)
+
+- OpenType Feature Programming
+- Tifinagh, Arabic, and Latin Kerning
+- Multilingual Specimen Page
+- Final Production Release
+
+## Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| Design | Inkscape, FontForge |
+| Scripting | Python (FontForge scripts) |
+| Tooling | gftools, ttfautohint, AutoMark |
+| License | SIL Open Font License 1.1 |
+
+## Project Structure
+
+```
+OmniversifyFont/
+├── OmniversifyFont.sfd     # FontForge source file
+├── exports/                # Generated TTF, OTF, WOFF2, SVG, UFO
+├── documentation/          # Design docs and specimens
+├── images/                 # Character set previews and showcase
+├── generate_formats.py     # Batch export script
+├── generate_specimen.py    # Specimen page generator
+├── test_print.py           # Print test utility
+├── build.ninja             # Build system
+└── AutoMark/               # Automatic Arabic diacritic positioning
+```
+
+## Key Technical Details
+
+- **Design Tools:** Inkscape for vector glyphs, FontForge for assembly and kerning
+- **AutoMark Integration:** FontForge Python script that automatically adds OpenType GPOS lookups for Arabic diacritic positioning (mark and mkmk features)
+- **Validation:** Passed Google Fonts validation — OTS (OpenType Sanitizer), name table checks, language support for en/ar/zgh, GPOS lookups verified
+- **Hinting:** TrueType autohinting via `gftools fix-hinting` (ttfautohint)
+- **Export Formats:** TTF, OTF, SVG, UFO
+
+</div>

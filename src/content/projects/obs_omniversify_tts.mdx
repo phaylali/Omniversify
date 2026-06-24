@@ -1,0 +1,106 @@
+---
+title: "OBS Omniversify TTS"
+description: "A high-performance OBS Studio plugin for real-time chat preview and local GPU-accelerated Text-to-Speech, optimized for AMD GPUs on Arch Linux."
+tags: ["OBS", "Plugin", "TTS", "C++"]
+color: "#ff6b35"
+gradient: "linear-gradient(135deg, #2d1b00 0%, #ff6b35 100%)"
+featured: true
+repo: "https://github.com/phaylali/obs-omniversify-tts"
+---
+
+<div class="section-overview">
+
+## Overview
+
+A high-performance OBS Studio plugin designed for real-time chat preview and local Text-to-Speech (TTS) integration, optimized specifically for **AMD GPUs on Arch Linux**.
+
+Provides streamers with a low-latency, GPU-accelerated TTS solution that offloads processing from the CPU to ensure smooth gameplay in demanding titles.
+
+## Features
+
+- **Real-time Chat Preview** — View and manage chat messages directly within OBS
+- **Local TTS Processing** — Fully local execution, no cloud latency or privacy concerns
+- **AMD & Cross-GPU Optimization** — Leverages ROCm or Vulkan for hardware-accelerated inference
+- **Zero CPU Hogging** — Minimizes CPU usage during intense gaming sessions
+- **Simulation Mode** — Built-in debugging tool to test voices and emoji handling before going live
+- **Emoji Support** — Visual preview with emojis; TTS engine intelligently ignores them
+- **Engine Selection** — Toggle between ROCm/Vulkan engines and voices from the OBS Dock
+
+## Architecture
+
+```
+┌──────────────────────────────────────────────────┐
+│              OBS Plugin (C++/Qt)                  │
+│  ┌─────────────┐  ┌──────────────────────────┐   │
+│  │  Chat Dock   │  │  Engine Manager          │   │
+│  │  (Qt Widget) │  │  ROCm / Vulkan / Sim     │   │
+│  └─────────────┘  └──────────┬───────────────┘   │
+│                              │ IPC (WebSocket)    │
+├──────────────────────────────┼───────────────────┤
+│                 TTS Backend (Python)              │
+│  ┌─────────────┐  ┌──────────────────────────┐   │
+│  │  ROCm/ONNX  │  │  Vulkan/ONNX             │   │
+│  │  (Piper)    │  │  (Piper/Silero)          │   │
+│  └─────────────┘  └──────────────────────────┘   │
+└──────────────────────────────────────────────────┘
+```
+
+## Tech Stack
+
+| Category | Technology |
+|----------|------------|
+| Plugin | C++17, OBS Studio API, Qt6 |
+| ROCm Backend | Python, onnxruntime-rocm, torch-rocm |
+| Vulkan Backend | Python, onnxruntime-vulkan, ncnn |
+| TTS Models | Piper, Silero |
+| IPC | WebSockets / Local Sockets |
+| Build | CMake, build.sh |
+
+## Project Structure
+
+```
+src/
+├── plugin-main.cpp     # OBS plugin entry point
+├── tts-dock.cpp        # Qt dock UI (chat preview, controls)
+└── tts-dock.hpp        # Dock header
+
+backend/                # Python TTS inference backends
+data/                   # Model files and configs
+build.sh                # Automated build script
+```
+
+## Roadmap
+
+### Phase 1: Simulation & Mocking (Current)
+- Basic OBS Dock UI in C++/Qt
+- Simulation Mode with text input and test button
+- Backend-agnostic TTS handler
+- Emoji stripping and rendering
+
+### Phase 2: Local TTS Engine Integration
+- Python environment via `uv`
+- ROCm-accelerated TTS model integration
+- IPC between C++ plugin and Python backend
+
+### Phase 3: Real Chat Integration
+- Connect to Twitch/YouTube via OBS hooks or WebSocket
+- Message queuing for high-traffic without overlapping audio
+
+## Quick Start
+
+```bash
+git clone https://github.com/phaylali/obs-omniversify-tts.git
+cd obs-omniversify-tts
+./build.sh
+```
+
+Requires OBS Studio, ROCm or Vulkan drivers on Arch Linux.
+
+## Design Decisions
+
+- **Emoji Handling** — Rendered in the preview dock but stripped from TTS input
+- **AMD Focus** — ROCm/HIP explicitly targeted; Windows/Nvidia abstracted for future
+- **C++ for Plugin** — Maximum stability for OBS integration
+- **Python for Backend** — Leverages rich AI ecosystem on Linux
+
+</div>
