@@ -480,8 +480,12 @@
 }
 
 /* ============ TABLE STYLES ============ */
+.content-body {
+  overflow-x: auto;
+}
+
 .content-body table {
-  @apply w-full border-collapse my-8 border-2 border-gold shadow-[0_0_10px_rgba(194,176,103,0.2)];
+  @apply w-full border-collapse my-8 border-2 border-gold/30 shadow-[0_0_10px_rgba(194,176,103,0.2)];
 }
 
 .content-body th,
@@ -490,10 +494,10 @@
 }
 
 .content-body th {
-  @apply bg-gold/20 text-gold font-semibold;
+  @apply bg-gold/20 text-gold font-semibold text-sm uppercase tracking-wider;
 }
 
-.content-body tr:nth-child(even) {
+.content-body tr:nth-child(odd) {
   @apply bg-gold/5;
 }
 
