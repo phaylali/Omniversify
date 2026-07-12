@@ -86,6 +86,11 @@ build.sh                # Automated build script
 - Connect to Twitch/YouTube via OBS hooks or WebSocket
 - Message queuing for high-traffic without overlapping audio
 
+### Phase 4: AUR Package & Auto-Launch
+- Package plugin and backend as an AUR PKGBUILD for easy installation
+- Integrate systemd user service or OBS startup script to spawn the TTS backend automatically on login
+- Automatic backend discovery: OBS plugin connects to backend on load without manual command execution
+
 ## Quick Start
 
 ```bash
