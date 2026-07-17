@@ -1,5 +1,6 @@
 ---
 import Layout from "../../../layouts/Layout.astro";
+import AudioPlayer from "../../../components/AudioPlayer.astro";
 import ShareButtons from "../../../components/ShareButtons.astro";
 import ButtonRow from "../../../components/ButtonRow.astro";
 import { getCollection, render } from "astro:content";
@@ -55,6 +56,8 @@ const readingTime = getReadingTime(item.body);
         >
         <span class="text-gold opacity-70 text-sm">{readingTime}</span>
       </div>
+
+      <AudioPlayer slug={item.id} />
 
       <h1 class="text-4xl text-gold mb-4 leading-tight">{item.data.title}</h1>
       <p class="text-xl text-gold opacity-80 leading-relaxed">
