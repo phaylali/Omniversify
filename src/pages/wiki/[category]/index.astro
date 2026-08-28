@@ -5,7 +5,7 @@ import { getCollection } from 'astro:content';
 
 export async function getStaticPaths() {
   const wiki = await getCollection('wiki');
-  const categories = ['characters', 'realms', 'weapons', 'events'];
+  const categories = ['characters', 'realms', 'weapons', 'events', 'locations'];
   
   return categories.map((category) => ({
     params: { category },
@@ -23,6 +23,7 @@ const categoryInfo: Record<string, { name: string; icon: string }> = {
   realms: { name: 'Realms', icon: '🌍' },
   weapons: { name: 'Weapons', icon: '⚔️' },
   events: { name: 'Events', icon: '📜' },
+  locations: { name: 'Locations', icon: '📍' },
 };
 ---
 
