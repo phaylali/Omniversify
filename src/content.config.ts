@@ -74,9 +74,30 @@ const news = defineCollection({
   }),
 });
 
+const media = defineCollection({
+  loader: glob({ pattern: '**/*.mdx', base: './src/content/media' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    type: z.enum(['movie', 'series']),
+    genre: z.string().default('Documentary'),
+    release_date: z.coerce.date().optional(),
+    duration: z.string().optional(),
+    seasons: z.number().optional(),
+    episodes: z.number().optional(),
+    status: z.enum(['Released', 'In Production', 'Post-Production', 'Announced']).default('Released'),
+    youtube: z.string().url().optional(),
+    cover: z.string().optional(),
+    tags: z.array(z.string()).default([]),
+    project: z.string().optional(),
+    featured: z.boolean().default(false),
+  }),
+});
+
 export const collections = {
   projects,
   wiki,
   blog,
   news,
+  media,
 };

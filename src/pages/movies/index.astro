@@ -1,0 +1,16 @@
+---
+import MediaIndex from "../../components/MediaIndex.astro";
+import { getCollection } from "astro:content";
+
+const movies = (await getCollection("media")).filter(
+  (m) => m.data.type === "movie",
+);
+---
+
+<MediaIndex
+  items={movies}
+  title="Movies"
+  subtitle="Documentaries and films from the Omniversify world"
+  emptyTitle="No films yet"
+  emptyText="Our first documentary is in the works. Check back soon."
+/>

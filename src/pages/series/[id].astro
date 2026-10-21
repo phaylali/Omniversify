@@ -1,0 +1,24 @@
+---
+import MediaDetail from "../../components/MediaDetail.astro";
+import { getCollection, render } from "astro:content";
+
+export async function getStaticPaths() {
+  const series = (await getCollection("media")).filter(
+    (s) => s.data.type === "series",
+  );
+  return series.map((s) => ({
+    params: { id: s.id },
+    props: { series: s },
+  }));
+}
+
+const { series } = Astro.props;
+const { Content } = await render(series);
+---
+
+<MediaDetail
+  item={series}
+  Content={Content}
+  backHref="/series"
+  backLabel="Back to Series"
+/>

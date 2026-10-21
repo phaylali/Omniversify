@@ -1,0 +1,170 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ShareButtons from "../components/ShareButtons.astro";
+import ButtonRow from "../components/ButtonRow.astro";
+
+interface Props {
+  item: any;
+  Content: any;
+  backHref: string;
+  backLabel: string;
+}
+
+const { item, Content, backHref, backLabel } = Astro.props;
+
+const coverImage = item.data.cover
+  ? `${Astro.url.origin}${item.data.cover}`
+  : undefined;
+
+const youtubeId = item.data.youtube
+  ? (item.data.youtube.match(
+      /(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/,
+    )?.[1] ?? null)
+  : null;
+
+function formatDate(date: Date) {
+  return date.toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+}
+
+function getReadingTime(body: string) {
+  const words = body.trim().split(/\s+/).length;
+  return `${Math.max(1, Math.ceil(words / 200))} min read`;
+}
+
+const readingTime = getReadingTime(item.body);
+
+const headerCover =
+  item.data.cover || "https://picsum.photos/seed/default-media/1920/600";
+
+const meta: Array<{ label: string; value: string }> = [];
+if (item.data.genre) meta.push({ label: "Genre", value: item.data.genre });
+if (item.data.duration)
+  meta.push({ label: "Runtime", value: item.data.duration });
+if (item.data.seasons)
+  meta.push({
+    label: item.data.seasons === 1 ? "Season" : "Seasons",
+    value: String(item.data.seasons),
+  });
+if (item.data.episodes)
+  meta.push({
+    label: item.data.episodes === 1 ? "Episode" : "Episodes",
+    value: String(item.data.episodes),
+  });
+if (item.data.release_date)
+  meta.push({
+    label: "Released",
+    value: formatDate(item.data.release_date),
+  });
+meta.push({ label: "Status", value: item.data.status });
+---
+
+<Layout
+  title={`${item.data.title} - Omniversify`}
+  description={item.data.description}
+  image={coverImage}
+>
+  <article class="mx-auto max-w-[800px]">
+    <header class="relative border-b border-gold/20">
+      <div
+        class="absolute inset-0 z-0"
+        style={`background-image: url('${headerCover}'); background-size: cover; background-position: center;`}
+      >
+        <div class="absolute inset-0 bg-black/60"></div>
+      </div>
+
+      <div class="relative z-10 pt-20 px-4 md:px-8">
+        <ButtonRow
+          items={[
+            { href: backHref, label: backLabel },
+            { text: item.data.status, class: "tag bg-white/20 text-white" },
+          ]}
+        />
+
+        <h1 class="text-5xl text-white mt-8 mb-4 leading-tight uppercase">
+          {item.data.title}
+        </h1>
+        <p class="text-xl text-white/85 leading-relaxed mb-6">
+          {item.data.description}
+        </p>
+
+        <div class="flex gap-2 flex-wrap mb-6">
+          {
+            item.data.tags.map((tag: string) => (
+              <span class="tag bg-white/20 text-white">{tag}</span>
+            ))
+          }
+        </div>
+
+        {
+          meta.length > 0 && (
+            <dl class="flex flex-wrap gap-x-8 gap-y-3 mb-6 text-sm">
+              {meta.map((m) => (
+                <div class="flex flex-col">
+                  <dt class="text-white/60 uppercase tracking-wider text-[0.65rem]">
+                    {m.label}
+                  </dt>
+                  <dd class="text-white m-0">{m.value}</dd>
+                </div>
+              ))}
+            </dl>
+          )
+        }
+
+        <div class="flex gap-4 flex-wrap mb-8">
+          {
+            youtubeId && (
+              <a
+                href={item.data.youtube}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-5 py-2.5 bg-red-700/90 hover:bg-red-700 text-white rounded-lg transition-colors no-underline font-semibold"
+              >
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.5 12 3.5 12 3.5s-7.5 0-9.4.6A3 3 0 0 0 .5 6.2 31.5 31.5 0 0 0 0 12a31.5 31.5 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.6 9.4.6 9.4.6s7.5 0 9.4-.6a3 3 0 0 0 2.1-2.1A31.5 31.5 0 0 0 24 12a31.5 31.5 0 0 0-.5-5.8zM9.5 15.6V8.4l6.3 3.6-6.3 3.6z" />
+                </svg>
+                Watch on YouTube
+              </a>
+            )
+          }
+        </div>
+      </div>
+    </header>
+
+    <div class="bg-black/60 px-4 md:px-8 py-8">
+      {
+        youtubeId && (
+          <div
+            class="mb-8 rounded-xl overflow-hidden border-2 border-gold/30 shadow-[0_0_20px_rgba(194,176,103,0.15)]"
+            style="position: relative; padding-bottom: 56.25%; height: 0;"
+          >
+            <iframe
+              src={`https://www.youtube.com/embed/${youtubeId}`}
+              title={item.data.title}
+              loading="lazy"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+              style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;"
+            />
+          </div>
+        )
+      }
+
+      <div class="content-body">
+        <Content />
+      </div>
+
+      <footer class="my-16 pt-8 border-t border-gold/20">
+        <ShareButtons
+          url={Astro.url.href}
+          title={item.data.title}
+          description={item.data.description}
+        />
+      </footer>
+    </div>
+  </article>
+</Layout>

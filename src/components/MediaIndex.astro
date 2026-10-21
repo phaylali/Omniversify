@@ -1,0 +1,88 @@
+---
+import Layout from "../layouts/Layout.astro";
+import ButtonRow from "../components/ButtonRow.astro";
+
+interface Props {
+  items: any[];
+  title: string;
+  subtitle: string;
+  emptyTitle: string;
+  emptyText: string;
+}
+
+const { items, title, subtitle, emptyTitle, emptyText } = Astro.props;
+
+const sorted = [...items].sort(
+  (a, b) =>
+    (b.data.release_date?.valueOf() ?? 0) -
+    (a.data.release_date?.valueOf() ?? 0),
+);
+---
+
+<Layout title={`${title} - Omniversify`} description={subtitle}>
+  <main class="page-container">
+    <ButtonRow items={[{ href: "/", label: "Back to Home" }]} />
+
+    <header class="text-center mb-12">
+      <h1 class="gradient-section-title">{title}</h1>
+      <p class="text-xl text-gold opacity-80">{subtitle}</p>
+    </header>
+
+    <div class="flex flex-col gap-6 max-w-[900px] mx-auto">
+      {
+        sorted.length > 0 ? (
+          sorted.map((item) => (
+            <a
+              href={`/${item.data.type === "movie" ? "movies" : "series"}/${item.id}`}
+              class="flex flex-col sm:flex-row items-stretch sm:gap-6 p-4 rounded-2xl no-underline border-2 border-gold/30 bg-black/30 overflow-hidden transition-all duration-300 hover:shadow-[0_0_30px_rgba(194,176,103,0.4)] hover:translate-x-2"
+            >
+              <div
+                class="w-full sm:w-[260px] h-[160px] sm:h-[auto] flex-shrink-0 rounded-xl bg-cover bg-center"
+                style={
+                  item.data.cover
+                    ? {
+                        backgroundImage: `url(${item.data.cover})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }
+                    : { background: "linear-gradient(135deg, #1a1a2e 0%, #8B7355 100%)" }
+                }
+              >
+                {!item.data.cover && (
+                  <div class="w-full h-full flex items-center justify-center">
+                    <span class="text-3xl font-bold text-gold">
+                      {item.data.title.charAt(0)}
+                    </span>
+                  </div>
+                )}
+              </div>
+              <div class="flex-1 min-w-0 text-center sm:text-left flex flex-col justify-center">
+                <div class="flex items-center gap-2 justify-center sm:justify-start mb-2">
+                  <span class="tag-sm">{item.data.status}</span>
+                  {item.data.duration && <span class="tag-sm">{item.data.duration}</span>}
+                  {item.data.seasons && (
+                    <span class="tag-sm">
+                      {item.data.seasons} {item.data.seasons === 1 ? "Season" : "Seasons"}
+                    </span>
+                  )}
+                </div>
+                <h2 class="text-xl text-gold mb-2">{item.data.title}</h2>
+                <p class="text-sm text-gold opacity-80 leading-relaxed mb-0">
+                  {item.data.description}
+                </p>
+              </div>
+            </a>
+          ))
+        ) : (
+          <div class="text-center py-16 px-8 rounded-2xl border-2 border-dashed border-gold/30 bg-black/20">
+            <span class="text-5xl mb-6 block">🎬</span>
+            <h2 class="text-2xl text-gold mb-3">{emptyTitle}</h2>
+            <p class="text-gold opacity-70 max-w-[420px] mx-auto leading-relaxed">
+              {emptyText}
+            </p>
+          </div>
+        )
+      }
+    </div>
+  </main>
+</Layout>

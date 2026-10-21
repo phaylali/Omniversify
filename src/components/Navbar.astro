@@ -43,11 +43,11 @@ import Search from "./Search.astro";
 
 <div
     id="menuOverlay"
-    class="fixed top-0 left-0 right-0 bottom-0 bg-black/95 z-[200] opacity-0 invisible transition-all duration-300 flex flex-col items-center justify-center p-8"
+    class="fixed top-0 left-0 right-0 bottom-0 bg-black/95 z-[200] opacity-0 invisible transition-all duration-300 flex flex-col items-center overflow-y-auto overscroll-contain p-8"
 >
     <button
         id="closeMenuBtn"
-        class="absolute top-4 right-4 bg-transparent border-none text-gold cursor-pointer p-2 flex items-center justify-center hover:opacity-70 transition-opacity"
+        class="fixed top-4 right-4 z-10 bg-black/60 rounded-full text-gold cursor-pointer p-2 flex items-center justify-center hover:opacity-70 transition-opacity"
         aria-label="Close menu"
     >
         <svg
@@ -63,7 +63,7 @@ import Search from "./Search.astro";
         </svg>
     </button>
 
-    <div class="flex flex-col gap-4 sm:gap-6 max-w-2xl w-full text-center">
+    <div class="flex flex-col gap-4 sm:gap-6 max-w-2xl w-full text-center my-auto py-12 shrink-0">
         <a
             href="/"
             class="menu-btn relative px-4 py-3 sm:px-6 sm:py-4 bg-no-repeat bg-center bg-contain text-gold text-xl sm:text-2xl font-bold no-underline hover:scale-105 transition-transform"
@@ -91,6 +91,20 @@ import Search from "./Search.astro";
             style={`background-image: url("data:image/svg+xml,${encodeURIComponent(decorSvg)}"); background-size: auto 100%;`}
         >
             Projects
+        </a>
+        <a
+            href="/movies"
+            class="menu-btn relative px-4 py-3 sm:px-6 sm:py-4 bg-no-repeat bg-center bg-contain text-gold text-xl sm:text-2xl font-bold no-underline hover:scale-105 transition-transform"
+            style={`background-image: url("data:image/svg+xml,${encodeURIComponent(decorSvg)}"); background-size: auto 100%;`}
+        >
+            Movies
+        </a>
+        <a
+            href="/series"
+            class="menu-btn relative px-4 py-3 sm:px-6 sm:py-4 bg-no-repeat bg-center bg-contain text-gold text-xl sm:text-2xl font-bold no-underline hover:scale-105 transition-transform"
+            style={`background-image: url("data:image/svg+xml,${encodeURIComponent(decorSvg)}"); background-size: auto 100%;`}
+        >
+            Series
         </a>
         <a
             href="/wiki"

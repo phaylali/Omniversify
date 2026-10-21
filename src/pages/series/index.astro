@@ -1,0 +1,16 @@
+---
+import MediaIndex from "../../components/MediaIndex.astro";
+import { getCollection } from "astro:content";
+
+const series = (await getCollection("media")).filter(
+  (s) => s.data.type === "series",
+);
+---
+
+<MediaIndex
+  items={series}
+  title="Series"
+  subtitle="Episodic stories from the Omniversify world"
+  emptyTitle="Nothing in production yet"
+  emptyText="We have ideas for the first series. When something moves into production, it will appear here."
+/>
