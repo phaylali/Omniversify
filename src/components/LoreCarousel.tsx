@@ -6,7 +6,7 @@ interface WikiEntry {
   id: string;
   data: {
     title: string;
-    category: 'characters' | 'realms' | 'weapons' | 'events';
+    category: 'characters' | 'realms' | 'weapons' | 'events' | 'locations';
     description: string;
     color: string;
   };
@@ -14,21 +14,29 @@ interface WikiEntry {
 
 interface Props {
   wiki: WikiEntry[];
+  category: string;
+  title: string;
+  icon?: string;
 }
 
-const categoryLabels: Record<string, string> = {
-  characters: "Character",
-  realms: "Realm",
-  weapons: "Weapon",
-  events: "Event",
-};
+export function LoreCarousel({ wiki, category, title, icon }: Props) {
+  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, align: 'start' });
 
-export function LoreCarousel({ wiki }: Props) {
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true });
+  if (wiki.length === 0) return null;
 
   return (
     <div className="carousel-wrapper">
-      <h2 className="gradient-section-title">Lore: Characters & Events</h2>
+      <div style={{ display: 'flex', alignItems: 'baseline', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
+        <h2 className="gradient-section-title">{icon ? `${icon} ` : ''}{title}</h2>
+        <a
+          href={`/wiki/${category}`}
+          style={{ color: 'rgba(255,255,255,0.6)', fontSize: '0.85rem', textDecoration: 'none', whiteSpace: 'nowrap' }}
+          onMouseEnter={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.95)')}
+          onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255,255,255,0.6)')}
+        >
+          View all →
+        </a>
+      </div>
       <div className="embla" ref={emblaRef}>
         <div className="embla__container">
           {wiki.map((item) => {
@@ -36,7 +44,7 @@ export function LoreCarousel({ wiki }: Props) {
             return (
             <div className="embla__slide" key={item.id}>
               <a href={`/wiki/${item.data.category}/${slug}`} className="lore-card" style={{ backgroundColor: item.data.color }}>
-                <span className="lore-type">{categoryLabels[item.data.category]}</span>
+                <span className="lore-type">{title.replace(/s$/, '')}</span>
                 <h3>{item.data.title}</h3>
                 <p>{item.data.description}</p>
               </a>
@@ -46,8 +54,8 @@ export function LoreCarousel({ wiki }: Props) {
         </div>
       </div>
       <div className="carousel-controls">
-        <CarouselNavButton direction="prev" onClick={() => emblaApi?.scrollPrev()} ariaLabel="Previous" />
-        <CarouselNavButton direction="next" onClick={() => emblaApi?.scrollNext()} ariaLabel="Next" />
+        <CarouselNavButton direction="prev" onClick={() => emblaApi?.scrollPrev()} ariaLabel={`Previous ${title}`} />
+        <CarouselNavButton direction="next" onClick={() => emblaApi?.scrollNext()} ariaLabel={`Next ${title}`} />
       </div>
     </div>
   );

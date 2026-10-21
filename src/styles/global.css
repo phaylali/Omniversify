@@ -678,6 +678,13 @@
   line-height: 1.5;
   color: #c2b067;
   opacity: 0.8;
+  min-height: 0;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 6;
+  line-clamp: 6;
 }
 
 .embla__slide:not(.project-slide) {
@@ -693,12 +700,15 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 0.5rem;
   padding: 2rem;
   text-align: center;
   color: white;
   transition: box-shadow 0.3s;
   cursor: pointer;
   text-decoration: none;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
 .lore-card:hover {
@@ -707,12 +717,23 @@
 
 .lore-card h3 {
   font-size: 1.5rem;
-  margin: 0 0 0.5rem 0;
+  margin: 0;
+  overflow-wrap: break-word;
 }
 
 .lore-card p {
   margin: 0;
   opacity: 0.9;
+  flex: 0 1 auto;
+  min-height: 0;
+  max-width: 100%;
+  overflow: hidden;
+  overflow-wrap: break-word;
+  hyphens: auto;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 7;
+  line-clamp: 7;
 }
 
 .lore-type {
@@ -805,6 +826,16 @@
 
   .lore-card {
     height: 280px;
+    padding: 1.25rem;
+  }
+
+  .lore-card h3 {
+    font-size: 1.25rem;
+  }
+
+  .lore-card p {
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
   }
 
   .carousel-wrapper h2 {

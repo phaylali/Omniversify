@@ -379,6 +379,17 @@ Uses Tabler Icons for consistent styling.
 | `bun build` | Build production site to `./dist/` |
 | `bun preview` | Preview production build locally |
 | `bun run deploy` | Deploy to Cloudflare Pages |
+| `bun run dev:fresh` | Clear Vite's dep cache, then start the dev server |
+
+### Troubleshooting: carousel arrows / React components dead in dev
+
+**Symptom:** nav buttons (Projects, Characters, Realms, Locations, Events carousels) do nothing — no errors in the UI.
+
+**Cause:** Vite's dependency pre-bundle cache in `node_modules/.vite/` is stale after a dependency update. The affected module returns **HTTP 504 `Outdated Optimize Dep`**, so the island's `import()` fails, React never hydrates, and `emblaApi` stays `undefined`. A production build is unaffected (Rollup doesn't use that cache).
+
+**Diagnose:** `curl -s -o /dev/null -w "%{http_code}" "http://localhost:4321/node_modules/.vite/deps/embla-carousel-react.js"` → `504` means stale.
+
+**Fix:** stop the dev server, run `bun run dev:fresh` (or `rm -rf node_modules/.vite` and restart).
 
 ---
 

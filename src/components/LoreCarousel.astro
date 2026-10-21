@@ -4,8 +4,28 @@ import { LoreCarousel } from "./LoreCarousel";
 import { getCollection } from 'astro:content';
 
 const wiki = await getCollection('wiki');
+
+const categories = [
+  { key: 'characters', name: 'Characters', icon: '👤' },
+  { key: 'realms', name: 'Realms', icon: '🌍' },
+  { key: 'locations', name: 'Locations', icon: '📍' },
+  { key: 'weapons', name: 'Weapons', icon: '⚔️' },
+  { key: 'events', name: 'Events', icon: '📜' },
+] as const;
+
+const sections = categories
+  .map((c) => ({ ...c, entries: wiki.filter((w) => w.data.category === c.key) }))
+  .filter((c) => c.entries.length > 0);
 ---
 
-<Section>
-  <LoreCarousel client:visible wiki={wiki} />
-</Section>
+{sections.map((section) => (
+  <Section>
+    <LoreCarousel
+      client:visible
+      wiki={section.entries}
+      category={section.key}
+      title={section.name}
+      icon={section.icon}
+    />
+  </Section>
+))}
