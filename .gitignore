@@ -30,3 +30,6 @@ pnpm-debug.log*
 !.env.example
 bun.lock
 pnpm-lock.yaml
+
+# editor local state
+.ferrite/
