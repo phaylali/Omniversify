@@ -1,29 +1,45 @@
 # HSTS - Force HTTPS
+# Default for everything: revalidate every time, so a new deploy shows up
+# immediately instead of being pinned in the browser for a day.
+# The more specific rules below override this for cacheable assets.
 /*
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
+  Cache-Control: public, max-age=0, must-revalidate
 
-# Cache static assets for 1 year
+# Astro build assets use content-hashed filenames - safe to cache forever
+/_astro/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Pagefind search index (regenerated each build)
+/pagefind/*
+  Cache-Control: public, max-age=3600, must-revalidate
+
+# Images
 /images/*
   Cache-Control: public, max-age=31536000, immutable
 
-# Cache images in root for 1 year
 *.webp
+  Cache-Control: public, max-age=31536000, immutable
+
+*.png
+  Cache-Control: public, max-age=31536000, immutable
+
+*.jpg
   Cache-Control: public, max-age=31536000, immutable
 
 *.svg
   Cache-Control: public, max-age=31536000, immutable
 
-# Cache fonts if present
+*.ico
+  Cache-Control: public, max-age=31536000, immutable
+
+# Fonts
 *.woff
   Cache-Control: public, max-age=31536000, immutable
 
 *.woff2
   Cache-Control: public, max-age=31536000, immutable
 
-# HTML pages - shorter cache
-/*.html
-  Cache-Control: public, max-age=3600
-
-# Static files - cache for 1 day
-/*
-  Cache-Control: public, max-age=86400
+# RSS feed - cheap to revalidate, but don't hammer it
+/rss.xml
+  Cache-Control: public, max-age=300, must-revalidate
